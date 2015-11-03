@@ -3,6 +3,7 @@ import os
 import gensim
 import sys
 import codecs
+import six
 
 from sortedcontainers import SortedDict
 from collections import defaultdict, Counter
@@ -30,6 +31,8 @@ class VocabularyMonitor():
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
                     forwards=True, sumDistances=False, outlinks=False):
+        if isinstance(seedTerms, six.string_types):
+            seedTerms = [seedTerms]
         aSeedSet = seedTerms
         dResult = SortedDict()
 
