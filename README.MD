@@ -17,11 +17,8 @@ http://localhost:5000/track/oorlog
 http://localhost:5000/track/oorlog?startKey=1952_1961
 http://localhost:5000/track/oorlog?startKey=1952_1961&maxTerms=5
 http://localhost:5000/track/oorlog?startKey=1952_1961&maxTerms=5&forwards=
-
-
 http://localhost:5000/track/nederland?maxTerms=5&sumDistances=true
 http://localhost:5000/track/nederland?maxTerms=5&sumDistances=
-
 ```
 
 ## Unit testing
