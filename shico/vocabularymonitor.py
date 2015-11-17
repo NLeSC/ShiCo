@@ -79,7 +79,8 @@ class VocabularyMonitor():
                 dResult[sKey], aSeedSet = \
                     self._trackSimple(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
-                                      maxRelatedTerms=maxRelatedTerms)
+                                      maxRelatedTerms=maxRelatedTerms,
+                                      minDist=minDist)
             else:
                 raise Exception('Algorithm not supported: ' + algorithm)
 
@@ -208,14 +209,16 @@ class VocabularyMonitor():
         newSeedSet = [word for word, weight in result]
         return result, newSeedSet
 
-    def _trackSimple(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10):
+    def _trackSimple(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
+                     minDist=0.0):
         relatedTerms = []
 
         # Get the first tier related terms
         for term in seedTerms:
             try:
                 newTerms = model.most_similar(term, topn=maxRelatedTerms)
-                relatedTerms += [newTerm for newTerm, tDist in newTerms]
+                relatedTerms += [newTerm for newTerm, tDist in newTerms
+                                 if tDist >= minDist]
 
                 relatedTerms.append(term)
                 # Every word is related to itself

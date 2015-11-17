@@ -1,8 +1,5 @@
-import scipy.stats as ss
-import numpy as np
-
 from sortedcontainers import SortedDict
-from collections import defaultdict, Counter
+from collections import defaultdict
 from utils import weightJSD, weightGauss, weightLinear
 
 
