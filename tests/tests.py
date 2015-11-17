@@ -49,12 +49,19 @@ class VocabularyMonitorTest(unittest.TestCase):
         seedTerms = 'x'
         maxTerms = 5
 
-        rOut = self.vm.trackClouds(seedTerms, maxTerms=maxTerms, outlinks=True)
-        rIn = self.vm.trackClouds(seedTerms, maxTerms=maxTerms, outlinks=False)
+        rOut = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
+                                   algorithm='outlinks')
+        rIn = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
+                                  algorithm='inlinks')
+        rNA = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
+                                  algorithm='non-adaptive')
 
         for key in rOut.keys():
             self.assertEqual(len(rOut[key]), len(rIn[key]),
                              'Outlinks and Inlinks should generate equal ' +
+                             'number ofresults')
+            self.assertEqual(len(rIn[key]), len(rNA[key]),
+                             'Inlinks and non-adapt. should generate equal ' +
                              'number ofresults')
 
     def testTrackTermsKeys(self):

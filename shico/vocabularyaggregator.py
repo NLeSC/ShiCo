@@ -21,7 +21,7 @@ class VocabularyAggregator():
                                         yIntervals=self._yearsInInterval,
                                         weightF=self._weighF,
                                         param=self._wfParam)
-        raise 'Unknown aggregation algorithm: ' + self._aggAlgo
+        raise Exception('Unknown aggregation algorithm: ' + self._aggAlgo)
 
 
 def _adaptiveAggregation(V, n=5, yIntervals=2, weightF='Gaussian', param=10):

@@ -31,7 +31,10 @@ class VocabularyMonitor():
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
-                    forwards=True, sumDistances=False, outlinks=False):
+                    forwards=True, sumDistances=False, algorithm='inlinks'):
+        '''
+        algorithm    'inlinks', 'outlinks', or 'non-adaptive'
+        '''
         if isinstance(seedTerms, six.string_types):
             seedTerms = [seedTerms]
         aSeedSet = seedTerms
@@ -56,22 +59,29 @@ class VocabularyMonitor():
             sortedKeys = sortedKeys[::-1]
 
         for sKey in sortedKeys:
-            if outlinks:
-                dResult[sKey] = \
-                    self._trackOutlink(self._models[sKey], aSeedSet,
-                                       maxTerms=maxTerms,
-                                       maxRelatedTerms=maxRelatedTerms,
-                                       minDist=minDist,
-                                       wordBoost=wordBoost,
-                                       sumDistances=sumDistances)
-            else:
-                dResult[sKey] = \
+            if algorithm == 'inlinks':
+                dResult[sKey], aSeedSet = \
                     self._trackInlink(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
                                       maxRelatedTerms=maxRelatedTerms,
                                       minDist=minDist,
                                       wordBoost=wordBoost,
                                       sumDistances=sumDistances)
+            elif algorithm == 'outlinks':
+                dResult[sKey], aSeedSet = \
+                    self._trackOutlink(self._models[sKey], aSeedSet,
+                                       maxTerms=maxTerms,
+                                       maxRelatedTerms=maxRelatedTerms,
+                                       minDist=minDist,
+                                       wordBoost=wordBoost,
+                                       sumDistances=sumDistances)
+            elif algorithm == 'non-adaptive':
+                dResult[sKey], aSeedSet = \
+                    self._trackSimple(self._models[sKey], aSeedSet,
+                                      maxTerms=maxTerms,
+                                      maxRelatedTerms=maxRelatedTerms)
+            else:
+                raise Exception('Algorithm not supported: ' + algorithm)
 
         return dResult
 
@@ -109,15 +119,18 @@ class VocabularyMonitor():
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0, wordBoost=1.0, sumDistances=False):
         if sumDistances:
-            return self._inlinkSum(model, seedTerms,
-                                   maxTerms=maxTerms, minDist=minDist,
-                                   maxRelatedTerms=maxRelatedTerms,
-                                   wordBoost=wordBoost)
-        else:
-            return self._inlinkNosum(model, seedTerms,
+            result = self._inlinkSum(model, seedTerms,
                                      maxTerms=maxTerms, minDist=minDist,
                                      maxRelatedTerms=maxRelatedTerms,
                                      wordBoost=wordBoost)
+        else:
+            result = self._inlinkNosum(model, seedTerms,
+                                       maxTerms=maxTerms, minDist=minDist,
+                                       maxRelatedTerms=maxRelatedTerms,
+                                       wordBoost=wordBoost)
+        # Make a new seed set
+        newSeedSet = [word for word, weight in result]
+        return result, newSeedSet
 
     def _inlinkSum(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                    minDist=0.0, wordBoost=1.0):
@@ -190,4 +203,24 @@ class VocabularyMonitor():
                     dOutlinks[ftTerm] += fAdd
 
         oCounter = Counter(dOutlinks)
-        return oCounter.most_common(maxTerms)
+        result = oCounter.most_common(maxTerms)
+        # Make a new seed set
+        newSeedSet = [word for word, weight in result]
+        return result, newSeedSet
+
+    def _trackSimple(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10):
+        relatedTerms = []
+
+        # Get the first tier related terms
+        for term in seedTerms:
+            try:
+                newTerms = model.most_similar(term, topn=maxRelatedTerms)
+                relatedTerms += [newTerm for newTerm, tDist in newTerms]
+
+                relatedTerms.append(term)
+                # Every word is related to itself
+            except KeyError:
+                pass
+
+        oCounter = Counter(relatedTerms)
+        return oCounter.most_common(maxTerms), seedTerms
