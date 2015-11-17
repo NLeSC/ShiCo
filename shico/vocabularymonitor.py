@@ -10,6 +10,7 @@ from collections import defaultdict, Counter
 
 
 class VocabularyMonitor():
+
     def __init__(self):
         self._models = SortedDict()
 
@@ -76,10 +77,16 @@ class VocabularyMonitor():
 
     def printTrackClouds(self, dResult, aSeedTerms, sOutputFile=None,
                          sumDistances=False, direction='forwards',
-                         description=''):
+                         description='', aggregator=None):
+        # Aggregation step
+        if aggregator is not None:
+            dResult = aggregator.aggregate(dResult)
+
         fh = sys.stdout
         if sOutputFile is not None:
             fh = codecs.open(sOutputFile, mode='w', encoding='utf8')
+        if isinstance(aSeedTerms, six.string_types):
+            aSeedTerms = [aSeedTerms]
 
         # First line always contains the seed terms
         print >>fh, ",".join(aSeedTerms)
