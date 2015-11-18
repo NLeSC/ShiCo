@@ -4,6 +4,7 @@ from shico import VocabularyMonitor as shVM
 
 
 class VocabularyMonitorTest(unittest.TestCase):
+
     @classmethod
     def setUpClass(self):
         self.vm = shVM()

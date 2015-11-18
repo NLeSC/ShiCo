@@ -1,24 +1,22 @@
+import six
 from sortedcontainers import SortedDict
 from collections import defaultdict
 from utils import weightJSD, weightGauss, weightLinear
 
 
 class VocabularyAggregator():
-    def __init__(self, algorithm='adaptive', weighF='Gaussian', wfParam=10,
-                 yearsInInterval=2, nWordsPerYear=5):
-        self._aggAlgo = algorithm
+    def __init__(self, weighF='Gaussian', wfParam=10,
+                 yearsInInterval=5, nWordsPerYear=10):
         self._weighF = weighF
         self._wfParam = wfParam
         self._yearsInInterval = yearsInInterval
         self._nWordsPerYear = nWordsPerYear
 
     def aggregate(self, vocab):
-        if self._aggAlgo == 'adaptive':
-            return _adaptiveAggregation(vocab, n=self._nWordsPerYear,
-                                        yIntervals=self._yearsInInterval,
-                                        weightF=self._weighF,
-                                        param=self._wfParam)
-        raise Exception('Unknown aggregation algorithm: ' + self._aggAlgo)
+        return _adaptiveAggregation(vocab, n=self._nWordsPerYear,
+                                    yIntervals=self._yearsInInterval,
+                                    weightF=self._weighF,
+                                    param=self._wfParam)
 
 
 def _adaptiveAggregation(V, n=5, yIntervals=2, weightF='Gaussian', param=10):
@@ -28,8 +26,10 @@ def _adaptiveAggregation(V, n=5, yIntervals=2, weightF='Gaussian', param=10):
         f = lambda y1, y2: weightJSD(y1, y2, param)
     elif weightF == 'Linear':
         f = lambda y1, y2: weightLinear(y1, y2, param)
-    else:
+    elif six.callable(weightF):
         f = weightF
+    else:
+        raise Exception('Unknown weighting function: ' + weightF)
 
     timeFrames = _arrangeIntervals(V, yIntervals)
     finalVocabs = SortedDict()
