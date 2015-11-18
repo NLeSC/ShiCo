@@ -8,7 +8,9 @@ class VocabularyMonitorTest(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         self.vm = shVM()
-        self.vm.loadAllModels('word2vecModels/195[0-3]_????.w2v')
+        # self.vm.loadAllModels('word2vecModels/195[0-3]_????.w2v')
+        # Fake models! Only made so we can do unittests
+        self.vm.loadAllModels('tests/w2vModels/*.w2v')
 
     def testLoad(self):
         self.assertGreater(len(self.vm._models), 0,
@@ -40,9 +42,9 @@ class VocabularyMonitorTest(unittest.TestCase):
 
         for period, result in results.iteritems():
             self.assertEqual(len(result), maxTerms,
-                             'Every period should have %d terms' % maxTerms)
+                             'Every period should have %d terms. %s does not'
+                             % (maxTerms, period))
             for item in result:
-
                 self.assertEqual(len(item), 2,
                                  'Results should be word,score tuples')
 

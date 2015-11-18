@@ -2,6 +2,7 @@ import unittest
 from sortedcontainers import SortedDict
 from shico import VocabularyAggregator as shVA
 
+
 class TestVocabularyAggregation(unittest.TestCase):
     @classmethod
     def setUpClass(self):
@@ -36,19 +37,19 @@ class TestVocabularyAggregation(unittest.TestCase):
         for f in ['Gaussian', 'JSD',  'Linear']:
             try:
                 agg = shVA(weighF=f)
-                aggData = agg.aggregate(self._data)
+                agg.aggregate(self._data)
             except:
                 self.fail(f + ' should be a valid function')
 
         try:
             agg = shVA(weighF=lambda t1, t2: 0)
-            aggData = agg.aggregate(self._data)
+            agg.aggregate(self._data)
         except:
             self.fail('Lambda function should be a valid function')
 
         with self.assertRaises(Exception):
-            agg5 = shVA(weighF='Unknown')
-            aggData5 = agg5.aggregate(self._data)
+            agg = shVA(weighF='Unknown')
+            agg.aggregate(self._data)
 
     def testWordsPerYear(self):
         nWordsPerYear = 5
