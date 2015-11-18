@@ -1,0 +1,5 @@
+gensim==0.12.0
+glob2==0.4.1
+numpy==1.9.2
+six==1.10.0
+sortedcontainers==1.4.2
