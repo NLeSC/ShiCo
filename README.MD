@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/c-martinez/ShiCo.svg?branch=master)](https://travis-ci.org/c-martinez/ShiCo)
+
 # ShiCo package
 
 More documentation will follow
