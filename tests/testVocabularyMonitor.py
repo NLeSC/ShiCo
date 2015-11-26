@@ -7,10 +7,9 @@ class VocabularyMonitorTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        self.vm = shVM()
-        # self.vm.loadAllModels('word2vecModels/195[0-3]_????.w2v')
+        # self.vm = shVM('word2vecModels/195[0-3]_????.w2v')
         # Fake models! Only made so we can do unittests
-        self.vm.loadAllModels('tests/w2vModels/*.w2v')
+        self.vm = shVM('tests/w2vModels/*.w2v')
 
     def testLoad(self):
         self.assertGreater(len(self.vm._models), 0,

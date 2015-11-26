@@ -1,11 +1,12 @@
-"""ShiCo server.
+'''ShiCo server.
 
 Usage:
-  server.py  [-f FILES]
+  server.py  [-f FILES] [-n]
 
-  -f FILES    Path to word2vec model files (glob format is supported)
-              [default: word2vecModels/195[0-1]_????.w2v]
-"""
+  -f FILES         Path to word2vec model files (glob format is supported)
+                   [default: word2vecModels/195[0-1]_????.w2v]
+  -n,--non-binary  w2v files are NOT binary.
+'''
 from docopt import docopt
 
 from flask import Flask, jsonify
@@ -14,9 +15,8 @@ from flask_restful import reqparse
 from vocabularymonitor import VocabularyMonitor
 
 arguments = docopt(__doc__)
-
-_vm = VocabularyMonitor()
-_vm.loadAllModels(arguments['-f'])
+binary = not arguments['--non-binary']
+_vm = VocabularyMonitor(arguments['-f'], binary=binary)
 
 # trackClouds parameters
 trackParser = reqparse.RequestParser()

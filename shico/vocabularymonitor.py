@@ -2,7 +2,6 @@ import glob
 import os
 import gensim
 import sys
-import codecs
 import six
 
 from sortedcontainers import SortedDict
@@ -10,24 +9,33 @@ from collections import defaultdict, Counter
 
 
 class VocabularyMonitor():
+    '''Vocabulary Monitor tracks a concept through time. It uses a series of
+    gensim Word2Vec models (one for each group of years) to produce a group of
+    concept words.
+    '''
 
-    def __init__(self):
+    def __init__(self, globPattern, binary=True):
+        '''Create a Vocabulary monitor using the gensim w2v models located in
+        the given glob pattern.
+
+        Arguments:
+        globPattern     glob pattern where w2v files can be found
+        binary          True if w2v files have been saved as binary
+        '''
         self._models = SortedDict()
+        self._loadAllModels(globPattern, binary=True)
 
-    def loadAllModels(self, sGlobPattern, bReplace=True, bBinary=True):
-        """Load word2vec models from given sGlobPattern and return a dictionary of
+    def _loadAllModels(self, globPattern, binary=True):
+        '''Load word2vec models from given globPattern and return a dictionary of
         Word2Vec models.
-        """
-        for sModelFile in glob.glob(sGlobPattern):
+        '''
+        for sModelFile in glob.glob(globPattern):
             # Chop off the path and the extension
             sModelName = os.path.splitext(os.path.basename(sModelFile))[0]
 
-            if (sModelName in self._models) and not bReplace:
-                print "[%s]: already loaded" % sModelName
-            else:
-                print "[%s]: %s" % (sModelName, sModelFile)
-                self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
-                    load_word2vec_format(sModelFile, binary=bBinary)
+            print '[%s]: %s' % (sModelName, sModelFile)
+            self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
+                load_word2vec_format(sModelFile, binary=binary)
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
@@ -85,37 +93,6 @@ class VocabularyMonitor():
                 raise Exception('Algorithm not supported: ' + algorithm)
 
         return dResult
-
-    def printTrackClouds(self, dResult, aSeedTerms, sOutputFile=None,
-                         sumDistances=False, direction='forwards',
-                         description='', aggregator=None):
-        # Aggregation step
-        if aggregator is not None:
-            dResult = aggregator.aggregate(dResult)
-
-        fh = sys.stdout
-        if sOutputFile is not None:
-            fh = codecs.open(sOutputFile, mode='w', encoding='utf8')
-        if isinstance(aSeedTerms, six.string_types):
-            aSeedTerms = [aSeedTerms]
-
-        # First line always contains the seed terms
-        print >>fh, ",".join(aSeedTerms)
-        # Second line is always the direction
-        print >>fh, direction
-        # Third line is always the description
-        print >>fh, description
-
-        for sKey in dResult.keys():
-            if sumDistances:
-                print >>fh, "%s\t%s" % (sKey, ' '.join(["%s (%.2f)" %
-                                        (x[0], x[1]) for x in dResult[sKey]]))
-            else:
-                print >>fh, "%s\t%s" % (sKey, ' '.join(["%s (%d)" %
-                                        (x[0], x[1]) for x in dResult[sKey]]))
-
-        if sOutputFile is not None:
-            fh.close()
 
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0, wordBoost=1.0, sumDistances=False):
