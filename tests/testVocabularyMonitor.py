@@ -7,7 +7,6 @@ class VocabularyMonitorTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        # self.vm = shVM('word2vecModels/195[0-3]_????.w2v')
         # Fake models! Only made so we can do unittests
         self.vm = shVM('tests/w2vModels/*.w2v')
 
