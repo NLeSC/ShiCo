@@ -14,9 +14,11 @@ class kbTokenizer:
     def __init__(self, bLowerCase=True):
         self.bLowerCase = bLowerCase
 
-        self.oPunktSentenceTokenizer = PunktSentenceTokenizer()
+        self.oPunktSentTokenizer = PunktSentenceTokenizer()
 
-        self.sNonTokenChars = u"[‘’“”…”’“–«»\,‘\]\[;:\-\"'\?!¡¢∞§¶•ª≠∑´®†¨^πƒ©˙∆˚¬≈√∫~⁄™‹›ﬁﬂ‡°·±—‚„‰∏”`◊ˆ~¯˘¿÷\*\(\)<>=\+#^\\\/_]+"
+        self.sNonTokenChars = (u"[‘’“”…”’“–«»\,‘\]\[;:\-\"'\?!¡¢∞§¶•ª≠∑´®†¨^π"
+                               "ƒ©˙∆˚¬≈√∫~⁄™‹›ﬁﬂ‡°·±—‚„‰∏”`◊ˆ~¯˘¿÷\*\(\)<>="
+                               "\+#^\\\/_]+")
         self.reNonTokenChars_start = \
             re.compile(u"(\A|\s)%s" % self.sNonTokenChars, re.U)
         self.reNonTokenChars_end = \
@@ -36,8 +38,8 @@ class kbTokenizer:
             aTokens = self.reWhitespace.split(
                 self.removeNonTokenChars(sString))
 
-        # split() gives empty first/last elements if there were separators at the
-        # start/end of the string (so whitespace, in this case).
+        # split() gives empty first/last elements if there were separators at
+        # the start/end of the string (so whitespace, in this case).
         # We correct for that.
         iStart = 1 if aTokens[0] == '' else 0
         if aTokens[-1] == '':
@@ -51,7 +53,7 @@ class kbTokenizer:
         Output is a list of lists of tokens. One list of tokens per sentence.
         '''
         aTextTokens = []
-        for sSentence in self.oPunktSentenceTokenizer.sentences_from_text(sText):
+        for sSentence in self.oPunktSentTokenizer.sentences_from_text(sText):
             aTokens = self.tokenizeSentence(sSentence)
 
             if len(aTokens) > 0:
@@ -83,9 +85,9 @@ if __name__ == "__main__":
     oArgsParser.add_argument('INPUT_FILE')
     oArgs = oArgsParser.parse_args()
 
-    # To make the printing go right, we make sure that the output is utf8 encoded
-    # In general, it might be a good idea to set the Pythion IO encoding
-    # envirnoment variable: PYTHONIOENCODING=utf8
+    # To make the printing go right, we make sure that the output is utf8
+    # encoded. In general, it might be a good idea to set the Pythion IO
+    # encoding envirnoment variable: PYTHONIOENCODING=utf8
     if sys.stdout.encoding != 'utf8':
         sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 

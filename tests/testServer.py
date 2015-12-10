@@ -4,6 +4,7 @@ import shico.server
 
 
 class ServerTest(unittest.TestCase):
+
     '''Tests for server'''
     @classmethod
     def setUpClass(self):
@@ -26,10 +27,11 @@ class ServerTest(unittest.TestCase):
 
         years = respJson.keys()
         self.assertGreater(len(years), 0,
-                           'Response should produce response for several yearly models')
+                           'Response should produce response for several ' +
+                           'yearly models')
 
         wordsPerResult = None
-        for year,wordList in respJson.iteritems():
+        for year, wordList in respJson.iteritems():
             nWordsInList = len(wordList)
             self.assertGreater(nWordsInList, 0,
                                'Word lists should contain words')
@@ -38,8 +40,10 @@ class ServerTest(unittest.TestCase):
                 wordsPerResult = nWordsInList
             else:
                 self.assertEqual(wordsPerResult, nWordsInList,
-                                 'All results should contain the same number of words')
+                                 'All results should contain the same number' +
+                                 ' of words')
 
             for item in wordList:
                 self.assertEqual(len(item), 2,
-                                 'Items in wordList should be word/weight pairs')
+                                 'Items in wordList should be word/weight ' +
+                                 'pairs')

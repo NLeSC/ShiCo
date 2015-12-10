@@ -29,7 +29,7 @@ class VocabularyMonitorTest(unittest.TestCase):
             aWord = model.vocab.keys()[0]
             items = model.most_similar(aWord, topn=nItems)
             self.assertEqual(len(items), nItems,
-                             'Model should produced at least %d items' % nItems)
+                             'Model should produced %d items' % nItems)
 
     def testTrackTermsGivesResults(self):
         '''Test that trackClouds produces results in the expected format.'''
