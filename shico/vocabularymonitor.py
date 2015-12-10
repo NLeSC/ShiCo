@@ -1,7 +1,6 @@
 import glob
 import os
 import gensim
-import sys
 import six
 
 from sortedcontainers import SortedDict
@@ -41,6 +40,7 @@ class VocabularyMonitor():
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
                     forwards=True, sumDistances=False, algorithm='inlinks'):
         '''
+        TODO: Document properly
         algorithm    'inlinks', 'outlinks', or 'non-adaptive'
         '''
         if isinstance(seedTerms, six.string_types):

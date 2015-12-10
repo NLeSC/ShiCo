@@ -4,6 +4,7 @@ from shico import VocabularyMonitor as shVM
 
 
 class VocabularyMonitorTest(unittest.TestCase):
+    '''Tests for VocabularyMonitor'''
 
     @classmethod
     def setUpClass(self):
@@ -11,6 +12,7 @@ class VocabularyMonitorTest(unittest.TestCase):
         self.vm = shVM('tests/w2vModels/*.w2v')
 
     def testLoad(self):
+        '''Test loading of w2v models'''
         self.assertGreater(len(self.vm._models), 0,
                            'Should have at least 1 model')
         for label, model in self.vm._models.iteritems():
@@ -18,6 +20,7 @@ class VocabularyMonitorTest(unittest.TestCase):
                                   'Object should be a Word2Vec model')
 
     def testModelsWork(self):
+        '''Test that w2v models produce results.'''
         nItems = 5
         for label, model in self.vm._models.iteritems():
             modelWords = model.vocab.keys()
@@ -26,10 +29,10 @@ class VocabularyMonitorTest(unittest.TestCase):
             aWord = model.vocab.keys()[0]
             items = model.most_similar(aWord, topn=nItems)
             self.assertEqual(len(items), nItems,
-                             'Model should produced at least %d items'
-                             % nItems)
+                             'Model should produced at least %d items' % nItems)
 
     def testTrackTermsGivesResults(self):
+        '''Test that trackClouds produces results in the expected format.'''
         seedTerms = 'x'
         maxTerms = 5
         results = self.vm.trackClouds(seedTerms, maxTerms=maxTerms)
@@ -47,6 +50,8 @@ class VocabularyMonitorTest(unittest.TestCase):
                                  'Results should be word,score tuples')
 
     def testTrackTermsOutlinks(self):
+        '''Test that different algorithms still produce the same number of
+        results'''
         seedTerms = 'x'
         maxTerms = 5
 
@@ -66,6 +71,7 @@ class VocabularyMonitorTest(unittest.TestCase):
                              'number ofresults')
 
     def testTrackTermsKeys(self):
+        '''Test that using range selection works.'''
         seedTerms = 'x'
         keys = self.vm._models.keys()
         print keys

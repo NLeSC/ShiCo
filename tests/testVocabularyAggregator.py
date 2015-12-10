@@ -4,6 +4,7 @@ from shico import VocabularyAggregator as shVA
 
 
 class TestVocabularyAggregation(unittest.TestCase):
+    '''Tests for VocabularyAggregator'''
     @classmethod
     def setUpClass(self):
         self._data = SortedDict({
@@ -34,6 +35,8 @@ class TestVocabularyAggregation(unittest.TestCase):
         })
 
     def testWeightingFunctions(self):
+        '''Test that VocabularyAggregator supports weighting functions and fails
+        for unsupported ones.'''
         for f in ['Gaussian', 'JSD',  'Linear']:
             try:
                 agg = shVA(weighF=f)
@@ -52,6 +55,7 @@ class TestVocabularyAggregation(unittest.TestCase):
             agg.aggregate(self._data)
 
     def testWordsPerYear(self):
+        '''Test that aggregator produces the correct number of results'''
         nWordsPerYear = 5
         agg = shVA(nWordsPerYear=nWordsPerYear)
         aggData = agg.aggregate(self._data)
@@ -60,6 +64,8 @@ class TestVocabularyAggregation(unittest.TestCase):
                              'Each year should have %d words ' % nWordsPerYear)
 
     def testYearsInInterval(self):
+        '''Test aggregator reduces the number of intervals produced when
+        such intervals are longer'''
         agg = shVA(yearsInInterval=1)
         aggData = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), len(self._data.keys()),
@@ -74,3 +80,8 @@ class TestVocabularyAggregation(unittest.TestCase):
         aggData = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), 1,
                          'Should have only 1 key')
+
+        agg = shVA(yearsInInterval=2 * len(self._data.keys()))
+        aggData = agg.aggregate(self._data)
+        self.assertEqual(len(aggData.keys()), 1,
+                         'Should have only 1 key, containing all years')

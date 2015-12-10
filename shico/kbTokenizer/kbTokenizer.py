@@ -7,6 +7,7 @@ import codecs
 
 
 class kbTokenizer:
+
     '''Tokenizer used to pre-process KB dataset for generating Word2Vec models
     from word2vecModels/*.w2v. '''
 
@@ -30,7 +31,7 @@ class kbTokenizer:
         aTokens = None
         if self.bLowerCase:
             aTokens = self.reWhitespace.split(
-                    self.removeNonTokenChars(sString.lower()))
+                self.removeNonTokenChars(sString.lower()))
         else:
             aTokens = self.reWhitespace.split(
                 self.removeNonTokenChars(sString))

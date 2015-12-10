@@ -4,6 +4,7 @@ import shico.server
 
 
 class ServerTest(unittest.TestCase):
+    '''Tests for server'''
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
@@ -11,7 +12,9 @@ class ServerTest(unittest.TestCase):
         self.app = shico.server.app.test_client()
 
     def testTrackService(self):
-        resp = self.app.get('/track/x')
+        '''Test calls to /track/<terms>. Response should be valid JSON.'''
+        terms = 'x'
+        resp = self.app.get('/track/' + terms)
 
         self.assertEqual(resp.status_code, 200,
                          'Response should be code 200')
