@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('shico', ['ngResource', 'ui.bootstrap', 'toastr']);
+    .module('shico', ['ngResource', 'ui.bootstrap', 'toastr', 'nvd3']);
 
 })();

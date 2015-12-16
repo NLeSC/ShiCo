@@ -24,18 +24,22 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container">
+    <div class="container" ng-controller="FlowController as vm">
       <div class="jumbotron row">
-        <form ng-submit="vm.submit()" ng-controller="FormController as vm">
+        <form ng-submit="vm.doPost()">
           <tracker-parameters></tracker-parameters>
           <div class="col-md-12">
             <button type="submit" class="btn btn-success">Submit</button>
           </div>
+          <div class="col-md-12">
+            <button ng-click="vm.doPrint()" class="btn btn-success">Print</button>
+          </div>
         </form>
-
+      </div>
+      <div>
+        <plot-directive></plot-directive>
       </div>
     </div>
-
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

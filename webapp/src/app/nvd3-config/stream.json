@@ -1,0 +1,11 @@
+{
+  "type": "stackedAreaChart",
+  "height": 450,
+  "margin" : {
+      "top": 20,
+      "right": 20,
+      "bottom": 60,
+      "left": 55
+  },
+  "x": "function(d){ return d[0]; }"
+}
