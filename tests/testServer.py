@@ -43,7 +43,7 @@ class ServerTest(unittest.TestCase):
                                  'All results should contain the same number' +
                                  ' of words')
 
-            for item in wordList:
-                self.assertEqual(len(item), 2,
-                                 'Items in wordList should be word/weight ' +
-                                 'pairs')
+            for word in wordList:
+                self.assertIsNotNone(wordList[word],
+                                 'Items in wordList should be word: weight ' +
+                                 'dictionary entries')

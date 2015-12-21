@@ -13,7 +13,7 @@
 
     function trackConcept(trackerParams) {
       // var tracker = $resource('http://localhost:5000/track/:terms');
-      var tracker = $resource('dummy.json');
+      var tracker = $resource('dummy2.json');
       var request = tracker.get(trackerParams, parseTermTrack);
       return request.$promise;
     }

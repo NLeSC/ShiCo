@@ -42,6 +42,9 @@ trackParser.add_argument('sumDistances', type=bool, default=False)
 trackParser.add_argument('algorithm', type=str, default='inlinks')
 
 
+def _makeDict(pairList):
+    return { word: weight for word,weight in pairList }
+
 @app.route('/track/<terms>')
 def trackWord(terms):
     '''VocabularyMonitor.trackClouds service. Expects a list of terms to be
@@ -60,6 +63,7 @@ def trackWord(terms):
                         sumDistances=defaults['sumDistances'],
                         algorithm=defaults['algorithm'],
                         )
+    results = { year: _makeDict(vals) for year, vals in results.iteritems() }
     return jsonify(results)
 
 if __name__ == '__main__':
