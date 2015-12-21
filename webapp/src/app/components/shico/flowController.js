@@ -39,12 +39,19 @@
         });
 
         // HACK: we must gather these...
+        var yearAliasI = {
+          1950: "1950_1959",
+          1951: "1951_1960",
+          1952: "1952_1961",
+          1953: "1953_1962"
+        };
         var yearAlias = {
           "1950_1959": 1950,
           "1951_1960": 1951,
           "1952_1961": 1952,
           "1953_1962": 1953
-        }
+        };
+        GraphConfigService.setYearAlias(yearAliasI);
 
         var newData = [];
         angular.forEach(allWords, function(word) {

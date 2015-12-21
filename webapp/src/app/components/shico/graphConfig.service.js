@@ -26,15 +26,19 @@
       }
     };
 
+    var yearAlias = {
+    };
+
     var service = {
-      getConfig: getConfig
+      getConfig: getConfig,
+      setYearAlias: setYearAlias
     };
     return service;
 
     // TODO: remove these functions
     function getX(d){ return d[0]; }
     function getY(d){ return d[1]; }
-    function tickYear(d) { return d + '_'; }
+    function tickYear(d) { return yearAlias[d]; }
 
     function getConfig(graphName) {
       if(graphName === 'streamGraph') {
@@ -42,6 +46,10 @@
       } else {
         return {};
       }
+    }
+
+    function setYearAlias(newData) {
+      yearAlias = newData;
     }
   }
 })();
