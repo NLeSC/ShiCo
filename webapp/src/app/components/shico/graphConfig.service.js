@@ -28,20 +28,20 @@
           }
       }
     };
-    var yearTickLabels = {};   // Year markers for stream graph
-
+    // TODO: forceConfig could be loaded from JSON ?
+    // NVD3 configuration for force directed graph
     var forceConfig = {
       chart: {
           type: 'forceDirectedGraph',
-          height: 200,
+          height: 300,
+          width: 300,
           color: d3.scale.category20(),
           radius: 5,
           nodeExtras: addTextLabels
       }
     };
 
-    var yearAlias = {
-    };
+    var yearTickLabels = {};   // Year markers for stream graph
 
     var service = {
       getConfig: getConfig,
@@ -69,16 +69,13 @@
         .attr("dy", ".35em")
         .text(function(d) { return d.name; });
     }
+
     function getConfig(graphName) {
       if(graphName === 'streamGraph') {
         return streamConfig;
       } else if(graphName === 'forceGraph'){
         return forceConfig;
       }
-    }
-
-    function setYearAlias(newData) {
-      yearAlias = newData;
     }
   }
 })();
