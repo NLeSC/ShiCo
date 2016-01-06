@@ -9,26 +9,40 @@
     var vm = this;
 
     vm.doPost = doPost;
-    vm.doPrint = doPrint;
     vm.parameters = {
       terms: 'oorlog',
       maxTerms: 5,
       sumDistances: true
     };
 
-    vm.graph = {
+    vm.streamGraph = {
       options: GraphConfigService.getConfig('streamGraph'),
       data:    []
+    };
+
+    vm.forceGraph = {
+      options: GraphConfigService.getConfig('forceGraph'),
+      data: [],
+      currYearIdx: 0
+    };
+    vm.yearLabels = [];
+
+    vm.slider_options = {
+      floor: 0,
+      ceil: 0,
+      showTicksValues: true,
+      translate: function(value) {
+        return vm.yearLabels[value];
+      }
     };
 
     function doPost() {
       var resp = ConceptService.trackConcept(vm.parameters);
 
-      console.log("DoPost of: ");
-      console.log(vm.parameters);
-
       resp.then(function(data) {
+        data = data.toJSON();
 
+        // Collect all words and year labels on data
         var allYears = [];
         var allWords = new Set();
         angular.forEach(data, function(wordValues, year) {
@@ -38,40 +52,66 @@
           });
         });
 
-        // HACK: we must gather these...
-        var yearAlias = {
-          "1950_1959": 1950,
-          "1951_1960": 1951,
-          "1952_1961": 1952,
-          "1953_1962": 1953
-        }
+        // Create year idx -> label table
+        var yearIdx = {};
+        angular.forEach(allYears, function(year, idx) {
+          yearIdx[year] = idx;
+        });
 
-        var newData = [];
-        angular.forEach(allWords, function(word) {
-          var values = [];
-          angular.forEach(allYears, function(year) {
-            var val = 0;
-            if(word in data[year]) {
-              val = data[year][word];
-            } else {
-              val = 0;
-            }
+        // Register year labels with to be used by config
+        GraphConfigService.setStreamYears(allYears);
+        vm.yearLabels = allYears;
 
-            values.push([ yearAlias[year], val]);
-          });
-          this.push({
-            key: word,
-            values: values
-          });
-        }, newData);
+        // Prepare data on format suitable from NVD3
+        var streamData = formatForStream(data, yearIdx, allWords, allYears);
+        var forceData  = formatForForce(data, yearIdx, allWords, allYears);
 
-        vm.graph.data = newData;
+        // Register data on graph
+        vm.streamGraph.data = streamData;
+        vm.forceGraph.data = forceData;
+
+        vm.slider_options.ceil = vm.yearLabels.length-1;
       });
     }
 
-    function doPrint() {
-      console.log("Do print of: ");
-      console.log(vm.parameters);
+    function formatForStream(data, yearIdx, allWords, allYears) {
+      var streamData = [];
+      angular.forEach(allWords, function(word) {
+        var values = [];
+        angular.forEach(allYears, function(year) {
+          var val = (word in data[year]) ? data[year][word] : 0;
+          this.push([ yearIdx[year], val]);
+        }, values);
+        this.push({
+          key: word,
+          values: values
+        });
+      }, streamData);
+      return streamData;
+    }
+
+    function formatForForce(data, yearIdx, allWords, allYears) {
+      var forceData = {};
+
+      angular.forEach(data, function(wordValues, year) {
+        var yearForceData = {};
+        yearForceData.links = [];
+        yearForceData.nodes = [];
+        yearForceData.nodes.push({ name: 'x' });
+        var n = 1;
+        angular.forEach(wordValues, function(weight, word) {
+          yearForceData.nodes.push({ name: word });
+          yearForceData.links.push({
+            source: 0,
+            target: n,
+            value:  weight
+          });
+          n = n + 1;
+        });
+        forceData[yearIdx[year]] = yearForceData;
+      });
+
+      return forceData;
     }
   }
 })();

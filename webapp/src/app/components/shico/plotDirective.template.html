@@ -1,4 +1,11 @@
 <nvd3
-  data='vm.graph.data'
-  options='vm.graph.options'>
+  data='vm.streamGraph.data'
+  options='vm.streamGraph.options'>
 </nvd3>
+<nvd3
+  data='vm.forceGraph.data[vm.forceGraph.currYearIdx]'
+  options='vm.forceGraph.options'>
+</nvd3>
+<rzslider ng-hide="!vm.slider_options.ceil"
+         rz-slider-model="vm.forceGraph.currYearIdx"
+         rz-slider-options="vm.slider_options"></rzslider>

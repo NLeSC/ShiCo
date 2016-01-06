@@ -6,6 +6,7 @@
       'ngResource',
       'ui.bootstrap',
       'toastr',
-      'nvd3'
+      'nvd3',
+      'rzModule'
     ]);
 })();
