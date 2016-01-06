@@ -40,6 +40,9 @@
       }
     };
 
+    var yearAlias = {
+    };
+
     var service = {
       getConfig: getConfig,
       setStreamYears: setStreamYears
@@ -66,13 +69,16 @@
         .attr("dy", ".35em")
         .text(function(d) { return d.name; });
     }
-
     function getConfig(graphName) {
       if(graphName === 'streamGraph') {
         return streamConfig;
       } else if(graphName === 'forceGraph'){
         return forceConfig;
       }
+    }
+
+    function setYearAlias(newData) {
+      yearAlias = newData;
     }
   }
 })();
