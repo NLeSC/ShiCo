@@ -12,6 +12,7 @@
     return service;
 
     function trackConcept(trackerParams) {
+      // trackerURL format: http://localhost:5000/track/:terms
       var tracker = $resource(SettingsService.trackerURL);
       var request = tracker.get(trackerParams);
       var trackPromise = request.$promise.then(parseTermTrack);

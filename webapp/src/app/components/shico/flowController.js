@@ -17,7 +17,7 @@
 
     // FlowController exposed variables
     vm.parameters = {
-      terms: 'oorlog',
+      terms: '',
       maxTerms: 5,
       sumDistances: true
     };
