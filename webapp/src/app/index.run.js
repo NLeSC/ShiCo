@@ -6,8 +6,9 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log) {
+  function runBlock($log, SettingsService) {
     $log.debug('runBlock end');
+    SettingsService.doLoad();
   }
 
 })();

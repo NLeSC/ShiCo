@@ -5,24 +5,22 @@
       .module('shico')
       .service('ConceptService', ConceptService);
 
-  function ConceptService($resource, $log) {
+  function ConceptService($resource, $log, SettingsService) {
     var service = {
       trackConcept: trackConcept
     };
     return service;
 
     function trackConcept(trackerParams) {
-      // var tracker = $resource('http://localhost:5000/track/:terms');
-      var tracker = $resource('dummy2.json');
-      var request = tracker.get(trackerParams, parseTermTrack);
-      return request.$promise;
+      var tracker = $resource(SettingsService.trackerURL);
+      var request = tracker.get(trackerParams);
+      var trackPromise = request.$promise.then(parseTermTrack);
+      return trackPromise;
     }
 
     function parseTermTrack(data) {
-      $log.debug('ConceptService returned data!');
-      // If data needs to be post-processed, do so here
-      delete data['$promise'];
-      delete data['$resolved'];
+      // If data needs to be parsed, it should be done here.
+      return data.toJSON();
     }
   }
 })();

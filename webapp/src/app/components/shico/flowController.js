@@ -53,8 +53,6 @@
     function doPost() {
       var resp = ConceptService.trackConcept(vm.parameters);
       resp.then(function(data) {
-        data = data.toJSON();
-
         // Collect all words and year labels on data
         var allYears = [];
         var allWords = new Set();
