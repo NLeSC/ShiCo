@@ -3,18 +3,22 @@
     <p class="lead">Concept search</p>
     <div class="form-horizontal">
       <div class="form-group">
-        <input type="text" class="form-control" id="terms" ng-model="vm.parameters.terms" placeholder="Search concepts">
+        <input type="text" ng-model="vm.parameters.terms" class="form-control" id="terms" placeholder="Search concepts">
       </div>
-
+    </div>
+    <div class="form-inline">
       <div class="form-group">
-        <label>More inputs go here</label>
-        <input type="text" class="form-control" id="dummy" placeholder="???">
+        <label for="maxConcepts">Max terms</label>
+        <input type="number" ng-model="vm.parameters.maxTerms" min="1" max="20" class="form-control" id="maxConcepts">
+
+        <label for="maxRelatedTerms">Max related terms</label>
+        <input type="number" ng-model="vm.parameters.maxRelatedTerms" min="1" max="20" class="form-control" id="maxRelatedTerms">
       </div>
     </div>
   </div>
+
   <div class="col-md-6">
     <p class="lead">Concept aggregation</p>
-
     <div class="form-horizontal">
       <div class="form-group">
         <label>More inputs go here</label>
