@@ -5,7 +5,8 @@
       .module('shico')
       .controller('FlowController', FlowController);
 
-  function FlowController(ConceptService, GraphConfigService) {
+  function FlowController(ConceptService,
+                          GraphControlService) {
     var vm = this;
 
     // FlowController exposed functions
@@ -29,60 +30,16 @@
       hide: true
     };
 
-    vm.streamGraph = {
-      options: GraphConfigService.getConfig('streamGraph'),
-      data:    []
-    };
-
-    vm.forceGraph = {
-      options: GraphConfigService.getConfig('forceGraph'),
-      data: [],
-      currYearIdx: 0
-    };
-    vm.yearLabels = [];
-
-    vm.slider_options = {
-      floor: 0,
-      ceil: 0,
-      showTicksValues: true,
-      translate: function(value) {
-        return vm.yearLabels[value];
-      }
-    };
+    // Share graph data from service to controller
+    // so directive can find them.
+    vm.streamGraph = GraphControlService.streamGraph;
+    vm.forceGraph = GraphControlService.forceGraph;
+    vm.slider_options = GraphControlService.slider_options;
 
     function doPost() {
       var resp = ConceptService.trackConcept(vm.parameters);
-      resp.then(function(data) {
-        // Collect all words and year labels on data
-        var allYears = [];
-        var allWords = new Set();
-        angular.forEach(data, function(wordValues, year) {
-          allYears.push(year);
-          angular.forEach(wordValues, function(weight, word) {
-            allWords.add(word);
-          });
-        });
-
-        // Create year idx -> label table
-        var yearIdx = {};
-        angular.forEach(allYears, function(year, idx) {
-          yearIdx[year] = idx;
-        });
-
-        // Register year labels with to be used by config
-        GraphConfigService.setStreamYears(allYears);
-        vm.yearLabels = allYears;
-
-        // Prepare data on format suitable from NVD3
-        var streamData = formatForStream(data, yearIdx, allWords, allYears);
-        var forceData  = formatForForce(data, yearIdx, allWords, allYears);
-
-        // Register data on graph
-        vm.streamGraph.data = streamData;
-        vm.forceGraph.data = forceData;
-
-        vm.slider_options.ceil = vm.yearLabels.length-1;
-      });
+      // resp.then(GraphControlService.doSomething);
+      resp.then(GraphControlService.update);
     }
 
     // TODO Move formatForStream and formatForForce to

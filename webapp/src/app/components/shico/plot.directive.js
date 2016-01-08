@@ -8,7 +8,6 @@
   function plotDirective() {
     var directive = {
       templateUrl: '/app/components/shico/plotDirective.template.html',
-
     };
     return directive;
   }
