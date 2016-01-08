@@ -11,14 +11,15 @@
     vm.parameters = {
       terms: 'oorlog',
       maxTerms: 10,
-      maxRelatedTerms: 10,  // TO BE INCLUDED
+      maxRelatedTerms: 10,
       startKey: '',         // TO BE INCLUDED
       endKey: '',           // TO BE INCLUDED
-      minDist: 0.0,         // TO BE INCLUDED
-      wordBoost: 1.0,       // TO BE INCLUDED
-      forwards: true,       // TO BE INCLUDED
-      sumDistances: false,  // TO BE INCLUDED
-      algorithm: 'inlinks', // TO BE INCLUDED
+      minDist: 0.1,
+      wordBoost: 1.0,
+      forwards: true,
+      sumDistances: false,
+      algorithm: 'inlinks',
+      //  'inlinks', 'outlinks', or 'non-adaptive'
     };
 
     var service = {
