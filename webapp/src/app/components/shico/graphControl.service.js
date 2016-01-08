@@ -37,7 +37,7 @@
     };
     return service;
 
-    // Update
+    // Update graphs with the given data
     function update(data){
       // Collect all words and year labels on data
       var allYears = [];
