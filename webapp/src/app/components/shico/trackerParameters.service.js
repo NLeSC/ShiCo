@@ -9,7 +9,7 @@
     var vm = this;
 
     vm.parameters = {
-      terms: 'oorlog',
+      terms: '',
       maxTerms: 10,
       maxRelatedTerms: 10,
       //startKey: '',         // TO BE INCLUDED
