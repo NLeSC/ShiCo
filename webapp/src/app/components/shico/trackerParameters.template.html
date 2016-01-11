@@ -1,54 +1,62 @@
 <div class="row form-horizontal col-md-12">
   <p class="lead">Concept search</p>
-  <div class="form-group">
+  <div class="form-group col-md-11">
     <input type="text" ng-model="vm.parameters.terms" class="form-control" id="terms" placeholder="Search concepts">
   </div>
 
-  <div class="form-group form-inline col-md-4">
-    <label for="maxConcepts">Max terms</label>
-    <input type="number" ng-model="vm.parameters.maxTerms" min="1" max="20" class="form-control" id="maxConcepts">
+  <div class="form-group col-md-1">
+    <button class="btn btn-primary" ng-click="open = !open"> + </button>
   </div>
 
-  <div class="form-group form-inline col-md-4">
-    <label for="maxRelatedTerms">Max related terms</label>
-    <input type="number" ng-model="vm.parameters.maxRelatedTerms" min="1" max="20" class="form-control" id="maxRelatedTerms">
-  </div>
+  <div collapse="!open">
+    <div>
+      <div class="form-group form-inline col-md-4">
+        <label for="maxConcepts">Max terms</label>
+        <input type="number" ng-model="vm.parameters.maxTerms" min="1" max="20" class="form-control" id="maxConcepts">
+      </div>
 
-  <div class="form-group form-inline col-md-4">
-    <label for="minDist">Max related terms</label>
-    <input type="number" ng-model="vm.parameters.minDist" min="0.1" max="10.0" step="0.1" class="form-control" id="minDist">
-  </div>
+      <div class="form-group form-inline col-md-4">
+        <label for="maxRelatedTerms">Max related terms</label>
+        <input type="number" ng-model="vm.parameters.maxRelatedTerms" min="1" max="20" class="form-control" id="maxRelatedTerms">
+      </div>
 
-  <div class="form-group form-inline col-md-4">
-    <label for="wordBoost">Word boost</label>
-    <input type="number" ng-model="vm.parameters.wordBoost" min="0.1" max="10.0" step="0.1" class="form-control" id="wordBoost">
-  </div>
+      <div class="form-group form-inline col-md-4">
+        <label for="minDist">Max related terms</label>
+        <input type="number" ng-model="vm.parameters.minDist" min="0.1" max="10.0" step="0.1" class="form-control" id="minDist">
+      </div>
 
-  <div class="form-group form-inline col-md-4">
-    <label for="sumDistances">Sum distances</label>
-    <input type="checkbox" ng-model="vm.parameters.sumDistances" class="form-control" id="sumDistances">
-  </div>
+      <div class="form-group form-inline col-md-4">
+        <label for="wordBoost">Word boost</label>
+        <input type="number" ng-model="vm.parameters.wordBoost" min="0.1" max="10.0" step="0.1" class="form-control" id="wordBoost">
+      </div>
 
-  <div class="form-group form-inline col-md-4">
-    <label for="algorithm">Algorithm: </label>
-    <select ng-model="vm.parameters.algorithm" name="algorithm">
-      <option data-ng-repeat="algo in vm.algorithms" value="{{ algo }}">{{ algo }}</option>
-    </select>
-  </div>
+      <div class="form-group form-inline col-md-4">
+        <label for="sumDistances">Sum distances</label>
+        <input type="checkbox" ng-model="vm.parameters.sumDistances" class="form-control" id="sumDistances">
+      </div>
 
-  <div class="form-group col-md-12"><!-- TODO: Should this be col-md-4 ?-->
-    <label for="forward">Date Range</label>
-    <div class="radio">
-      <label>
-        <input type="radio" ng-model="vm.parameters.forwards" ng-value="true" id="forward">
-        Forwards
-      </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input type="radio" ng-model="vm.parameters.forwards" ng-value="false" id="forward">
-        Backwards
-      </label>
+      <div class="form-group form-inline col-md-4">
+        <label for="algorithm">Algorithm: </label>
+        <select ng-model="vm.parameters.algorithm" name="algorithm">
+          <option data-ng-repeat="algo in vm.algorithms" value="{{ algo }}">{{ algo }}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-12"><!-- TODO: Should this be col-md-4 ?-->
+        <label for="forward">Date Range</label>
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="vm.parameters.forwards" ng-value="true" id="forward">
+            Forwards
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="vm.parameters.forwards" ng-value="false" id="forward">
+            Backwards
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 </div>
