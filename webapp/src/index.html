@@ -24,7 +24,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container" ng-controller="FormController as vm">
+    <div class="container" ng-controller="FormController as vm" cg-busy="vm.trackerPromise">
       <div class="jumbotron">
         <form ng-submit="vm.doPost()">
           <tracker-parameters></tracker-parameters>
@@ -38,6 +38,8 @@
       </div>
       <tracker-graphs></tracker-graphs>
     </div>
+
+
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
