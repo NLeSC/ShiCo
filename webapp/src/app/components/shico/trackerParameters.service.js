@@ -12,8 +12,8 @@
       terms: 'oorlog',
       maxTerms: 10,
       maxRelatedTerms: 10,
-      startKey: '',         // TO BE INCLUDED
-      endKey: '',           // TO BE INCLUDED
+      //startKey: '',         // TO BE INCLUDED
+      //endKey: '',           // TO BE INCLUDED
       minDist: 0.1,
       wordBoost: 1.0,
       forwards: true,
