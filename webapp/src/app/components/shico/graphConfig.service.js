@@ -37,15 +37,17 @@
           width: 300,
           color: d3.scale.category20(),
           radius: 5,
-          nodeExtras: addTextLabels
+          nodeExtras: processNode
       }
     };
 
     var yearTickLabels = {};   // Year markers for stream graph
+    var forceGraphHooks = [];
 
     var service = {
       getConfig: getConfig,
-      setStreamYears: setStreamYears
+      setStreamYears: setStreamYears,
+      addForceGraphHook: addForceGraphHook
     };
     return service;
 
@@ -63,11 +65,22 @@
     }
 
     // Helper functions for forceConfig
+    function processNode(node) {
+      addTextLabels(node);
+      angular.forEach(forceGraphHooks, function(hook) {
+        hook(node);
+      });
+    }
+
     function addTextLabels(node) {
       node.append("text")
         .attr("dx", 12)
         .attr("dy", ".35em")
         .text(function(d) { return d.name; });
+    }
+
+    function addForceGraphHook(callback) {
+      forceGraphHooks.push(callback);
     }
 
     function getConfig(graphName) {
