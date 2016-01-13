@@ -83,5 +83,5 @@ def trackWord(terms):
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     initApp(arguments['-f'], not arguments['--non-binary'])
-    app.debug = True
+    # app.debug = True
     app.run(host='0.0.0.0')

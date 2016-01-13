@@ -98,56 +98,17 @@ class VocabularyMonitor():
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0, wordBoost=1.0, sumDistances=False):
         if sumDistances:
-            result = self._inlinkSum(model, seedTerms,
-                                     maxTerms=maxTerms, minDist=minDist,
+            result = self._trackCore(model, seedTerms, maxTerms=maxTerms,
                                      maxRelatedTerms=maxRelatedTerms,
-                                     wordBoost=wordBoost)
+                                     minDist=minDist, wordBoost=wordBoost,
+                                     reward=lambda tDist: 1.0 - tDist)
         else:
-            result = self._inlinkNosum(model, seedTerms,
-                                       maxTerms=maxTerms, minDist=minDist,
-                                       maxRelatedTerms=maxRelatedTerms,
-                                       wordBoost=wordBoost)
+            result = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+                                     maxRelatedTerms=maxRelatedTerms,
+                                     minDist=minDist)
         # Make a new seed set
         newSeedSet = [word for word, weight in result]
         return result, newSeedSet
-
-    def _inlinkSum(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                   minDist=0.0, wordBoost=1.0):
-        dRelatedTerms = defaultdict(float)
-        for term in seedTerms:
-            try:
-                # The terms are always related to themselves
-                dRelatedTerms[term] += wordBoost
-
-                newTerms = model.most_similar(term, topn=maxRelatedTerms)
-                for newTerm, tDist in newTerms:
-                    if tDist < minDist:
-                        break
-                    fDistance = 1.0 - tDist  # Similarity to distance
-                    dRelatedTerms[newTerm] += fDistance
-            except KeyError:  # If the word is not present in this era
-                pass
-
-        oCounter = Counter(dRelatedTerms)
-        return oCounter.most_common(maxTerms)
-
-    def _inlinkNosum(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                     minDist=0.0, wordBoost=1.0):
-        aRelatedTerms = []
-        for term in seedTerms:
-            try:
-                newTerms = model.most_similar(term, topn=maxRelatedTerms)
-                aRelatedTerms += \
-                    [newTerm for newTerm, tDist in newTerms
-                     if tDist >= minDist]
-            except KeyError:  # If the word is not present in this era
-                pass
-
-        # The terms are always related to themselves
-        aRelatedTerms += seedTerms
-        oCounter = Counter(aRelatedTerms)
-
-        return oCounter.most_common(maxTerms)
 
     def _trackOutlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                       minDist=0.0, wordBoost=1.0, sumDistances=False):
@@ -189,19 +150,27 @@ class VocabularyMonitor():
 
     def _trackSimple(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0):
-        relatedTerms = []
+        trackTerms = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+                        maxRelatedTerms=maxRelatedTerms, minDist=minDist)
+        return trackTerms, seedTerms
+
+    def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
+                     minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
+        dRelatedTerms = defaultdict(float)
 
         # Get the first tier related terms
         for term in seedTerms:
             try:
-                newTerms = model.most_similar(term, topn=maxRelatedTerms)
-                relatedTerms += [newTerm for newTerm, tDist in newTerms
-                                 if tDist >= minDist]
+                # The terms are always related to themselves
+                dRelatedTerms[term] = wordBoost
 
-                relatedTerms.append(term)
-                # Every word is related to itself
+                newTerms = model.most_similar(term, topn=maxRelatedTerms)
+                for newTerm, tDist in newTerms:
+                    if tDist < minDist:
+                        break
+                    dRelatedTerms[newTerm] += reward(tDist)
             except KeyError:
                 pass
 
-        oCounter = Counter(relatedTerms)
-        return oCounter.most_common(maxTerms), seedTerms
+        oCounter = Counter(dRelatedTerms)
+        return oCounter.most_common(maxTerms)
