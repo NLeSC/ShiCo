@@ -47,6 +47,7 @@ class VocabularyMonitor():
             seedTerms = [seedTerms]
         aSeedSet = seedTerms
         dResult = SortedDict()
+        background = SortedDict()
 
         # Keys are already sorted because we use a SortedDict
         sortedKeys = self._models.keys()

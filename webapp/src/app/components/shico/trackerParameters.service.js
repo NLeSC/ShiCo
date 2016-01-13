@@ -18,8 +18,12 @@
       wordBoost: 1.0,
       forwards: true,
       sumDistances: false,
-      algorithm: 'inlinks',
-      //  'inlinks', 'outlinks', or 'non-adaptive'
+      algorithm: 'inlinks',   //  'inlinks', 'outlinks', or 'non-adaptive'
+      // Aggregator parameters:
+      // agg.weighF,          // TO BE INCLUDED
+      // agg.wfParam,         // TO BE INCLUDED
+      // agg.yearsInInterval, // TO BE INCLUDED
+      // agg.nWordsPerYear,   // TO BE INCLUDED
     };
 
     var service = {

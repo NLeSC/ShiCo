@@ -14,6 +14,7 @@ from flask_restful import reqparse
 from flask.ext.cors import CORS
 
 from vocabularymonitor import VocabularyMonitor
+from vocabularyaggregator import VocabularyAggregator
 
 app = Flask(__name__)
 CORS(app)
@@ -30,6 +31,8 @@ def initApp(files, binary):
     _vm = VocabularyMonitor(files, binary)
 
 # trackClouds parameters
+
+## VocabularyMonitor parameters:
 trackParser = reqparse.RequestParser()
 trackParser.add_argument('maxTerms', type=int, default=10)
 trackParser.add_argument('maxRelatedTerms', type=int, default=10)
@@ -41,6 +44,11 @@ trackParser.add_argument('forwards', type=bool, default=True)
 trackParser.add_argument('sumDistances', type=bool, default=False)
 trackParser.add_argument('algorithm', type=str, default='inlinks')
 
+## VocabularyAggregator parameters:
+trackParser.add_argument('agg.weighF', type=str, default='Gaussian')
+trackParser.add_argument('agg.wfParam', type=float, default=None)
+trackParser.add_argument('agg.yearsInInterval', type=int, default=5)
+trackParser.add_argument('agg.nWordsPerYear', type=int, default=10)
 
 def _makeDict(pairList):
     return { word: weight for word,weight in pairList }
@@ -63,6 +71,12 @@ def trackWord(terms):
                         sumDistances=defaults['sumDistances'],
                         algorithm=defaults['algorithm'],
                         )
+    agg = VocabularyAggregator(weighF=defaults['agg.weighF'],
+                               wfParam=defaults['agg.wfParam'],
+                               yearsInInterval=defaults['agg.yearsInInterval'],
+                               nWordsPerYear=defaults['agg.nWordsPerYear']
+                               )
+    results = agg.aggregate(results)
     results = { year: _makeDict(vals) for year, vals in results.iteritems() }
     return jsonify(results)
 
