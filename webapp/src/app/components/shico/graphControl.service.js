@@ -55,7 +55,8 @@
         yearIdx[year] = idx;
       });
 
-      // Register year labels with to be used by config
+      // Register vocabulary and year labels with to be used by config
+      GraphConfigService.setVocabulary(allWords);
       GraphConfigService.setStreamYears(allYears);
       vm.yearLabels = allYears;
 

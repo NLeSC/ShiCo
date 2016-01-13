@@ -25,7 +25,8 @@
           },
           yAxis: {
             tickFormat: tickY
-          }
+          },
+          color: getColour,
       }
     };
     // TODO: forceConfig could be loaded from JSON ?
@@ -35,21 +36,42 @@
           type: 'forceDirectedGraph',
           height: 300,
           width: 300,
-          color: d3.scale.category20(),
+          // color: d3.scale.category20(),
+          color: getColour,
           radius: 5,
           nodeExtras: processNode
       }
     };
+    var colours = d3.scale.category20();
 
     var yearTickLabels = {};   // Year markers for stream graph
     var forceGraphHooks = [];
+    var wordColourIdx = {};
 
     var service = {
       getConfig: getConfig,
       setStreamYears: setStreamYears,
-      addForceGraphHook: addForceGraphHook
+      addForceGraphHook: addForceGraphHook,
+      setVocabulary: setVocabulary
     };
     return service;
+
+    // Helper functions for all graphs
+    function setVocabulary(vocab) {
+      var idx = 0;
+      // Each word of vocabulary is assigned an unique ID, later used to assign colour
+      // TODO: can't we get a list of words from server?
+      angular.forEach(vocab, function(word) {
+        wordColourIdx[word] = idx;
+        idx += 1;
+      });
+    }
+
+    function getColour(item) {
+      var word = item.key || item.name;
+      var cIdx = wordColourIdx[word];
+      return cIdx ? colours(cIdx) : '#223344';
+    }
 
     // Helper functions for streamConfig
     function getX(point){ return point[0]; }
