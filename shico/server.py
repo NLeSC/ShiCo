@@ -46,7 +46,7 @@ trackParser.add_argument('algorithm', type=str, default='inlinks')
 
 ## VocabularyAggregator parameters:
 trackParser.add_argument('agg.weighF', type=str, default='Gaussian')
-trackParser.add_argument('agg.wfParam', type=float, default=None)
+trackParser.add_argument('agg.wfParam', type=float, default=1.0)
 trackParser.add_argument('agg.yearsInInterval', type=int, default=5)
 trackParser.add_argument('agg.nWordsPerYear', type=int, default=10)
 
@@ -83,5 +83,5 @@ def trackWord(terms):
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     initApp(arguments['-f'], not arguments['--non-binary'])
-    # app.debug = True
+    app.debug = True
     app.run(host='0.0.0.0')
