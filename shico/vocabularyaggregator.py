@@ -33,16 +33,19 @@ def _adaptiveAggregation(V, n=5, yIntervals=2, weightF='Gaussian', param=10):
 
     timeFrames = _arrangeIntervals(V, yIntervals)
     finalVocabs = SortedDict()
+    finalVocabsRaw = SortedDict() # TODO: Give it a better name
     for t in timeFrames:
         mu_t = _getMidRange(t[0], t[-1])
         V_prime = SortedDict({tx: V[tx] for tx in t})
 
+        tmpLst = []
         score = defaultdict(float)
         for years_v, words_v in V_prime.iteritems():
             mu_v = _getMidRange(years_v)
             fvt = f(mu_v, mu_t)
             for word, score_wv in words_v:
                 score[word] += fvt * score_wv
+                tmpLst.append(word)
 
         # Top n terms w sorted by score_w
         scoreList = [(k, v) for k, v in score.iteritems()]
@@ -50,7 +53,8 @@ def _adaptiveAggregation(V, n=5, yIntervals=2, weightF='Gaussian', param=10):
         topN = scoreList[:n]
 
         finalVocabs[str(int(mu_t))] = topN
-    return finalVocabs
+        finalVocabsRaw[str(int(mu_t))] = tmpLst
+    return finalVocabs,finalVocabsRaw
 
 
 def _arrangeIntervals(vocabs, nYears=5):

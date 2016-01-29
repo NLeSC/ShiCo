@@ -42,7 +42,7 @@
       // Collect all words and year labels on data
       var allYears = [];
       var allWords = new Set();
-      angular.forEach(data, function(wordValues, year) {
+      angular.forEach(data.aggregated, function(wordValues, year) {
         allYears.push(year);
         angular.forEach(wordValues, function(weight, word) {
           allWords.add(word);
@@ -61,7 +61,7 @@
       vm.yearLabels = allYears;
 
       // Prepare data on format suitable from NVD3
-      var streamData = formatForStream(data, yearIdx, allWords, allYears);
+      var streamData = formatForStream(data.aggregated, yearIdx, allWords, allYears);
       var forceData  = formatForForce(data, yearIdx, allWords, allYears);
 
       // Register data on graph
@@ -90,7 +90,8 @@
     function formatForForce(data, yearIdx, allWords) {
       var forceData = {};
 
-      angular.forEach(data, function(wordValues, year) {
+      console.log("We also have data.w2vresults -- what do we do with it?");
+      angular.forEach(data.aggregated, function(wordValues, year) {
         var yearForceData = {};
         yearForceData.links = [];
         yearForceData.nodes = [];
@@ -107,6 +108,7 @@
         });
         forceData[yearIdx[year]] = yearForceData;
       });
+      console.log(forceData);
 
       return forceData;
     }

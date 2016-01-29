@@ -6,7 +6,6 @@
       .service('GraphConfigService', GraphConfigService);
 
   function GraphConfigService() {
-    // TODO: streamConfig could be loaded from JSON ?
     // NVD3 configuration for stream graph
     var streamConfig = {
       chart: {
@@ -29,14 +28,12 @@
           color: getColour,
       }
     };
-    // TODO: forceConfig could be loaded from JSON ?
     // NVD3 configuration for force directed graph
     var forceConfig = {
       chart: {
           type: 'forceDirectedGraph',
           height: 300,
           width: 300,
-          // color: d3.scale.category20(),
           color: getColour,
           radius: 5,
           nodeExtras: processNode

@@ -9,7 +9,7 @@
     var vm = this;
 
     vm.parameters = {
-      terms: '',
+      terms: 'x',
       maxTerms: 10,
       maxRelatedTerms: 10,
       //startKey: '',         // TO BE INCLUDED

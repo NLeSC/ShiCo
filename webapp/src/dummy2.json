@@ -1,30 +1,74 @@
 {
-  "1950_1959": {
-    "bevrijding": 1,
-    "burgeroorlog": 1,
-    "oorlof": 1,
-    "oorlogen": 1,
-    "wereldoorlog": 1
+  "queryWords": {
+    "1950": [ "oorlog" ],
+    "1951": [ "oorlog" ],
+    "1952": [ "oorlog" ],
+    "1953": [ "oorlog" ]
   },
-  "1951_1960": {
-    "boerenoorlog": 1,
-    "oorlog": 4,
-    "revolutie": 1,
-    "ruzies": 1,
-    "souvereiniteitsoverdracht": 1
+  "response": {
+    "1952_1961": {
+      "bevrijding": 1,
+      "wereldoorlog": 1,
+      "capitulatie": 1,
+      "oorlogen": 1,
+      "bezettingsjaren": 1,
+      "burgeroorlog": 1,
+      "bevruding": 1,
+      "ooriog": 1,
+      "oorlogse": 1,
+      "oorlog": 1
+    },
+    "1951_1960": {
+      "bevrijding": 1,
+      "wereldoorlog": 1,
+      "boerenoorlog": 1,
+      "bezettingsjaren": 1,
+      "bevrijdingsoorlog": 1,
+      "crisisjaren": 1,
+      "burgeroorlog": 1,
+      "bevruding": 1,
+      "ooriog": 1,
+      "oorlog": 1
+    },
+    "1950_1959": {
+      "bevrijding": 1,
+      "wereldoorlog": 1,
+      "oorlogen": 1,
+      "burgeroorlog": 1,
+      "bevruding": 1,
+      "ooriog": 1,
+      "hongerwinter": 1,
+      "oorlogse": 1,
+      "oorlog": 1,
+      "oorlogsjaren": 1
+    },
+    "1953_1962": {
+      "bevrijding": 1,
+      "wereldoorlog": 1,
+      "capitulatie": 1,
+      "souvereiniteitsoverdracht": 1,
+      "bevrijdingsoorlog": 1,
+      "bezettingsjaren": 1,
+      "burgeroorlog": 1,
+      "bevruding": 1,
+      "oorlogse": 1,
+      "oorlog": 1
+    }
   },
-  "1952_1961": {
-    "bevrijding": 2,
-    "bezettingsjaren": 2,
-    "burgeroorlog": 2,
-    "oorlogsjaren": 2,
-    "rampdagen": 1
-  },
-  "1953_1962": {
-    "bevrijdingsoorlog": 2,
-    "illegaliteit": 2,
-    "kerkstrijd": 2,
-    "oorlog": 4,
-    "oorlogsjaren": 3
+  "aggregated": {
+    "1950": {
+      "bevrijding": 1.9048374180359595,
+      "wereldoorlog": 1.9048374180359595,
+      "burgeroorlog": 1.9048374180359595,
+      "bevruding": 1.9048374180359595,
+      "ooriog": 1.9048374180359595
+    },
+    "1952": {
+      "bevrijding": 1.9048374180359595,
+      "wereldoorlog": 1.9048374180359595,
+      "capitulatie": 1.9048374180359595,
+      "bezettingsjaren": 1.9048374180359595,
+      "burgeroorlog": 1.9048374180359595
+    }
   }
 }
