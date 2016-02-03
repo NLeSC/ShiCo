@@ -22,8 +22,8 @@
       // Aggregator parameters:
       // agg.weighF: 'Gausian',          // TO BE INCLUDED
       // agg.wfParam: 1,         // TO BE INCLUDED
-      "agg.yearsInInterval": 1, // TO BE INCLUDED
-      // agg.nWordsPerYear,   // TO BE INCLUDED
+      aggYearsInInterval: 1,
+      aggWordsYear: 5,
     };
 
     var service = {

@@ -57,6 +57,17 @@
           </label>
         </div>
       </div>
+
+      <div class="form-group form-inline col-md-4">
+        <label for="yearsInterval">Years in interval</label>
+        <input type="number" ng-model="vm.parameters.aggYearsInInterval" min="1" max="10" step="1" class="form-control" id="yearsInterval">
+      </div>
+
+      <div class="form-group form-inline col-md-4">
+        <label for="wordsPerYear">Words per year</label>
+        <input type="number" ng-model="vm.parameters.aggWordsYear" min="1" max="100" step="1" class="form-control" id="wordsPerYear">
+      </div>
+
     </div>
   </div>
 </div>
