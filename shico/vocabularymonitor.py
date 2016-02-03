@@ -47,7 +47,8 @@ class VocabularyMonitor():
             seedTerms = [seedTerms]
         aSeedSet = seedTerms
         dResult = SortedDict()
-        background = SortedDict()
+        usedSeeds = SortedDict()    # TODO: usedSeeds can be replaced by allLinks -- allLinks contains dicts where keys are the used seeds
+        allLinks = SortedDict()     # TODO: give allLinks a more meaningful name
 
         # Keys are already sorted because we use a SortedDict
         sortedKeys = self._models.keys()
@@ -69,7 +70,7 @@ class VocabularyMonitor():
 
         for sKey in sortedKeys:
             if algorithm == 'inlinks':
-                dResult[sKey], aSeedSet = \
+                result, newSeedSet, links = \
                     self._trackInlink(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
                                       maxRelatedTerms=maxRelatedTerms,
@@ -77,7 +78,7 @@ class VocabularyMonitor():
                                       wordBoost=wordBoost,
                                       sumDistances=sumDistances)
             elif algorithm == 'outlinks':
-                dResult[sKey], aSeedSet = \
+                result, newSeedSet, links = \
                     self._trackOutlink(self._models[sKey], aSeedSet,
                                        maxTerms=maxTerms,
                                        maxRelatedTerms=maxRelatedTerms,
@@ -85,7 +86,7 @@ class VocabularyMonitor():
                                        wordBoost=wordBoost,
                                        sumDistances=sumDistances)
             elif algorithm == 'non-adaptive':
-                dResult[sKey], aSeedSet = \
+                result, newSeedSet, links = \
                     self._trackSimple(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
                                       maxRelatedTerms=maxRelatedTerms,
@@ -93,22 +94,28 @@ class VocabularyMonitor():
             else:
                 raise Exception('Algorithm not supported: ' + algorithm)
 
-        return dResult
+            # Store results and prepare for next iteration
+            dResult[sKey] = result
+            usedSeeds[sKey] = aSeedSet
+            allLinks[sKey] = links
+            aSeedSet = newSeedSet
+
+        return dResult, usedSeeds, allLinks
 
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0, wordBoost=1.0, sumDistances=False):
         if sumDistances:
-            result = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+            result, links = self._trackCore(model, seedTerms, maxTerms=maxTerms,
                                      maxRelatedTerms=maxRelatedTerms,
                                      minDist=minDist, wordBoost=wordBoost,
                                      reward=lambda tDist: 1.0 - tDist)
         else:
-            result = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+            result, links = self._trackCore(model, seedTerms, maxTerms=maxTerms,
                                      maxRelatedTerms=maxRelatedTerms,
                                      minDist=minDist)
         # Make a new seed set
         newSeedSet = [word for word, weight in result]
-        return result, newSeedSet
+        return result, newSeedSet, links
 
     def _trackOutlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                       minDist=0.0, wordBoost=1.0, sumDistances=False):
@@ -146,31 +153,44 @@ class VocabularyMonitor():
         result = oCounter.most_common(maxTerms)
         # Make a new seed set
         newSeedSet = [word for word, weight in result]
-        return result, newSeedSet
+        return result, newSeedSet, { 'seed': [ ('to',0),('be',0,1),('implemented',0.2)]}
 
     def _trackSimple(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0):
-        trackTerms = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+        trackTerms, links = self._trackCore(model, seedTerms, maxTerms=maxTerms,
                         maxRelatedTerms=maxRelatedTerms, minDist=minDist)
-        return trackTerms, seedTerms
+        return trackTerms, seedTerms, links
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
         dRelatedTerms = defaultdict(float)
+        links = defaultdict(list)
 
         # Get the first tier related terms
         for term in seedTerms:
             try:
                 # The terms are always related to themselves
                 dRelatedTerms[term] = wordBoost
+                links[term].append((term, 0))
 
                 newTerms = model.most_similar(term, topn=maxRelatedTerms)
                 for newTerm, tDist in newTerms:
                     if tDist < minDist:
                         break
                     dRelatedTerms[newTerm] += reward(tDist)
+                    links[term].append((newTerm, tDist))
             except KeyError:
                 pass
 
         oCounter = Counter(dRelatedTerms)
-        return oCounter.most_common(maxTerms)
+        result = oCounter.most_common(maxTerms)
+
+        resultWords = set( word for word,weight in result)
+        links = { seed: _pruned(pairs, resultWords, seedTerms) for seed, pairs in links.iteritems() }
+        return result,links
+
+def _pruned(pairs, words, seeds):
+    return [ pair for pair in pairs if _keepWord(pair[0], words, seeds) ]
+
+def _keepWord(word, words, seeds):
+    return (word in words) # or (word in seeds)
