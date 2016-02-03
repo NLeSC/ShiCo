@@ -85,7 +85,10 @@
 
     // Helper functions for forceConfig
     function processNode(node) {
-      addTextLabels(node);
+      // Nodes have: {'name': 'str', 'type': 'seed', 'count': N},
+      addTextLabels(node);  // {'count': 1, 'name': u'bevrijding', 'type': 'seed'},
+      setSize(node);
+      setOutline(node);
       angular.forEach(forceGraphHooks, function(hook) {
         hook(node);
       });
@@ -96,6 +99,33 @@
         .attr("dx", 12)
         .attr("dy", ".35em")
         .text(function(d) { return d.name; });
+    }
+
+    function setSize(node) {
+      node.select('circle')
+        .attr('r', function(d) { return 5 + 2 * (d.count); });
+    }
+
+    function setOutline(node) {
+      node.select('circle')
+        .attr('stroke', function(d) { return pickStroke(d.type, 'colour'); })
+        .attr('stroke-width', function(d) { return pickStroke(d.type, 'width'); });
+    }
+
+    function pickStroke(nodeType, feature) {
+      var width = '';
+      var colour = '';
+      if(nodeType == 'seed') {
+        width = 2;
+        colour = 'red';
+      } else if(nodeType == 'word') {
+        width = 0;
+        colour = 'black';
+      } else {  // nodeType == 'drop'
+        width = 2;
+        colour = 'gray';
+      }
+      return (feature=='width')? width : colour;
     }
 
     function addForceGraphHook(callback) {
