@@ -1,61 +1,5 @@
 {
-  "queryWords": {
-    "1950": [ "oorlog" ],
-    "1951": [ "oorlog" ],
-    "1952": [ "oorlog" ],
-    "1953": [ "oorlog" ]
-  },
-  "response": {
-    "1952_1961": {
-      "bevrijding": 1,
-      "wereldoorlog": 1,
-      "capitulatie": 1,
-      "oorlogen": 1,
-      "bezettingsjaren": 1,
-      "burgeroorlog": 1,
-      "bevruding": 1,
-      "ooriog": 1,
-      "oorlogse": 1,
-      "oorlog": 1
-    },
-    "1951_1960": {
-      "bevrijding": 1,
-      "wereldoorlog": 1,
-      "boerenoorlog": 1,
-      "bezettingsjaren": 1,
-      "bevrijdingsoorlog": 1,
-      "crisisjaren": 1,
-      "burgeroorlog": 1,
-      "bevruding": 1,
-      "ooriog": 1,
-      "oorlog": 1
-    },
-    "1950_1959": {
-      "bevrijding": 1,
-      "wereldoorlog": 1,
-      "oorlogen": 1,
-      "burgeroorlog": 1,
-      "bevruding": 1,
-      "ooriog": 1,
-      "hongerwinter": 1,
-      "oorlogse": 1,
-      "oorlog": 1,
-      "oorlogsjaren": 1
-    },
-    "1953_1962": {
-      "bevrijding": 1,
-      "wereldoorlog": 1,
-      "capitulatie": 1,
-      "souvereiniteitsoverdracht": 1,
-      "bevrijdingsoorlog": 1,
-      "bezettingsjaren": 1,
-      "burgeroorlog": 1,
-      "bevruding": 1,
-      "oorlogse": 1,
-      "oorlog": 1
-    }
-  },
-  "aggregated": {
+  "stream": {
     "1950": {
       "bevrijding": 1.9048374180359595,
       "wereldoorlog": 1.9048374180359595,
@@ -69,6 +13,33 @@
       "capitulatie": 1.9048374180359595,
       "bezettingsjaren": 1.9048374180359595,
       "burgeroorlog": 1.9048374180359595
+    }
+  },
+  "networks": {
+    "1950": {
+      "nodes": [
+        { "name": "q1"  , "isSeed": "True", "color": "x", "size": "1"},
+        { "name": "q2"  },
+        { "name": "r1.1"},
+        { "name": "r1.2"},
+        { "name": "r1.3"},
+        { "name": "r1.4"},
+        { "name": "r2.1"},
+        { "name": "r2.2"}
+      ],
+      "links": [
+        { "source": 0, "target": 2, "value":  1 },
+        { "source": 0, "target": 3, "value":  1 },
+        { "source": 0, "target": 4, "value":  1 },
+        { "source": 0, "target": 5, "value":  1 },
+        { "source": 1, "target": 5, "value":  1 },
+        { "source": 1, "target": 6, "value":  1 },
+        { "source": 1, "target": 7, "value":  1 }
+      ]
+    },
+    "1952": {
+      "nodes": [],
+      "links": []
     }
   }
 }
