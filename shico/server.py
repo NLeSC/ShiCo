@@ -42,7 +42,7 @@ trackParser.add_argument('minDist', type=float, default=0.0)
 trackParser.add_argument('wordBoost', type=float, default=1.0)
 trackParser.add_argument('forwards', type=bool, default=True)
 trackParser.add_argument('sumDistances', type=bool, default=False)
-trackParser.add_argument('algorithm', type=str, default='inlinks')
+trackParser.add_argument('algorithm', type=str, default='adaptive')
 
 ## VocabularyAggregator parameters:
 trackParser.add_argument('agg.weighF', type=str, default='Gaussian')

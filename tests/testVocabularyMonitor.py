@@ -49,26 +49,21 @@ class VocabularyMonitorTest(unittest.TestCase):
                 self.assertEqual(len(item), 2,
                                  'Results should be word,score tuples')
 
-    def testTrackTermsOutlinks(self):
+    def testTrackTermsCountResults(self):
         '''Test that different algorithms still produce the same number of
         results'''
         seedTerms = 'x'
         maxTerms = 5
 
-        rOut = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
-                                   algorithm='outlinks')
         rIn = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
-                                  algorithm='inlinks')
+                                  algorithm='adaptive')
         rNA = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
                                   algorithm='non-adaptive')
 
-        for key in rOut.keys():
-            self.assertEqual(len(rOut[key]), len(rIn[key]),
-                             'Outlinks and Inlinks should generate equal ' +
-                             'number ofresults')
+        for key in rIn.keys():
             self.assertEqual(len(rIn[key]), len(rNA[key]),
-                             'Inlinks and non-adapt. should generate equal ' +
-                             'number ofresults')
+                             'adaptive and non-adaptive. should generate ' +
+                             'equal number of results')
 
     def testTrackTermsKeys(self):
         '''Test that using range selection works.'''

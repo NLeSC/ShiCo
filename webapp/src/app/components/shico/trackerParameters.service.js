@@ -18,7 +18,7 @@
       wordBoost: 1.0,
       forwards: true,
       sumDistances: false,
-      algorithm: 'inlinks',   //  'inlinks', 'outlinks', or 'non-adaptive'
+      algorithm: 'adaptive',   //  'adaptive' or 'non-adaptive'
       // Aggregator parameters:
       aggWeighFunction: 'Gaussian',
       aggWFParam: 1,
@@ -32,7 +32,7 @@
       options: {
         floor: 0,
         ceil: 1,
-          step: 1,
+        step: 1,
         onChange: updateYearKeys
       }
     };

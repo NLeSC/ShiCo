@@ -44,16 +44,16 @@ class VocabularyMonitor():
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
-                    forwards=True, sumDistances=False, algorithm='inlinks'):
+                    forwards=True, sumDistances=False, algorithm='adaptive'):
         '''
         TODO: Document properly
-        algorithm    'inlinks', or 'non-adaptive'
+        algorithm    'adaptive', or 'non-adaptive'
+        adaptive previously known as inlinks
         '''
         if isinstance(seedTerms, six.string_types):
             seedTerms = [seedTerms]
         aSeedSet = seedTerms
         dResult = SortedDict()
-        background = SortedDict()
 
         # Keys are already sorted because we use a SortedDict
         sortedKeys = self._models.keys()
@@ -74,7 +74,7 @@ class VocabularyMonitor():
             sortedKeys = sortedKeys[::-1]
 
         for sKey in sortedKeys:
-            if algorithm == 'inlinks':
+            if algorithm == 'adaptive':
                 dResult[sKey], aSeedSet = \
                     self._trackInlink(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
