@@ -36,12 +36,15 @@ class VocabularyMonitor():
             self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
                 load_word2vec_format(sModelFile, binary=binary)
 
+    def getAvailableYears(self):
+        return list(self._models.keys())
+
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
                     forwards=True, sumDistances=False, algorithm='inlinks'):
         '''
         TODO: Document properly
-        algorithm    'inlinks', 'outlinks', or 'non-adaptive'
+        algorithm    'inlinks', or 'non-adaptive'
         '''
         if isinstance(seedTerms, six.string_types):
             seedTerms = [seedTerms]
@@ -76,14 +79,6 @@ class VocabularyMonitor():
                                       minDist=minDist,
                                       wordBoost=wordBoost,
                                       sumDistances=sumDistances)
-            elif algorithm == 'outlinks':
-                dResult[sKey], aSeedSet = \
-                    self._trackOutlink(self._models[sKey], aSeedSet,
-                                       maxTerms=maxTerms,
-                                       maxRelatedTerms=maxRelatedTerms,
-                                       minDist=minDist,
-                                       wordBoost=wordBoost,
-                                       sumDistances=sumDistances)
             elif algorithm == 'non-adaptive':
                 dResult[sKey], aSeedSet = \
                     self._trackSimple(self._models[sKey], aSeedSet,
@@ -106,44 +101,6 @@ class VocabularyMonitor():
             result = self._trackCore(model, seedTerms, maxTerms=maxTerms,
                                      maxRelatedTerms=maxRelatedTerms,
                                      minDist=minDist)
-        # Make a new seed set
-        newSeedSet = [word for word, weight in result]
-        return result, newSeedSet
-
-    def _trackOutlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                      minDist=0.0, wordBoost=1.0, sumDistances=False):
-        aFirstTierTerms = []
-        dOutlinks = defaultdict(float)
-
-        # Get the first tier related terms
-        for term in seedTerms:
-            try:
-                newTerms = model.most_similar(term, topn=maxRelatedTerms)
-                aFirstTierTerms += \
-                    [newTerm for newTerm, tDist in newTerms
-                     if tDist >= minDist]
-
-                aFirstTierTerms.append(term)
-                # Every word is related to itself
-                dOutlinks[term] = wordBoost
-            except KeyError:
-                pass
-
-        dFirstTierTerms = set(aFirstTierTerms)
-
-        for ftTerm in dFirstTierTerms:
-            newTerms = model.most_similar(ftTerm, topn=maxRelatedTerms)
-            aSecondTierTerms = \
-                [(newTerm, tDist) for newTerm, tDist in newTerms
-                 if tDist >= minDist]
-
-            for stTerm, tDist in aSecondTierTerms:
-                if stTerm in dFirstTierTerms:
-                    fAdd = (1.0 - tDist) if sumDistances else 1.0
-                    dOutlinks[ftTerm] += fAdd
-
-        oCounter = Counter(dOutlinks)
-        result = oCounter.most_common(maxTerms)
         # Make a new seed set
         newSeedSet = [word for word, weight in result]
         return result, newSeedSet
