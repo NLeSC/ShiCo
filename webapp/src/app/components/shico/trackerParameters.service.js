@@ -12,8 +12,8 @@
       terms: '',
       maxTerms: 10,
       maxRelatedTerms: 10,
-      startKey: '',         // TO BE INCLUDED
-      endKey: '',           // TO BE INCLUDED
+      startKey: '',
+      endKey: '',
       minDist: 0.1,
       wordBoost: 1.0,
       forwards: true,
@@ -58,11 +58,15 @@
     }
 
     function updateYearKeys() {
-      console.log('set startKey and enKey as required...');
-      console.log('to values from avlYears.values');
-      console.log(vm.availableYears.to);
-      console.log(vm.availableYears.values);
-      console.log(vm.availableYears.values[vm.availableYears.to]);
+      // Copy values from slider to startKey and endKey
+      // Slider contains only year (e.g. 1954), while startKey and endKey
+      // require the name of the corresponding w2v model (e.g. 1950_1959)
+      var yearValues = vm.availableYears.values;
+      var idxYearFrom = vm.availableYears.from;
+      var idxYearTo = vm.availableYears.to;
+
+      vm.parameters.startKey = yearValues[idxYearFrom];
+      vm.parameters.endKey   = yearValues[idxYearTo];
     }
   }
 })();

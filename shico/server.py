@@ -28,8 +28,7 @@ def initApp(files, binary):
     binary   Whether files are binary
     '''
     global _vm
-    # _vm = VocabularyMonitor(files, binary)
-    _vm = 'VocabularyMonitor(files, binary)'
+    _vm = VocabularyMonitor(files, binary)
 
 # trackClouds parameters
 
@@ -64,10 +63,8 @@ def formatDotGetMidRange(first, last=None):
 
 @app.route('/available-years')
 def avlYears():
-    # years = _vm.getAvailableYears()
-    years = [ '1950_1959', '1951_1960', '1952_1961', '1953_1962' ]
+    years = _vm.getAvailableYears()
     yearLabels = { int(formatDotGetMidRange(y)): y for y in years }
-
     return jsonify(values=yearLabels,
                    first=min(yearLabels.keys()),
                    last=max(yearLabels.keys())
@@ -103,5 +100,5 @@ def trackWord(terms):
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     initApp(arguments['-f'], not arguments['--non-binary'])
-    app.debug = True
+    # app.debug = True
     app.run(host='0.0.0.0')
