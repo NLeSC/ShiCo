@@ -28,7 +28,8 @@ def initApp(files, binary):
     binary   Whether files are binary
     '''
     global _vm
-    _vm = VocabularyMonitor(files, binary)
+    # _vm = VocabularyMonitor(files, binary)
+    _vm = 'VocabularyMonitor(files, binary)'
 
 # trackClouds parameters
 
@@ -53,10 +54,24 @@ trackParser.add_argument('agg.nWordsPerYear', type=int, default=10)
 def _makeDict(pairList):
     return { word: weight for word,weight in pairList }
 
+# TODO use function from shico.format
+def formatDotGetMidRange(first, last=None):
+    if last is None:
+        last = first
+    y0 = int(first.split('_')[0])
+    yn = int(last.split('_')[1])
+    return round((yn + y0) / 2)
+
 @app.route('/available-years')
 def avlYears():
-    years = _vm.getAvailableYears()
-    return jsonify(yFrom=years[0], yTo=years[-1])
+    # years = _vm.getAvailableYears()
+    years = [ '1950_1959', '1951_1960', '1952_1961', '1953_1962' ]
+    yearLabels = { int(formatDotGetMidRange(y)): y for y in years }
+
+    return jsonify(values=yearLabels,
+                   first=min(yearLabels.keys()),
+                   last=max(yearLabels.keys())
+    )
 
 @app.route('/track/<terms>')
 def trackWord(terms):
@@ -88,5 +103,5 @@ def trackWord(terms):
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     initApp(arguments['-f'], not arguments['--non-binary'])
-    # app.debug = True
+    app.debug = True
     app.run(host='0.0.0.0')

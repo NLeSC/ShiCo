@@ -12,8 +12,8 @@
       terms: '',
       maxTerms: 10,
       maxRelatedTerms: 10,
-      //startKey: '',         // TO BE INCLUDED
-      //endKey: '',           // TO BE INCLUDED
+      startKey: '',         // TO BE INCLUDED
+      endKey: '',           // TO BE INCLUDED
       minDist: 0.1,
       wordBoost: 1.0,
       forwards: true,
@@ -26,9 +26,21 @@
       aggWordsYear: 5,
     };
 
+    vm.availableYears = {
+      from: 0, to: 1,
+      values: {},
+      options: {
+        floor: 0,
+        ceil: 1,
+          step: 1,
+        onChange: updateYearKeys
+      }
+    };
+
     var service = {
       getParameters: getParameters,
       setParameters: setParameters,
+      availableYears: vm.availableYears,
     };
     return service;
 
@@ -43,6 +55,14 @@
           vm.parameters[key] = params[key]
         }
       });
+    }
+
+    function updateYearKeys() {
+      console.log('set startKey and enKey as required...');
+      console.log('to values from avlYears.values');
+      console.log(vm.availableYears.to);
+      console.log(vm.availableYears.values);
+      console.log(vm.availableYears.values[vm.availableYears.to]);
     }
   }
 })();

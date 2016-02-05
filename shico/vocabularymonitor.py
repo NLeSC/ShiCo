@@ -37,6 +37,9 @@ class VocabularyMonitor():
                 load_word2vec_format(sModelFile, binary=binary)
 
     def getAvailableYears(self):
+        '''
+        TODO: Document properly
+        '''
         return list(self._models.keys())
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,

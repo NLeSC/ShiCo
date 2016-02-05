@@ -59,6 +59,7 @@ def _arrangeIntervals(vocabs, nYears=5):
 
 
 def _getMidRange(first, last=None):
+    # TODO: move to shico.format
     if last is None:
         last = first
     y0 = int(first.split('_')[0])
