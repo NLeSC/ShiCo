@@ -20,8 +20,8 @@
       sumDistances: false,
       algorithm: 'inlinks',   //  'inlinks', 'outlinks', or 'non-adaptive'
       // Aggregator parameters:
-      // agg.weighF: 'Gausian',          // TO BE INCLUDED
-      // agg.wfParam: 1,         // TO BE INCLUDED
+      aggWeighFunction: 'Gaussian',
+      aggWFParam: 1,
       aggYearsInInterval: 1,
       aggWordsYear: 5,
     };

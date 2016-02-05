@@ -53,6 +53,11 @@ trackParser.add_argument('agg.nWordsPerYear', type=int, default=10)
 def _makeDict(pairList):
     return { word: weight for word,weight in pairList }
 
+@app.route('/available-years')
+def avlYears():
+    years = _vm.getAvailableYears()
+    return jsonify(yFrom=years[0], yTo=years[-1])
+
 @app.route('/track/<terms>')
 def trackWord(terms):
     '''VocabularyMonitor.trackClouds service. Expects a list of terms to be

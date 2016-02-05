@@ -1,5 +1,5 @@
 {
   "trackerURL-dummy": "dummy2.json",
-  "trackerURL-example": "http://localhost:5000/track/:terms",
-  "trackerURL": "http://145.100.59.88:5000/track/:terms"
+  "trackerURL": "http://localhost:5000/track/:terms",
+  "trackerURL-real": "http://145.100.59.88:5000/track/:terms"
 }
