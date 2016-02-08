@@ -1,45 +1,388 @@
+
 {
-  "stream": {
-    "1950": {
-      "bevrijding": 1.9048374180359595,
-      "wereldoorlog": 1.9048374180359595,
-      "burgeroorlog": 1.9048374180359595,
-      "bevruding": 1.9048374180359595,
-      "ooriog": 1.9048374180359595
-    },
-    "1952": {
-      "bevrijding": 1.9048374180359595,
-      "wereldoorlog": 1.9048374180359595,
-      "capitulatie": 1.9048374180359595,
-      "bezettingsjaren": 1.9048374180359595,
-      "burgeroorlog": 1.9048374180359595
-    }
-  },
   "networks": {
-    "1950": {
-      "nodes": [
-        { "name": "q1"  , "isSeed": "True", "color": "x", "size": "1"},
-        { "name": "q2"  },
-        { "name": "r1.1"},
-        { "name": "r1.2"},
-        { "name": "r1.3"},
-        { "name": "r1.4"},
-        { "name": "r2.1"},
-        { "name": "r2.2"}
-      ],
+    "1954": {
       "links": [
-        { "source": 0, "target": 2, "value":  1 },
-        { "source": 0, "target": 3, "value":  1 },
-        { "source": 0, "target": 4, "value":  1 },
-        { "source": 0, "target": 5, "value":  1 },
-        { "source": 1, "target": 5, "value":  1 },
-        { "source": 1, "target": 6, "value":  1 },
-        { "source": 1, "target": 7, "value":  1 }
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1
+        },
+        {
+          "source": 8,
+          "target": 0,
+          "value": 0.6150405596375453
+        },
+        {
+          "source": 8,
+          "target": 5,
+          "value": 0.61574476190616
+        },
+        {
+          "source": 8,
+          "target": 9,
+          "value": 0.6185860956452239
+        },
+        {
+          "source": 8,
+          "target": 6,
+          "value": 0.6341258740095761
+        },
+        {
+          "source": 8,
+          "target": 4,
+          "value": 0.6366178704231987
+        },
+        {
+          "source": 8,
+          "target": 7,
+          "value": 0.6425945578912905
+        },
+        {
+          "source": 8,
+          "target": 2,
+          "value": 0.6441464668155386
+        },
+        {
+          "source": 8,
+          "target": 1,
+          "value": 0.6482461317568318
+        },
+        {
+          "source": 8,
+          "target": 3,
+          "value": 0.6512208555053965
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "wereldoorlog",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "oorlogen",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "burgeroorlog",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "oorlof",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "bevr?ding",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "ooriog",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "hongerwinter",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "oorlogse",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "oorlog",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "oorlogsjaren",
+          "type": "word"
+        }
       ]
     },
-    "1952": {
-      "nodes": [],
-      "links": []
+    "1955": {
+      "links": [
+        {
+          "source": 1,
+          "target": 12,
+          "value": 0.6091253624997164
+        },
+        {
+          "source": 1,
+          "target": 13,
+          "value": 0.6289308044070249
+        },
+        {
+          "source": 1,
+          "target": 11,
+          "value": 0.6331761540408645
+        },
+        {
+          "source": 1,
+          "target": 2,
+          "value": 0.6637804438642722
+        },
+        {
+          "source": 6,
+          "target": 12,
+          "value": 0.6320567824335007
+        },
+        {
+          "source": 7,
+          "target": 14,
+          "value": 0.6605439020991812
+        },
+        {
+          "source": 7,
+          "target": 12,
+          "value": 0.6716094462611977
+        },
+        {
+          "source": 8,
+          "target": 0,
+          "value": 0.5894476422854604
+        },
+        {
+          "source": 8,
+          "target": 12,
+          "value": 0.645595270657051
+        },
+        {
+          "source": 8,
+          "target": 14,
+          "value": 0.6502364164369371
+        },
+        {
+          "source": 9,
+          "target": 12,
+          "value": 0.6239873307320869
+        },
+        {
+          "source": 9,
+          "target": 14,
+          "value": 0.6378367799089589
+        },
+        {
+          "source": 10,
+          "target": 10,
+          "value": 1
+        },
+        {
+          "source": 10,
+          "target": 13,
+          "value": 0.6091053708954489
+        },
+        {
+          "source": 10,
+          "target": 11,
+          "value": 0.629993626545773
+        },
+        {
+          "source": 10,
+          "target": 4,
+          "value": 0.6337581312894075
+        },
+        {
+          "source": 10,
+          "target": 5,
+          "value": 0.6389553943125132
+        },
+        {
+          "source": 15,
+          "target": 15,
+          "value": 1
+        },
+        {
+          "source": 15,
+          "target": 0,
+          "value": 0.6258788332533197
+        },
+        {
+          "source": 15,
+          "target": 12,
+          "value": 0.6540929249125259
+        },
+        {
+          "source": 12,
+          "target": 12,
+          "value": 1
+        },
+        {
+          "source": 12,
+          "target": 0,
+          "value": 0.5994142986319546
+        },
+        {
+          "source": 12,
+          "target": 13,
+          "value": 0.6114793575252305
+        },
+        {
+          "source": 12,
+          "target": 2,
+          "value": 0.6309904108895575
+        },
+        {
+          "source": 12,
+          "target": 5,
+          "value": 0.6489117186254141
+        },
+        {
+          "source": 12,
+          "target": 4,
+          "value": 0.6499838213179241
+        },
+        {
+          "source": 13,
+          "target": 13,
+          "value": 1
+        },
+        {
+          "source": 13,
+          "target": 4,
+          "value": 0.5685778322094432
+        },
+        {
+          "source": 13,
+          "target": 11,
+          "value": 0.6041135654066492
+        },
+        {
+          "source": 13,
+          "target": 5,
+          "value": 0.6051598837654939
+        },
+        {
+          "source": 13,
+          "target": 10,
+          "value": 0.6091053708954489
+        },
+        {
+          "source": 13,
+          "target": 12,
+          "value": 0.6114793575252305
+        },
+        {
+          "source": 13,
+          "target": 2,
+          "value": 0.6252580968613953
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "bevrijding",
+          "type": "word"
+        },
+        {
+          "count": 0,
+          "name": "wereldoorlog",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "boerenoorlog",
+          "type": "word"
+        },
+        {
+          "count": 0,
+          "name": "oorlogen",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "bezettingsjaren",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "crisisjaren",
+          "type": "word"
+        },
+        {
+          "count": 0,
+          "name": "burgeroorlog",
+          "type": "seed"
+        },
+        {
+          "count": 0,
+          "name": "oorlof",
+          "type": "seed"
+        },
+        {
+          "count": 0,
+          "name": "bevr?ding",
+          "type": "seed"
+        },
+        {
+          "count": 0,
+          "name": "ooriog",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "hongerwinter",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "oorlogsdagen",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "oorlog",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "oorlogsjaren",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "oorloe",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "oorlogse",
+          "type": "seed"
+        }
+      ]
+    }
+  },
+  "stream": {
+    "1954": {
+      "bevr?ding": 0.4291989803314209,
+      "burgeroorlog": 0.44755804538726807,
+      "hongerwinter": 0.42302602529525757,
+      "ooriog": 0.37595045566558838,
+      "oorlof": 0.46442264318466187,
+      "oorlog": 1.0,
+      "oorlogen": 0.45737606287002563,
+      "oorlogse": 0.44380879402160645,
+      "oorlogsjaren": 0.38341015577316284,
+      "wereldoorlog": 0.37409096956253052
+    },
+    "1955": {
+      "bevrijding": 1.0374479293823242,
+      "bezettingsjaren": 1.1248369812965393,
+      "boerenoorlog": 1.3093280792236328,
+      "crisisjaren": 1.2414479851722717,
+      "hongerwinter": 1.3582479357719421,
+      "oorloe": 1.3803946971893311,
+      "oorlog": 3.9714372456073761,
+      "oorlogsdagen": 1.1780251264572144,
+      "oorlogse": 1.0,
+      "oorlogsjaren": 1.4099999666213989
     }
   }
 }

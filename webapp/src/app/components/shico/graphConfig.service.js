@@ -28,6 +28,9 @@
           color: getColour,
       }
     };
+    var customSymbol = d3.svg.symbol()
+                .type( function(d) { return d.type=="seed"?"triangle-up":"circle"; } )
+                .size( function(d) { return 50 * Math.log2(2 + d.count); } );
     // NVD3 configuration for force directed graph
     var forceConfig = {
       chart: {
@@ -35,7 +38,7 @@
           height: 300,
           width: 300,
           color: getColour,
-          radius: 5,
+          symbol: customSymbol,
           nodeExtras: processNode
       }
     };
@@ -136,6 +139,7 @@
       if(graphName === 'streamGraph') {
         return streamConfig;
       } else if(graphName === 'forceGraph'){
+        console.log("Use force config...");
         return forceConfig;
       }
     }
