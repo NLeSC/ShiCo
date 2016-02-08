@@ -101,7 +101,8 @@
       node.append("text")
         .attr("dx", 12)
         .attr("dy", ".35em")
-        .text(function(d) { return d.name; });
+        .text(function(d) { return d.name; })
+        .style("font-weight", function(d) { return d.type=="seed"?"bold":""; });
     }
 
     function setSize(node) {
@@ -139,7 +140,6 @@
       if(graphName === 'streamGraph') {
         return streamConfig;
       } else if(graphName === 'forceGraph'){
-        console.log("Use force config...");
         return forceConfig;
       }
     }
