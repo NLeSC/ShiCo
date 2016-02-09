@@ -9,7 +9,7 @@
     var vm = this;
 
     vm.parameters = {
-      terms: 'x',
+      terms: '',
       maxTerms: 10,
       maxRelatedTerms: 10,
       startKey: '',

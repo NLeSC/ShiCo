@@ -24,6 +24,16 @@ CORS(app)
 _vm = None
 
 
+def validatestr(value):
+    try:
+        s = str(value)
+        if len(s)==0:
+            return None
+        return s
+    except:
+        raise ValueError
+
+
 def initApp(files, binary):
     '''Initialize Flask app by loading VocabularyMonitor.
 
@@ -39,8 +49,8 @@ def initApp(files, binary):
 trackParser = reqparse.RequestParser()
 trackParser.add_argument('maxTerms', type=int, default=10)
 trackParser.add_argument('maxRelatedTerms', type=int, default=10)
-trackParser.add_argument('startKey', type=str, default=None)
-trackParser.add_argument('endKey', type=str, default=None)
+trackParser.add_argument('startKey', type=validatestr, default=None)
+trackParser.add_argument('endKey', type=validatestr, default=None)
 trackParser.add_argument('minDist', type=float, default=0.0)
 trackParser.add_argument('wordBoost', type=float, default=1.0)
 trackParser.add_argument('forwards', type=bool, default=True)
@@ -69,23 +79,23 @@ def trackWord(terms):
     '''VocabularyMonitor.trackClouds service. Expects a list of terms to be
     sent to the Vocabulary monitor, and returns a JSON representation of the
     response.'''
-    defaults = trackParser.parse_args()
+    params = trackParser.parse_args()
     termList = terms.split(',')
     results, seeds, links = \
-        _vm.trackClouds(termList, maxTerms=defaults['maxTerms'],
-                        maxRelatedTerms=defaults['maxRelatedTerms'],
-                        startKey=defaults['startKey'],
-                        endKey=defaults['endKey'],
-                        minDist=defaults['minDist'],
-                        wordBoost=defaults['wordBoost'],
-                        forwards=defaults['forwards'],
-                        sumDistances=defaults['sumDistances'],
-                        algorithm=defaults['algorithm'],
+        _vm.trackClouds(termList, maxTerms=params['maxTerms'],
+                        maxRelatedTerms=params['maxRelatedTerms'],
+                        startKey=params['startKey'],
+                        endKey=params['endKey'],
+                        minDist=params['minDist'],
+                        wordBoost=params['wordBoost'],
+                        forwards=params['forwards'],
+                        sumDistances=params['sumDistances'],
+                        algorithm=params['algorithm'],
                         )
-    agg = VocabularyAggregator(weighF=defaults['agg.weighF'],
-                               wfParam=defaults['agg.wfParam'],
-                               yearsInInterval=defaults['agg.yearsInInterval'],
-                               nWordsPerYear=defaults['agg.nWordsPerYear']
+    agg = VocabularyAggregator(weighF=params['agg.weighF'],
+                               wfParam=params['agg.wfParam'],
+                               yearsInInterval=params['agg.yearsInInterval'],
+                               nWordsPerYear=params['agg.nWordsPerYear']
                                )
     aggResults, aggMetadata = agg.aggregate(results)
 
