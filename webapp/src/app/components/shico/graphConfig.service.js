@@ -39,7 +39,9 @@
           width: 300,
           color: getColour,
           symbol: customSymbol,
-          nodeExtras: processNode
+          nodeExtras: processNode,
+          curveLinks:  true,
+          useArrows: true,
       }
     };
     var colours = d3.scale.category20();
