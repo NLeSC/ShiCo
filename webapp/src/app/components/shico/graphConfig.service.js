@@ -6,7 +6,6 @@
       .service('GraphConfigService', GraphConfigService);
 
   function GraphConfigService() {
-    // TODO: streamConfig could be loaded from JSON ?
     // NVD3 configuration for stream graph
     var streamConfig = {
       chart: {
@@ -29,17 +28,20 @@
           color: getColour,
       }
     };
-    // TODO: forceConfig could be loaded from JSON ?
+    var customSymbol = d3.svg.symbol()
+                .type( function(d) { return d.type=="seed"?"triangle-up":"circle"; } )
+                .size( function(d) { return 50 * Math.log2(2 + d.count); } );
     // NVD3 configuration for force directed graph
     var forceConfig = {
       chart: {
           type: 'forceDirectedGraph',
           height: 300,
           width: 300,
-          // color: d3.scale.category20(),
           color: getColour,
-          radius: 5,
-          nodeExtras: processNode
+          symbol: customSymbol,
+          nodeExtras: processNode,
+          curveLinks:  true,
+          useArrows: true,
       }
     };
     var colours = d3.scale.category20();
@@ -88,7 +90,10 @@
 
     // Helper functions for forceConfig
     function processNode(node) {
-      addTextLabels(node);
+      // Nodes have: {'name': 'str', 'type': 'seed', 'count': N},
+      addTextLabels(node);  // {'count': 1, 'name': u'bevrijding', 'type': 'seed'},
+      setSize(node);
+      setOutline(node);
       angular.forEach(forceGraphHooks, function(hook) {
         hook(node);
       });
@@ -98,7 +103,35 @@
       node.append("text")
         .attr("dx", 12)
         .attr("dy", ".35em")
-        .text(function(d) { return d.name; });
+        .text(function(d) { return d.name; })
+        .style("font-weight", function(d) { return d.type=="seed"?"bold":""; });
+    }
+
+    function setSize(node) {
+      node.select('circle')
+        .attr('r', function(d) { return 5 + 2 * (d.count); });
+    }
+
+    function setOutline(node) {
+      node.select('circle')
+        .attr('stroke', function(d) { return pickStroke(d.type, 'colour'); })
+        .attr('stroke-width', function(d) { return pickStroke(d.type, 'width'); });
+    }
+
+    function pickStroke(nodeType, feature) {
+      var width = '';
+      var colour = '';
+      if(nodeType == 'seed') {
+        width = 2;
+        colour = 'red';
+      } else if(nodeType == 'word') {
+        width = 0;
+        colour = 'black';
+      } else {  // nodeType == 'drop'
+        width = 2;
+        colour = 'gray';
+      }
+      return (feature=='width')? width : colour;
     }
 
     function addForceGraphHook(callback) {

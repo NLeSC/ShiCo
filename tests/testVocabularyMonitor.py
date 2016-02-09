@@ -35,7 +35,7 @@ class VocabularyMonitorTest(unittest.TestCase):
         '''Test that trackClouds produces results in the expected format.'''
         seedTerms = 'x'
         maxTerms = 5
-        results = self.vm.trackClouds(seedTerms, maxTerms=maxTerms)
+        results, _, _ = self.vm.trackClouds(seedTerms, maxTerms=maxTerms)
         resultPeriods = results.keys()
         modelPeriods = self.vm._models.keys()
         self.assertEqual(len(resultPeriods), len(modelPeriods),
@@ -55,9 +55,9 @@ class VocabularyMonitorTest(unittest.TestCase):
         seedTerms = 'x'
         maxTerms = 5
 
-        rIn = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
+        rIn, _, _ = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
                                   algorithm='adaptive')
-        rNA = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
+        rNA, _, _ = self.vm.trackClouds(seedTerms, maxTerms=maxTerms,
                                   algorithm='non-adaptive')
 
         for key in rIn.keys():
@@ -73,14 +73,24 @@ class VocabularyMonitorTest(unittest.TestCase):
         sKey = keys[1]
         eKey = keys[-1]
 
-        results = self.vm.trackClouds(seedTerms, startKey=sKey)
+        results, _, _ = self.vm.trackClouds(seedTerms, startKey=sKey)
         self.assertGreater(len(keys), len(results),
                            'Should have less results than number of models')
 
-        results = self.vm.trackClouds(seedTerms, endKey=eKey)
+        results, _, _ = self.vm.trackClouds(seedTerms, endKey=eKey)
         self.assertGreater(len(keys), len(results),
                            'Should have less results than number of models')
 
-        results = self.vm.trackClouds(seedTerms, startKey=sKey, endKey=eKey)
+        results, _, _ = self.vm.trackClouds(seedTerms, startKey=sKey, endKey=eKey)
         self.assertGreater(len(keys), len(results),
                            'Should have less results than number of models')
+
+    def testUsedSeeds(self):
+        '''Test that used seeds are correct.'''
+        # _, usedSeeds, _ = self.vm.trackClouds(seedTerms, startKey=sKey)
+        # TODO: validate usedSeeds
+
+    def testAllLinks(self):
+        '''Test that allLinks are correct.'''
+        # _, _, allLinks = self.vm.trackClouds(seedTerms, startKey=sKey)
+        # TODO: validate allLinks

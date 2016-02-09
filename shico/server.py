@@ -16,6 +16,8 @@ from flask.ext.cors import CORS
 from vocabularymonitor import VocabularyMonitor
 from vocabularyaggregator import VocabularyAggregator
 
+from format import _yearlyNetwork
+
 app = Flask(__name__)
 CORS(app)
 _vm = None
@@ -50,8 +52,15 @@ trackParser.add_argument('agg.wfParam', type=float, default=1.0)
 trackParser.add_argument('agg.yearsInInterval', type=int, default=5)
 trackParser.add_argument('agg.nWordsPerYear', type=int, default=10)
 
-def _makeDict(pairList):
+# Formatting functions:
+# TODO: Move to module ?
+# TODO: Document !
+def _tuplesAsDict(pairList):
     return { word: weight for word,weight in pairList }
+
+def _yearTuplesAsDict(results):
+    return { year: _tuplesAsDict(vals) for year, vals in results.iteritems() }
+
 
 # TODO use function from shico.format
 def formatDotGetMidRange(first, last=None):
@@ -70,6 +79,7 @@ def avlYears():
                    last=max(yearLabels.keys())
     )
 
+
 @app.route('/track/<terms>')
 def trackWord(terms):
     '''VocabularyMonitor.trackClouds service. Expects a list of terms to be
@@ -77,7 +87,7 @@ def trackWord(terms):
     response.'''
     defaults = trackParser.parse_args()
     termList = terms.split(',')
-    results = \
+    results,seeds, links = \
         _vm.trackClouds(termList, maxTerms=defaults['maxTerms'],
                         maxRelatedTerms=defaults['maxRelatedTerms'],
                         startKey=defaults['startKey'],
@@ -93,12 +103,17 @@ def trackWord(terms):
                                yearsInInterval=defaults['agg.yearsInInterval'],
                                nWordsPerYear=defaults['agg.nWordsPerYear']
                                )
-    results = agg.aggregate(results)
-    results = { year: _makeDict(vals) for year, vals in results.iteritems() }
-    return jsonify(results)
+    aggResults, aggMetadata = agg.aggregate(results)
+
+    # TODO: use used seeds for next loop query
+    networks = _yearlyNetwork(aggMetadata, aggResults, results, seeds, links)
+    return jsonify(
+            stream=_yearTuplesAsDict(aggResults),
+            networks=networks
+        )
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     initApp(arguments['-f'], not arguments['--non-binary'])
-    # app.debug = True
+    app.debug = True
     app.run(host='0.0.0.0')

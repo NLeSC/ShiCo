@@ -58,7 +58,7 @@ class TestVocabularyAggregation(unittest.TestCase):
         '''Test that aggregator produces the correct number of results'''
         nWordsPerYear = 5
         agg = shVA(nWordsPerYear=nWordsPerYear)
-        aggData = agg.aggregate(self._data)
+        aggData, _ = agg.aggregate(self._data)
         for words in aggData.itervalues():
             self.assertEqual(len(words), nWordsPerYear,
                              'Each year should have %d words ' % nWordsPerYear)
@@ -67,21 +67,27 @@ class TestVocabularyAggregation(unittest.TestCase):
         '''Test aggregator reduces the number of intervals produced when
         such intervals are longer'''
         agg = shVA(yearsInInterval=1)
-        aggData = agg.aggregate(self._data)
+        aggData, _ = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), len(self._data.keys()),
                          'Should have same number of keys as original data')
 
         agg = shVA(yearsInInterval=2)
-        aggData = agg.aggregate(self._data)
+        aggData, _ = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), len(self._data.keys())/2,
                          'Should have 1/2 the number of keys as original data')
 
         agg = shVA(yearsInInterval=len(self._data.keys()))
-        aggData = agg.aggregate(self._data)
+        aggData, _ = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), 1,
                          'Should have only 1 key')
 
         agg = shVA(yearsInInterval=2 * len(self._data.keys()))
-        aggData = agg.aggregate(self._data)
+        aggData, _ = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), 1,
                          'Should have only 1 key, containing all years')
+
+    def testMetadata(self):
+        '''Test aggregator produces metadata'''
+        # _, aggMetaData = agg.aggregate(self._data)
+        # TODO: validate aggMetaData
+        pass
