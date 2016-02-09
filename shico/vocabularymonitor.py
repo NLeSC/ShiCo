@@ -8,6 +8,7 @@ from collections import defaultdict, Counter
 
 
 class VocabularyMonitor():
+
     '''Vocabulary Monitor tracks a concept through time. It uses a series of
     gensim Word2Vec models (one for each group of years) to produce a group of
     concept words.
@@ -54,8 +55,11 @@ class VocabularyMonitor():
             seedTerms = [seedTerms]
         aSeedSet = seedTerms
         dResult = SortedDict()
-        usedSeeds = SortedDict()    # TODO: usedSeeds can be replaced by allLinks -- allLinks contains dicts where keys are the used seeds
-        allLinks = SortedDict()     # TODO: give allLinks a more meaningful name
+        # TODO: usedSeeds can be replaced by allLinks -- allLinks contains
+        # dicts where keys are the used seeds
+        usedSeeds = SortedDict()
+        # TODO: give allLinks a more meaningful name
+        allLinks = SortedDict()
 
         # Keys are already sorted because we use a SortedDict
         sortedKeys = self._models.keys()
@@ -104,12 +108,14 @@ class VocabularyMonitor():
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0, wordBoost=1.0, sumDistances=False):
         if sumDistances:
-            result, links = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+            result, links = self._trackCore(
+                model, seedTerms, maxTerms=maxTerms,
                                      maxRelatedTerms=maxRelatedTerms,
                                      minDist=minDist, wordBoost=wordBoost,
                                      reward=lambda tDist: 1.0 - tDist)
         else:
-            result, links = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+            result, links = self._trackCore(
+                model, seedTerms, maxTerms=maxTerms,
                                      maxRelatedTerms=maxRelatedTerms,
                                      minDist=minDist)
         # Make a new seed set
@@ -118,12 +124,13 @@ class VocabularyMonitor():
 
     def _trackSimple(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0):
-        trackTerms, links = self._trackCore(model, seedTerms, maxTerms=maxTerms,
+        trackTerms, links = self._trackCore(
+            model, seedTerms, maxTerms=maxTerms,
                         maxRelatedTerms=maxRelatedTerms, minDist=minDist)
         return trackTerms, seedTerms, links
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                     minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
+                   minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
         dRelatedTerms = defaultdict(float)
         links = defaultdict(list)
 
@@ -146,12 +153,15 @@ class VocabularyMonitor():
         oCounter = Counter(dRelatedTerms)
         result = oCounter.most_common(maxTerms)
 
-        resultWords = set( word for word,weight in result)
-        links = { seed: _pruned(pairs, resultWords, seedTerms) for seed, pairs in links.iteritems() }
-        return result,links
+        resultWords = set(word for word, weight in result)
+        links = {seed: _pruned(pairs, resultWords, seedTerms)
+                 for seed, pairs in links.iteritems()}
+        return result, links
+
 
 def _pruned(pairs, words, seeds):
-    return [ pair for pair in pairs if _keepWord(pair[0], words, seeds) ]
+    return [pair for pair in pairs if _keepWord(pair[0], words, seeds)]
+
 
 def _keepWord(word, words, seeds):
-    return (word in words) # or (word in seeds)
+    return (word in words)  # or (word in seeds)

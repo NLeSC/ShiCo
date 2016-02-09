@@ -2,6 +2,7 @@ import six
 from sortedcontainers import SortedDict
 from collections import defaultdict
 from utils import weightJSD, weightGauss, weightLinear
+from format import getMidRange
 
 
 class VocabularyAggregator():
@@ -35,12 +36,12 @@ def _adaptiveAggregation(V, n=5, yIntervals=2, weightF='Gaussian', param=10):
     finalVocabs = SortedDict()
     vocabsMetadata = SortedDict()
     for t in timeFrames:
-        mu_t = _getMidRange(t[0], t[-1])
+        mu_t = getMidRange(t[0], t[-1])
         V_prime = SortedDict({tx: V[tx] for tx in t})
 
         score = defaultdict(float)
         for years_v, words_v in V_prime.iteritems():
-            mu_v = _getMidRange(years_v)
+            mu_v = getMidRange(years_v)
             fvt = f(mu_v, mu_t)
             for word, score_wv in words_v:
                 score[word] += fvt * score_wv
@@ -58,12 +59,3 @@ def _adaptiveAggregation(V, n=5, yIntervals=2, weightF='Gaussian', param=10):
 def _arrangeIntervals(vocabs, nYears=5):
     keys = vocabs.keys()
     return [keys[i:i + nYears] for i in range(0, len(keys), nYears)]
-
-
-def _getMidRange(first, last=None):
-    # TODO: move to shico.format
-    if last is None:
-        last = first
-    y0 = int(first.split('_')[0])
-    yn = int(last.split('_')[1])
-    return round((yn + y0) / 2)
