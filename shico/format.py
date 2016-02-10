@@ -12,15 +12,18 @@ def getRangeMiddle(first, last=None):
     return round((yn + y0) / 2)
 
 
-def yearlyNetwork(aggMeta, aggResults, results, seeds, links):
+def yearlyNetwork(aggMeta, aggResults, results, links):
     '''Build a dictionary of network graph definitions. The key of this
     dictionary are the years and the values are the network definition
     (in the format used by D3).'''
+    seeds = { y:seedResp.keys() for y,seedResp in links.iteritems() }
+
     networks = {}
     for year_mu, years in aggMeta.iteritems():
         y_results = {y: results[y] for y in years}
-        y_seeds = {y: seeds[y] for y in years}
         y_links = {y: links[y] for y in years}
+        y_seeds = {y: seeds[y] for y in years}
+
         finalVocab = aggResults[year_mu]
         networks[year_mu] = _metaToNetwork(
             y_results, y_seeds, finalVocab, y_links)

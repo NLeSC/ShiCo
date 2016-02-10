@@ -54,12 +54,12 @@ class VocabularyMonitor():
         if isinstance(seedTerms, six.string_types):
             seedTerms = [seedTerms]
         aSeedSet = seedTerms
-        dResult = SortedDict()
-        # TODO: usedSeeds can be replaced by allLinks -- allLinks contains
-        # dicts where keys are the used seeds
-        usedSeeds = SortedDict()
-        # TODO: give allLinks a more meaningful name
-        allLinks = SortedDict()
+
+        # Initialize dicts to be returned
+        # Dictionary of terms found for each year
+        ## yTerms = { year: [(word1, weight1), word2, weight2]}
+        yTerms = SortedDict()
+        yLinks = SortedDict()
 
         # Keys are already sorted because we use a SortedDict
         sortedKeys = self._models.keys()
@@ -81,7 +81,7 @@ class VocabularyMonitor():
 
         for sKey in sortedKeys:
             if algorithm == 'adaptive':
-                result, links, newSeedSet = \
+                terms, links, newSeedSet = \
                     self._trackInlink(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
                                       maxRelatedTerms=maxRelatedTerms,
@@ -91,7 +91,7 @@ class VocabularyMonitor():
             elif algorithm == 'non-adaptive':
                 # Non-adaptive algorithm uses always same set of seeds
                 newSeedSet = aSeedSet
-                result, links = \
+                terms, links = \
                     self._trackCore(self._models[sKey], aSeedSet,
                                     maxTerms=maxTerms,
                                     maxRelatedTerms=maxRelatedTerms,
@@ -100,27 +100,26 @@ class VocabularyMonitor():
                 raise Exception('Algorithm not supported: ' + algorithm)
 
             # Store results and prepare for next iteration
-            dResult[sKey] = result
-            usedSeeds[sKey] = aSeedSet
+            yTerms[sKey] = terms
             aSeedSet = newSeedSet
-            allLinks[sKey] = links
+            yLinks[sKey] = links
 
-        return dResult, usedSeeds, allLinks
+        return yTerms, yLinks
 
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                      minDist=0.0, wordBoost=1.0, sumDistances=False):
         if sumDistances:
-            result, links = self._trackCore(
+            terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
                 maxRelatedTerms=maxRelatedTerms, minDist=minDist,
                 wordBoost=wordBoost,  reward=lambda tDist: 1.0 - tDist)
         else:
-            result, links = self._trackCore(
+            terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
                 maxRelatedTerms=maxRelatedTerms, minDist=minDist)
         # Make a new seed set
-        newSeedSet = [word for word, weight in result]
-        return result, links, newSeedSet
+        newSeedSet = [word for word, weight in terms]
+        return terms, links, newSeedSet
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                    minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
@@ -143,18 +142,20 @@ class VocabularyMonitor():
             except KeyError:
                 pass
 
-        oCounter = Counter(dRelatedTerms)
-        result = oCounter.most_common(maxTerms)
+        # Select the top N terms with biggest weights (where N=maxTerms)
+        topTerms = _getCommonTerms(dRelatedTerms, maxTerms)
 
-        resultWords = set(word for word, weight in result)
-        links = {seed: _pruned(pairs, resultWords, seedTerms)
+        selectedTerms = set(word for word, weight in topTerms)
+        links = {seed: _pruned(pairs, selectedTerms)
                  for seed, pairs in links.iteritems()}
-        return result, links
+        return topTerms, links
 
 
-def _pruned(pairs, words, seeds):
-    return [pair for pair in pairs if _keepWord(pair[0], words, seeds)]
+def _pruned(pairs, words):
+    return [(word, weight) for word, weight in pairs if word in words]
 
 
-def _keepWord(word, words, seeds):
-    return (word in words)  # or (word in seeds)
+def _getCommonTerms(relatedTerms, maxTerms):
+    termCounter = Counter(relatedTerms)
+    topTerms = termCounter.most_common(maxTerms)
+    return topTerms

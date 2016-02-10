@@ -82,7 +82,7 @@ def trackWord(terms):
     response.'''
     params = trackParser.parse_args()
     termList = terms.split(',')
-    results, seeds, links = \
+    results, links = \
         _vm.trackClouds(termList, maxTerms=params['maxTerms'],
                         maxRelatedTerms=params['maxRelatedTerms'],
                         startKey=params['startKey'],
@@ -101,7 +101,7 @@ def trackWord(terms):
     aggResults, aggMetadata = agg.aggregate(results)
 
     # TODO: use used seeds for next loop query
-    networks = yearlyNetwork(aggMetadata, aggResults, results, seeds, links)
+    networks = yearlyNetwork(aggMetadata, aggResults, results, links)
     return jsonify(
         stream=yearTuplesAsDict(aggResults),
         networks=networks
