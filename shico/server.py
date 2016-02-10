@@ -27,7 +27,7 @@ _vm = None
 def validatestr(value):
     try:
         s = str(value)
-        if len(s)==0:
+        if len(s) == 0:
             return None
         return s
     except:
@@ -104,8 +104,8 @@ def trackWord(terms):
     networks = yearlyNetwork(aggMetadata, aggResults, results, seeds, links)
     return jsonify(
         stream=yearTuplesAsDict(aggResults),
-            networks=networks
-    )
+        networks=networks
+        )
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)

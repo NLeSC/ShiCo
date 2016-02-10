@@ -90,10 +90,10 @@ class VocabularyMonitor():
                                       sumDistances=sumDistances)
             elif algorithm == 'non-adaptive':
                 result, newSeedSet, links = \
-                    self._trackSimple(self._models[sKey], aSeedSet,
-                                      maxTerms=maxTerms,
-                                      maxRelatedTerms=maxRelatedTerms,
-                                      minDist=minDist)
+                    self._trackCore(self._models[sKey], aSeedSet,
+                                    maxTerms=maxTerms,
+                                    maxRelatedTerms=maxRelatedTerms,
+                                    minDist=minDist)
             else:
                 raise Exception('Algorithm not supported: ' + algorithm)
 
@@ -110,24 +110,15 @@ class VocabularyMonitor():
         if sumDistances:
             result, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
-                                     maxRelatedTerms=maxRelatedTerms,
-                                     minDist=minDist, wordBoost=wordBoost,
-                                     reward=lambda tDist: 1.0 - tDist)
+                maxRelatedTerms=maxRelatedTerms, minDist=minDist,
+                wordBoost=wordBoost,  reward=lambda tDist: 1.0 - tDist)
         else:
             result, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
-                                     maxRelatedTerms=maxRelatedTerms,
-                                     minDist=minDist)
+                maxRelatedTerms=maxRelatedTerms, minDist=minDist)
         # Make a new seed set
         newSeedSet = [word for word, weight in result]
         return result, newSeedSet, links
-
-    def _trackSimple(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                     minDist=0.0):
-        trackTerms, links = self._trackCore(
-            model, seedTerms, maxTerms=maxTerms,
-                        maxRelatedTerms=maxRelatedTerms, minDist=minDist)
-        return trackTerms, seedTerms, links
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                    minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):

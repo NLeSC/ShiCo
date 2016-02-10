@@ -13,8 +13,8 @@ def _makeNode(word, counts, seedSet, finalWords):
         nodeType = 'drop'
     return {
         'name': word,
-            'count': counts[word],
-            'type': nodeType
+        'count': counts[word],
+        'type': nodeType
     }
 
 
@@ -32,8 +32,8 @@ def _buildNode(seed, word, weight, nodeIdx):
         print 'Word not found:', word
     return {
         'source': seedIdx,
-            'target': wordIdx,
-            'value':  1 / (weight + 1)
+        'target': wordIdx,
+        'value':  1 / (weight + 1)
     }
 
 
