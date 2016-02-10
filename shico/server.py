@@ -42,6 +42,7 @@ def initApp(files, binary):
     '''
     global _vm
     _vm = VocabularyMonitor(files, binary)
+    # _vm = "VocabularyMonitor(files, binary)"
 
 # trackClouds parameters
 
@@ -58,10 +59,10 @@ trackParser.add_argument('sumDistances', type=bool, default=False)
 trackParser.add_argument('algorithm', type=str, default='adaptive')
 
 # VocabularyAggregator parameters:
-trackParser.add_argument('agg.weighF', type=str, default='Gaussian')
-trackParser.add_argument('agg.wfParam', type=float, default=1.0)
-trackParser.add_argument('agg.yearsInInterval', type=int, default=5)
-trackParser.add_argument('agg.nWordsPerYear', type=int, default=10)
+trackParser.add_argument('aggWeighFunction', type=str, default='Gaussian')
+trackParser.add_argument('aggWFParam', type=float, default=1.0)
+trackParser.add_argument('aggYearsInInterval', type=int, default=5)
+trackParser.add_argument('aggWordsPerYear', type=int, default=10)
 
 
 @app.route('/available-years')
@@ -92,10 +93,10 @@ def trackWord(terms):
                         sumDistances=params['sumDistances'],
                         algorithm=params['algorithm'],
                         )
-    agg = VocabularyAggregator(weighF=params['agg.weighF'],
-                               wfParam=params['agg.wfParam'],
-                               yearsInInterval=params['agg.yearsInInterval'],
-                               nWordsPerYear=params['agg.nWordsPerYear']
+    agg = VocabularyAggregator(weighF=params['aggWeighFunction'],
+                               wfParam=params['aggWFParam'],
+                               yearsInInterval=params['aggYearsInInterval'],
+                               nWordsPerYear=params['aggWordsPerYear']
                                )
     aggResults, aggMetadata = agg.aggregate(results)
 
