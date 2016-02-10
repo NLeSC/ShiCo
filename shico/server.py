@@ -17,7 +17,7 @@ from flask.ext.cors import CORS
 from vocabularymonitor import VocabularyMonitor
 from vocabularyaggregator import VocabularyAggregator
 
-from format import yearlyNetwork, getMidRange, yearTuplesAsDict
+from format import yearlyNetwork, getRangeMiddle, yearTuplesAsDict
 
 app = Flask(__name__)
 CORS(app)
@@ -68,7 +68,7 @@ trackParser.add_argument('aggWordsPerYear', type=int, default=10)
 @app.route('/available-years')
 def avlYears():
     years = _vm.getAvailableYears()
-    yearLabels = {int(getMidRange(y)): y for y in years}
+    yearLabels = {int(getRangeMiddle(y)): y for y in years}
     return jsonify(values=yearLabels,
                    first=min(yearLabels.keys()),
                    last=max(yearLabels.keys())

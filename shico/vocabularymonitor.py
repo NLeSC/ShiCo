@@ -81,7 +81,7 @@ class VocabularyMonitor():
 
         for sKey in sortedKeys:
             if algorithm == 'adaptive':
-                result, newSeedSet, links = \
+                result, links, newSeedSet = \
                     self._trackInlink(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
                                       maxRelatedTerms=maxRelatedTerms,
@@ -89,7 +89,9 @@ class VocabularyMonitor():
                                       wordBoost=wordBoost,
                                       sumDistances=sumDistances)
             elif algorithm == 'non-adaptive':
-                result, newSeedSet, links = \
+                # Non-adaptive algorithm uses always same set of seeds
+                newSeedSet = aSeedSet
+                result, links = \
                     self._trackCore(self._models[sKey], aSeedSet,
                                     maxTerms=maxTerms,
                                     maxRelatedTerms=maxRelatedTerms,
@@ -118,7 +120,7 @@ class VocabularyMonitor():
                 maxRelatedTerms=maxRelatedTerms, minDist=minDist)
         # Make a new seed set
         newSeedSet = [word for word, weight in result]
-        return result, newSeedSet, links
+        return result, links, newSeedSet
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
                    minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
