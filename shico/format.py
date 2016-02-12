@@ -16,7 +16,7 @@ def yearlyNetwork(aggMeta, aggResults, results, links):
     '''Build a dictionary of network graph definitions. The key of this
     dictionary are the years and the values are the network definition
     (in the format used by D3).'''
-    seeds = { y:seedResp.keys() for y,seedResp in links.iteritems() }
+    seeds = {y: seedResp.keys() for y, seedResp in links.iteritems()}
 
     networks = {}
     for year_mu, years in aggMeta.iteritems():

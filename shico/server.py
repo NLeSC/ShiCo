@@ -25,11 +25,11 @@ _vm = None
 
 
 def validatestr(value):
+    '''Validate that given value is a non-empty string. Used to validate
+    tracker parameters.'''
     try:
         s = str(value)
-        if len(s) == 0:
-            return None
-        return s
+        return None if (len(s) == 0) else s
     except:
         raise ValueError
 
@@ -67,6 +67,8 @@ trackParser.add_argument('aggWordsPerYear', type=int, default=10)
 
 @app.route('/available-years')
 def avlYears():
+    '''VocabularyMonitor.getAvailableYears service. Takes no parameters.
+    Returns JSON structure with years available.'''
     years = _vm.getAvailableYears()
     yearLabels = {int(getRangeMiddle(y)): y for y in years}
     return jsonify(values=yearLabels,
@@ -102,10 +104,8 @@ def trackWord(terms):
 
     # TODO: use used seeds for next loop query
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
-    return jsonify(
-        stream=yearTuplesAsDict(aggResults),
-        networks=networks
-        )
+    return jsonify(stream=yearTuplesAsDict(aggResults),
+                   networks=networks)
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
