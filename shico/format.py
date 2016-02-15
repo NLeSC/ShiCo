@@ -12,21 +12,21 @@ def getRangeMiddle(first, last=None):
     return round((yn + y0) / 2)
 
 
-def yearlyNetwork(aggMeta, aggResults, results, links):
+def yearlyNetwork(aggPeriods, aggResults, results, links):
     '''Build a dictionary of network graph definitions. The key of this
     dictionary are the years and the values are the network definition
     (in the format used by D3).'''
     seeds = {y: seedResp.keys() for y, seedResp in links.iteritems()}
 
     networks = {}
-    for year_mu, years in aggMeta.iteritems():
-        y_results = {y: results[y] for y in years}
-        y_links = {y: links[y] for y in years}
-        y_seeds = {y: seeds[y] for y in years}
+    for year_mu, years in aggPeriods.iteritems():
+        yResults = {y: results[y] for y in years}
+        yLinks = {y: links[y] for y in years}
+        ySeeds = {y: seeds[y] for y in years}
 
         finalVocab = aggResults[year_mu]
         networks[year_mu] = _metaToNetwork(
-            y_results, y_seeds, finalVocab, y_links)
+            yResults, ySeeds, finalVocab, yLinks)
     return networks
 
 
@@ -75,13 +75,13 @@ def _buildLink(seed, word, weight, nodeIdx):
     }
 
 
-def _buildLinks(y_links, nodeIdx):
+def _buildLinks(yLinks, nodeIdx):
     '''Build a list of links from the given yearly links. For each year group,
     link all seeds to all their results (with strength proportional to their
     weight)'''
     linkList = []
-    # We are not doing anything with the years in y_links
-    for links in y_links.values():
+    # We are not doing anything with the years in yLinks
+    for links in yLinks.values():
         for seed, results in links.iteritems():
             for word, weight in results:
                 # TODO: check seeds present in dict more elegantly
@@ -105,16 +105,15 @@ def _buildNodes(wordCounts, seedSet, finalWords):
     return nodes, nodeIdx
 
 
-def _metaToNetwork(results, seeds, finalVocab, y_links):
+def _metaToNetwork(results, seeds, finalVocab, yLinks):
     '''Build a network (nodes & links), using aggregated results. Network must
     be in a format usable by the front end. '''
     wordCounts = Counter([w for res in results.values() for w, v in res])
     seedSet = set(w for seed in seeds.values() for w in seed)
     finalWords = [w for w, v in finalVocab]
 
-    # TODO: can we unittest that nodeIdx contains all words in y_links ?
     nodes, nodeIdx = _buildNodes(wordCounts, seedSet, finalWords)
-    links = _buildLinks(y_links, nodeIdx)
+    links = _buildLinks(yLinks, nodeIdx)
 
     network = {
         'nodes': nodes,

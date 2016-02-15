@@ -53,15 +53,16 @@ class VocabularyMonitor():
         word2vec models currently loaded in this vocabularymonitor.
 
         Keyword arguments:
-        seedTerms       -- List of initial seed terms (could be a single string)
+        seedTerms       -- List of initial seed terms (could be a single
+                           string)
         maxTerms        -- Maximum number of terms to be returned from each
                            w2v model.
         maxRelatedTerms -- Maximum number of terms to be returned from each
                            w2v model for each seed term.
         startKey        -- Year key of first w2v model to be used.
         endKey          -- Year key of last w2v model to be used.
-        minDist         -- Distance threshold (in embeded space) for distance of
-                           terms found.
+        minDist         -- Distance threshold (in embeded space) for distance
+                           of terms found.
         wordBoost       -- Weight boost automatically given to seed terms.
         forwards        -- Perform search in the forward time direction. Set to
                            False for backward direction.
@@ -71,7 +72,8 @@ class VocabularyMonitor():
                            previously known as inlinks). Adaptive algorithm
                            takes results from the current time period and uses
                            them as seeds for the next time period. Non-adaptive
-                           algorithm uses the initial seeds for every time period.
+                           algorithm uses the initial seeds for every time
+                           period.
 
         Returns:
         terms  -- A dictionary with the year key of every model as its keys and
