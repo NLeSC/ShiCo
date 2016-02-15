@@ -6,7 +6,6 @@ from format import getRangeMiddle
 
 
 class VocabularyAggregator():
-
     '''A VocabularyAggregator takes a vocabulary produced by a VocabularyMonitor
     and aggregates them over a set time window. Terms inside the 'window', are
     weighted by a weighting function.
