@@ -58,7 +58,7 @@ class TestVocabularyAggregation(unittest.TestCase):
         '''Test that aggregator produces the correct number of results'''
         nWordsPerYear = 5
         agg = shVA(nWordsPerYear=nWordsPerYear)
-        aggData = agg.aggregate(self._data)
+        aggData, _ = agg.aggregate(self._data)
         for words in aggData.itervalues():
             self.assertEqual(len(words), nWordsPerYear,
                              'Each year should have %d words ' % nWordsPerYear)
@@ -67,21 +67,45 @@ class TestVocabularyAggregation(unittest.TestCase):
         '''Test aggregator reduces the number of intervals produced when
         such intervals are longer'''
         agg = shVA(yearsInInterval=1)
-        aggData = agg.aggregate(self._data)
-        self.assertEqual(len(aggData.keys()), len(self._data.keys()),
+        aggData, _ = agg.aggregate(self._data)
+        self.assertEqual(len(aggData.keys()), len(self._data),
                          'Should have same number of keys as original data')
 
         agg = shVA(yearsInInterval=2)
-        aggData = agg.aggregate(self._data)
-        self.assertEqual(len(aggData.keys()), len(self._data.keys())/2,
+        aggData, _ = agg.aggregate(self._data)
+        self.assertEqual(len(aggData.keys()), len(self._data)/2,
                          'Should have 1/2 the number of keys as original data')
 
-        agg = shVA(yearsInInterval=len(self._data.keys()))
-        aggData = agg.aggregate(self._data)
+        agg = shVA(yearsInInterval=len(self._data))
+        aggData, _ = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), 1,
                          'Should have only 1 key')
 
-        agg = shVA(yearsInInterval=2 * len(self._data.keys()))
-        aggData = agg.aggregate(self._data)
+        agg = shVA(yearsInInterval=2 * len(self._data))
+        aggData, _ = agg.aggregate(self._data)
         self.assertEqual(len(aggData.keys()), 1,
                          'Should have only 1 key, containing all years')
+
+    def testTimePeriods(self):
+        '''Test aggregator produces metadata'''
+        agg = shVA(yearsInInterval=1, yIntervalFreq=1)
+        data, times = agg.aggregate(self._data)
+        self.assertEqual(len(data), len(times),
+                         'Should have same number of keys')
+        self.assertTrue(data.keys() == times.keys(),
+                        'Should be the same keys')
+
+        yearsInInterval = 2
+        agg = shVA(yearsInInterval=yearsInInterval, yIntervalFreq=1)
+        _, times = agg.aggregate(self._data)
+        for year, values in times.iteritems():
+            self.assertEqual(len(values), yearsInInterval,
+                             'Should have equal number of years in interval '
+                             'but %s does not' % year)
+
+        agg1 = shVA(yearsInInterval=yearsInInterval, yIntervalFreq=1)
+        agg2 = shVA(yearsInInterval=yearsInInterval, yIntervalFreq=2)
+        _, times1 = agg1.aggregate(self._data)
+        _, times2 = agg2.aggregate(self._data)
+        self.assertGreater(len(times1), len(times2),
+                           'Should have more intervals')

@@ -7,13 +7,13 @@
   </div>
 </div>
 <br>
-<div class="row" ng-hide="vm.paramIOControl.hide">
+<div class="row" ng-hide="vm.hide">
   <div class="col-md-8">
     <textarea class="form-control" rows="2"
-      ng-readonly="vm.paramIOControl.readOnly"
-      ng-model="vm.paramIOControl.text"></textarea>
+      ng-readonly="vm.readOnly"
+      ng-model="vm.text"></textarea>
   </div>
   <div class="col-md-2">
-    <button ng-click="vm.closeParamIO()" class="btn btn-success">{{ vm.paramIOControl.btnText }}</button>
+    <button ng-click="vm.closeParamIO()" class="btn btn-success">{{ vm.btnText }}</button>
   </div>
 </div>

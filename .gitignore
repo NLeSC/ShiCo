@@ -1,0 +1,12 @@
+*.ipynb
+.ipynb_checkpoints/
+*.pyc
+./word2vecModels
+
+webapp/node_modules/
+webapp/bower_components/
+webapp/coverage/
+webapp/.sass-cache/
+webapp/.idea/
+webapp/.tmp/
+webapp/dist/

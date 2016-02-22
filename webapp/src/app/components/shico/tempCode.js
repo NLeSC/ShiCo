@@ -3,6 +3,6 @@
 
   console.log('Running temp code...');
 
-  var shico = angular
-      .module('shico');
+//  var shico = angular
+//      .module('shico');
 })();
