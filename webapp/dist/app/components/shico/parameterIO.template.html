@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-2">
+    <button ng-click="vm.getParameters()" class="btn btn-success">Save parameters</button>
+  </div>
+  <div class="col-md-2">
+    <button ng-click="vm.setParameters()" class="btn btn-success">Load parameters</button>
+  </div>
+</div>
+<br>
+<div class="row" ng-hide="vm.hide">
+  <div class="col-md-8">
+    <textarea class="form-control" rows="2"
+      ng-readonly="vm.readOnly"
+      ng-model="vm.text"></textarea>
+  </div>
+  <div class="col-md-2">
+    <button ng-click="vm.closeParamIO()" class="btn btn-success">{{ vm.btnText }}</button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="row">
+ <div class="col-md-12">
+   <nvd3
+     data='vm.streamGraph.data'
+     options='vm.streamGraph.options'>
+   </nvd3>
+ </div>
+</div>
+ <div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <center>
+      <nvd3
+        data='vm.forceGraph.data[vm.forceGraph.currYearIdx]'
+        options='vm.forceGraph.options'>
+      </nvd3>
+    </center>
+    <rzslider ng-hide="!vm.slider_options.ceil"
+             rz-slider-model="vm.forceGraph.currYearIdx"
+             rz-slider-options="vm.slider_options"></rzslider>
+  </div>
+</div>
