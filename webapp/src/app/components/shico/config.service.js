@@ -7,7 +7,7 @@
 
   function SettingsService($resource, TrackerParametersService) {
     var service = {
-      doLoad: doLoad,
+      doLoad: doLoad
     };
     return service;
 
