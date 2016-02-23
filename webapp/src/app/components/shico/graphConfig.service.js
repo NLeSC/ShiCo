@@ -25,7 +25,7 @@
           yAxis: {
             tickFormat: tickY
           },
-          color: getColour,
+          color: getColour
       }
     };
     var customSymbol = d3.svg.symbol()
@@ -41,7 +41,7 @@
           symbol: customSymbol,
           nodeExtras: processNode,
           curveLinks:  true,
-          useArrows: true,
+          useArrows: true
       }
     };
     var colours = d3.scale.category20();

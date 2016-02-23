@@ -23,7 +23,7 @@
       aggWeighFunction: 'Gaussian',
       aggWFParam: 1,
       aggYearsInInterval: 1,
-      aggWordsPerYear: 5,
+      aggWordsPerYear: 5
     };
 
     vm.availableYears = {
@@ -40,7 +40,7 @@
     var service = {
       getParameters: getParameters,
       setParameters: setParameters,
-      availableYears: vm.availableYears,
+      availableYears: vm.availableYears
     };
     return service;
 
@@ -51,7 +51,7 @@
     function setParameters(params) {
       // Copy parameters from `params` which already exist in `vm.parameters`
       angular.forEach(vm.parameters, function(val,key) {
-        if(params[key] !== undefined) {
+        if(angular.isDefined(params[key])) {
           vm.parameters[key] = params[key]
         }
       });

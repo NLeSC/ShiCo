@@ -8,6 +8,20 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
+var print = require('gulp-print');
+
+// For some reason, these are not being copied
+// and angular is not reading them from $templateCache
+// TODO: investigate further (and remove this task)
+gulp.task('copyTemplates', function () {
+  return gulp.src(
+    path.join(conf.paths.src, '/app/**/*.template.html')
+  )
+    .pipe(gulp.dest(
+      conf.paths.dist + '/app/'
+    ));
+});
+
 gulp.task('partials', function () {
   return gulp.src([
     path.join(conf.paths.src, '/app/**/*.html'),
@@ -19,7 +33,7 @@ gulp.task('partials', function () {
       quotes: true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
-      module: 'webapp',
+      module: 'shico',
       root: 'app'
     }))
     .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
@@ -94,4 +108,4 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['html', 'fonts', 'other', 'copyTemplates']);
