@@ -35,10 +35,10 @@
         var row = [ word ];
         angular.forEach(allYears, function(year) {
           var val = (word in rawData[year]) ? rawData[year][word] : 0;
-          this.push(val);
-        }, row);
-        this.push(row);
-      }, csvData);
+          row.push(val);
+        });
+        csvData.push(row);
+      });
 
       return csvData;
     }
