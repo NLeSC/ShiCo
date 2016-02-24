@@ -16,13 +16,31 @@
     vm.downloadData = downloadData;
 
     function downloadData() {
-      console.log('Start data download...');
-      console.log('vm.streamGraph.data');
-      console.log(vm.streamGraph.data);
-      console.log('vm.forceGraph.data');
-      console.log(vm.forceGraph.data);
+      var rawData = GraphControlService.getRawData().stream;
 
-      return ['x','y','z'];
+      // allWords and allYears we already had -- we shouldn't need to build them again
+      var allWords = new Set();
+      var allYears = [];
+      angular.forEach(rawData, function(wordValues, year) {
+        allYears.push(year);
+        angular.forEach(wordValues, function(weight, word) {
+          allWords.add(word);
+        });
+      });
+
+      // Create CSV file
+      var headers = [ '' ].concat(allYears);
+      var csvData = [ headers ];
+      angular.forEach(allWords, function(word) {
+        var row = [ word ];
+        angular.forEach(allYears, function(year) {
+          var val = (word in rawData[year]) ? rawData[year][word] : 0;
+          this.push(val);
+        }, row);
+        this.push(row);
+      }, csvData);
+
+      return csvData;
     }
   }
 })();
