@@ -13,5 +13,16 @@
     vm.streamGraph = GraphControlService.streamGraph;
     vm.forceGraph = GraphControlService.forceGraph;
     vm.slider_options = GraphControlService.slider_options;
+    vm.downloadData = downloadData;
+
+    function downloadData() {
+      console.log('Start data download...');
+      console.log('vm.streamGraph.data');
+      console.log(vm.streamGraph.data);
+      console.log('vm.forceGraph.data');
+      console.log(vm.forceGraph.data);
+
+      return ['x','y','z'];
+    }
   }
 })();

@@ -9,6 +9,8 @@
       'toastr',
       'nvd3',
       'rzModule',
-      'cgBusy'
+      'cgBusy',
+      'ngSanitize',
+      'ngCsv'
     ]);
 })();
