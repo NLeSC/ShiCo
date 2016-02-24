@@ -31,6 +31,7 @@
 
     var service = {
       update: update,
+      getRawData: getRawData,
       streamGraph: vm.streamGraph,
       forceGraph:  vm.forceGraph,
       slider_options: vm.slider_options
@@ -38,7 +39,9 @@
     return service;
 
     // Update graphs with the given data
-    function update(data){
+    function update(data) {
+      vm.rawData = data;
+
       // Collect all words and year labels on data
       var allYears = [];
       var allWords = new Set();
@@ -69,6 +72,10 @@
       vm.forceGraph.data = forceData;
 
       vm.slider_options.ceil = vm.yearLabels.length-1;
+    }
+
+    function getRawData() {
+      return vm.rawData;
     }
 
     function formatForStream(data, yearIdx, allWords, allYears) {
