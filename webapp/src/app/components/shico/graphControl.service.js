@@ -23,7 +23,7 @@
     vm.slider_options = {
       floor: 0,
       ceil: 0,
-      showTicksValues: true,
+      showTicksValues: false,
       translate: function(value) {
         return vm.yearLabels[value];
       }
