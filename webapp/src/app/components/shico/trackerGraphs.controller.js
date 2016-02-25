@@ -13,7 +13,20 @@
     vm.streamGraph = GraphControlService.streamGraph;
     vm.forceGraph = GraphControlService.forceGraph;
     vm.slider_options = GraphControlService.slider_options;
+    vm.getYearLabel = GraphControlService.getYearLabel;
+    vm.yearsInSight = yearsInSight;
+    vm.addBorder = addBorder;
     vm.downloadData = downloadData;
+
+    function yearsInSight(yearIdx) {
+      return (vm.forceGraph.currYearIdx - 2) <= yearIdx &&
+              yearIdx < (vm.forceGraph.currYearIdx + 2);
+    }
+
+    function addBorder(scope) {
+      // Add border
+      scope.svg.attr('style', 'border-style: solid');
+    }
 
     function downloadData() {
       var rawData = GraphControlService.getRawData().stream;

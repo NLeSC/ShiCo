@@ -24,19 +24,23 @@
       floor: 0,
       ceil: 0,
       showTicksValues: false,
-      translate: function(value) {
-        return vm.yearLabels[value];
-      }
+      translate: getYearLabel
     };
 
     var service = {
       update: update,
       getRawData: getRawData,
+      getYearLabel: getYearLabel,
       streamGraph: vm.streamGraph,
       forceGraph:  vm.forceGraph,
       slider_options: vm.slider_options
+
     };
     return service;
+
+    function getYearLabel(yearIdx) {
+      return vm.yearLabels[yearIdx];
+    }
 
     // Update graphs with the given data
     function update(data) {

@@ -10,12 +10,12 @@
     var streamConfig = {
       chart: {
           type: 'stackedAreaChart',
-          height: 400,
+          height: 500,
           margin : {
-              top: 20,
-              right: 20,
-              bottom: 60,
-              left: 55
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0
           },
           x: getX,
           y: getY,
@@ -145,7 +145,7 @@
       html += '</tbody>';
       html += '</table>';
       return html;
-    };
+    }
 
     function addForceGraphHook(callback) {
       forceGraphHooks.push(callback);
