@@ -15,7 +15,7 @@
     function doPost() {
       var params = TrackerParametersService.getParameters();
       var resp = ConceptService.trackConcept(params);
-      this.trackerPromise = resp; // ng-busy watches on trackerPromise
+      vm.trackerPromise = resp; // ng-busy watches on trackerPromise
       resp.then(GraphControlService.update);
     }
   }

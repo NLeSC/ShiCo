@@ -1,24 +1,22 @@
 <div class="row" ng-if="vm.forceGraph.data.length != 0 ">
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row col-md-12">
+    <nvd3
+      data='vm.streamGraph.data'
+      options='vm.streamGraph.options'>
+    </nvd3>
+  </div>
+  <div class="row col-md-12">
+    <div class="col-md-3" ng-repeat="(yearIdx,yearData) in vm.forceGraph.data" ng-if="vm.yearsInSight(yearIdx)">
+      <span class="label label-default">{{ vm.getYearLabel(yearIdx) }}</span>
       <nvd3
-        data='vm.streamGraph.data'
-        options='vm.streamGraph.options'>
+        data='yearData'
+        options='vm.forceGraph.options'
+        on-ready="vm.addBorder">
       </nvd3>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <center>
-        <nvd3
-          data='vm.forceGraph.data[vm.forceGraph.currYearIdx]'
-          options='vm.forceGraph.options'>
-        </nvd3>
-      </center>
-      <rzslider ng-hide="!vm.slider_options.ceil"
+    <rzslider ng-hide="!vm.slider_options.ceil"
                rz-slider-model="vm.forceGraph.currYearIdx"
                rz-slider-options="vm.slider_options"></rzslider>
-    </div>
   </div>
   <div class="row col-md-12 pager">
     <button class="btn btn-success" ng-csv="vm.downloadData()" filename="test.csv">Save data</button>
