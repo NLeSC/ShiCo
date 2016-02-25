@@ -28,9 +28,11 @@
           color: getColour
       }
     };
+
     var customSymbol = d3.svg.symbol()
                 .type( function(d) { return d.type=="seed"?"triangle-up":"circle"; } )
                 .size( function(d) { return 50 * Math.log2(2 + d.count); } );
+
     // NVD3 configuration for force directed graph
     var forceConfig = {
       chart: {
@@ -41,7 +43,8 @@
           symbol: customSymbol,
           nodeExtras: processNode,
           curveLinks:  true,
-          useArrows: true
+          useArrows: true,
+          tooltip: { contentGenerator: customTooltipContent }
       }
     };
     var colours = d3.scale.category20();
@@ -112,6 +115,7 @@
         .attr('r', function(d) { return 5 + 2 * (d.count); });
     }
 
+    // TODO: unused code ?
     function setOutline(node) {
       node.select('circle')
         .attr('stroke', function(d) { return pickStroke(d.type, 'colour'); })
@@ -133,6 +137,25 @@
       }
       return (feature=='width')? width : colour;
     }
+
+    function customTooltipContent(d) {
+      var showContent = [ 'type', 'count', 'weight' ];
+
+      var html = '<table>';
+      html += '<thead><tr><td colspan="2"><strong class="x-value">' + d['name'] + '</strong></td></tr></thead>';
+      html += '<tbody>';
+
+      angular.forEach(showContent, function(key) {
+        html += '<tr>';
+        html += '<td class="key">' + key + '</td>';
+        html += '<td class="value">' + d[key] + '</td>';
+        html += '</tr>';
+      });
+
+      html += '</tbody>';
+      html += '</table>';
+      return html;
+    };
 
     function addForceGraphHook(callback) {
       forceGraphHooks.push(callback);
