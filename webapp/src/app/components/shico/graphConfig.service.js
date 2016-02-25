@@ -30,8 +30,8 @@
     };
 
     var customSymbol = d3.svg.symbol()
-                .type( function(d) { return d.type=="seed"?"triangle-up":"circle"; } )
-                .size( function(d) { return 50 * Math.log2(2 + d.count); } );
+                .type( chooseSymbolType )
+                .size( chooseSymbolSize );
 
     // NVD3 configuration for force directed graph
     var forceConfig = {
@@ -94,9 +94,8 @@
     // Helper functions for forceConfig
     function processNode(node) {
       // Nodes have: {'name': 'str', 'type': 'seed', 'count': N},
-      addTextLabels(node);  // {'count': 1, 'name': u'bevrijding', 'type': 'seed'},
+      addTextLabels(node);
       setSize(node);
-      setOutline(node);
       angular.forEach(forceGraphHooks, function(hook) {
         hook(node);
       });
@@ -115,27 +114,18 @@
         .attr('r', function(d) { return 5 + 2 * (d.count); });
     }
 
-    // TODO: unused code ?
-    function setOutline(node) {
-      node.select('circle')
-        .attr('stroke', function(d) { return pickStroke(d.type, 'colour'); })
-        .attr('stroke-width', function(d) { return pickStroke(d.type, 'width'); });
+    function chooseSymbolType(d) {
+      if (d.type=="seed") {
+        return "triangle-up";
+      } else if(d.type=="word") {
+        return "circle";
+      } else {
+        return "diamond";
+      }
     }
 
-    function pickStroke(nodeType, feature) {
-      var width = '';
-      var colour = '';
-      if(nodeType == 'seed') {
-        width = 2;
-        colour = 'red';
-      } else if(nodeType == 'word') {
-        width = 0;
-        colour = 'black';
-      } else {  // nodeType == 'drop'
-        width = 2;
-        colour = 'gray';
-      }
-      return (feature=='width')? width : colour;
+    function chooseSymbolSize(d) {
+      return 50 * Math.log2(2 + d.count);
     }
 
     function customTooltipContent(d) {
