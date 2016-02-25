@@ -1,359 +1,4018 @@
-
 {
   "networks": {
     "1954": {
       "links": [
         {
-          "source": 8,
-          "target": 8,
-          "value": 1
-        },
-        {
-          "source": 8,
-          "target": 0,
-          "value": 0.6150405596375453
-        },
-        {
-          "source": 8,
-          "target": 5,
-          "value": 0.61574476190616
-        },
-        {
-          "source": 8,
-          "target": 9,
-          "value": 0.6185860956452239
-        },
-        {
-          "source": 8,
-          "target": 6,
-          "value": 0.6341258740095761
-        },
-        {
-          "source": 8,
-          "target": 4,
-          "value": 0.6366178704231987
-        },
-        {
-          "source": 8,
-          "target": 7,
-          "value": 0.6425945578912905
-        },
-        {
-          "source": 8,
-          "target": 2,
-          "value": 0.6441464668155386
-        },
-        {
-          "source": 8,
+          "source": 1,
           "target": 1,
-          "value": 0.6482461317568318
+          "value": 1.0
         },
         {
-          "source": 8,
+          "source": 1,
+          "target": 7,
+          "value": 0.622163125459283
+        },
+        {
+          "source": 1,
+          "target": 9,
+          "value": 0.6292755926055424
+        },
+        {
+          "source": 1,
+          "target": 2,
+          "value": 0.6361179778343967
+        },
+        {
+          "source": 1,
+          "target": 8,
+          "value": 0.6372815424377435
+        },
+        {
+          "source": 1,
+          "target": 4,
+          "value": 0.6467639512747875
+        },
+        {
+          "source": 1,
+          "target": 5,
+          "value": 0.6472241647098518
+        },
+        {
+          "source": 1,
           "target": 3,
-          "value": 0.6512208555053965
+          "value": 0.6482011500254745
+        },
+        {
+          "source": 1,
+          "target": 6,
+          "value": 0.6488633821176761
+        },
+        {
+          "source": 1,
+          "target": 0,
+          "value": 0.6502381049273981
         }
       ],
       "nodes": [
         {
           "count": 1,
-          "name": "wereldoorlog",
+          "name": "domlngos",
           "type": "word"
         },
         {
           "count": 1,
-          "name": "oorlogen",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "burgeroorlog",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "oorlof",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "bevr?ding",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "ooriog",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "hongerwinter",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "oorlogse",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "oorlog",
+          "name": "brasil",
           "type": "seed"
         },
         {
           "count": 1,
-          "name": "oorlogsjaren",
+          "name": "lolde",
+          "type": "drop"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
           "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "drop"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "word"
+        },
+        {
+          "count": 1,
+          "name": "loide",
+          "type": "drop"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "drop"
+        },
+        {
+          "count": 1,
+          "name": "paraguay",
+          "type": "drop"
         }
       ]
     },
     "1955": {
       "links": [
         {
-          "source": 1,
-          "target": 12,
-          "value": 0.6091253624997164
+          "source": 8,
+          "target": 8,
+          "value": 1.0
         },
         {
-          "source": 1,
-          "target": 13,
-          "value": 0.6289308044070249
+          "source": 12,
+          "target": 5,
+          "value": 0.6223394699584762
         },
         {
-          "source": 1,
-          "target": 11,
-          "value": 0.6331761540408645
+          "source": 12,
+          "target": 10,
+          "value": 0.6342389989851248
         },
         {
-          "source": 1,
+          "source": 12,
+          "target": 0,
+          "value": 0.635970115816563
+        },
+        {
+          "source": 12,
+          "target": 7,
+          "value": 0.6378879742916624
+        },
+        {
+          "source": 12,
           "target": 2,
-          "value": 0.6637804438642722
+          "value": 0.6406009299265986
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 7,
+          "value": 0.5875945355007145
+        },
+        {
+          "source": 2,
+          "target": 3,
+          "value": 0.5894762228443708
+        },
+        {
+          "source": 2,
+          "target": 0,
+          "value": 0.589519844605174
+        },
+        {
+          "source": 2,
+          "target": 5,
+          "value": 0.5993440202173208
+        },
+        {
+          "source": 2,
+          "target": 1,
+          "value": 0.6082641061290276
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 0,
+          "value": 0.542782148290949
+        },
+        {
+          "source": 3,
+          "target": 5,
+          "value": 0.5473983366769979
+        },
+        {
+          "source": 3,
+          "target": 8,
+          "value": 0.5477425231267811
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 11,
+          "target": 11,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 2,
+          "value": 0.5327911130684607
+        },
+        {
+          "source": 9,
+          "target": 7,
+          "value": 0.596072212879563
+        },
+        {
+          "source": 9,
+          "target": 3,
+          "value": 0.597545085455291
+        },
+        {
+          "source": 9,
+          "target": 1,
+          "value": 0.5993708919490061
+        },
+        {
+          "source": 9,
+          "target": 5,
+          "value": 0.5999309929114508
+        },
+        {
+          "source": 9,
+          "target": 0,
+          "value": 0.6004379200027429
+        },
+        {
+          "source": 10,
+          "target": 10,
+          "value": 1.0
+        },
+        {
+          "source": 10,
+          "target": 5,
+          "value": 0.5922432488951312
+        },
+        {
+          "source": 10,
+          "target": 0,
+          "value": 0.5943825706897669
+        },
+        {
+          "source": 10,
+          "target": 7,
+          "value": 0.5981437425333267
+        },
+        {
+          "source": 10,
+          "target": 8,
+          "value": 0.5999649974263024
+        },
+        {
+          "source": 10,
+          "target": 1,
+          "value": 0.60454340390633
         },
         {
           "source": 6,
-          "target": 12,
-          "value": 0.6320567824335007
-        },
-        {
-          "source": 7,
-          "target": 14,
-          "value": 0.6605439020991812
-        },
-        {
-          "source": 7,
-          "target": 12,
-          "value": 0.6716094462611977
-        },
-        {
-          "source": 8,
-          "target": 0,
-          "value": 0.5894476422854604
-        },
-        {
-          "source": 8,
-          "target": 12,
-          "value": 0.645595270657051
-        },
-        {
-          "source": 8,
-          "target": 14,
-          "value": 0.6502364164369371
-        },
-        {
-          "source": 9,
-          "target": 12,
-          "value": 0.6239873307320869
-        },
-        {
-          "source": 9,
-          "target": 14,
-          "value": 0.6378367799089589
-        },
-        {
-          "source": 10,
-          "target": 10,
-          "value": 1
-        },
-        {
-          "source": 10,
-          "target": 13,
-          "value": 0.6091053708954489
-        },
-        {
-          "source": 10,
           "target": 11,
-          "value": 0.629993626545773
-        },
-        {
-          "source": 10,
-          "target": 4,
-          "value": 0.6337581312894075
-        },
-        {
-          "source": 10,
-          "target": 5,
-          "value": 0.6389553943125132
-        },
-        {
-          "source": 15,
-          "target": 15,
-          "value": 1
-        },
-        {
-          "source": 15,
-          "target": 0,
-          "value": 0.6258788332533197
-        },
-        {
-          "source": 15,
-          "target": 12,
-          "value": 0.6540929249125259
-        },
-        {
-          "source": 12,
-          "target": 12,
-          "value": 1
-        },
-        {
-          "source": 12,
-          "target": 0,
-          "value": 0.5994142986319546
-        },
-        {
-          "source": 12,
-          "target": 13,
-          "value": 0.6114793575252305
-        },
-        {
-          "source": 12,
-          "target": 2,
-          "value": 0.6309904108895575
-        },
-        {
-          "source": 12,
-          "target": 5,
-          "value": 0.6489117186254141
-        },
-        {
-          "source": 12,
-          "target": 4,
-          "value": 0.6499838213179241
-        },
-        {
-          "source": 13,
-          "target": 13,
-          "value": 1
-        },
-        {
-          "source": 13,
-          "target": 4,
-          "value": 0.5685778322094432
-        },
-        {
-          "source": 13,
-          "target": 11,
-          "value": 0.6041135654066492
-        },
-        {
-          "source": 13,
-          "target": 5,
-          "value": 0.6051598837654939
-        },
-        {
-          "source": 13,
-          "target": 10,
-          "value": 0.6091053708954489
-        },
-        {
-          "source": 13,
-          "target": 12,
-          "value": 0.6114793575252305
-        },
-        {
-          "source": 13,
-          "target": 2,
-          "value": 0.6252580968613953
+          "value": 0.5963125490560011
         }
       ],
       "nodes": [
         {
           "count": 1,
-          "name": "bevrijding",
-          "type": "word"
-        },
-        {
-          "count": 0,
-          "name": "wereldoorlog",
-          "type": "seed"
-        },
-        {
-          "count": 1,
-          "name": "boerenoorlog",
-          "type": "word"
-        },
-        {
-          "count": 0,
-          "name": "oorlogen",
-          "type": "seed"
-        },
-        {
-          "count": 1,
-          "name": "bezettingsjaren",
+          "name": "chlle",
           "type": "word"
         },
         {
           "count": 1,
-          "name": "crisisjaren",
-          "type": "word"
+          "name": "guatemale",
+          "type": "drop"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
         },
         {
           "count": 0,
-          "name": "burgeroorlog",
-          "type": "seed"
-        },
-        {
-          "count": 0,
-          "name": "oorlof",
-          "type": "seed"
-        },
-        {
-          "count": 0,
-          "name": "bevr?ding",
-          "type": "seed"
-        },
-        {
-          "count": 0,
-          "name": "ooriog",
+          "name": "paraguay",
           "type": "seed"
         },
         {
           "count": 1,
-          "name": "hongerwinter",
-          "type": "seed"
-        },
-        {
-          "count": 1,
-          "name": "oorlogsdagen",
-          "type": "word"
-        },
-        {
-          "count": 1,
-          "name": "oorlog",
-          "type": "seed"
-        },
-        {
-          "count": 1,
-          "name": "oorlogsjaren",
-          "type": "seed"
-        },
-        {
-          "count": 1,
-          "name": "oorloe",
+          "name": "domingos",
           "type": "word"
         },
         {
           "count": 1,
-          "name": "oorlogse",
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 0,
+          "name": "loide",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        },
+        {
+          "count": 0,
+          "name": "brasil",
+          "type": "seed"
+        }
+      ]
+    },
+    "1956": {
+      "links": [
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 3,
+          "value": 0.5438445303452232
+        },
+        {
+          "source": 5,
+          "target": 7,
+          "value": 0.548644094445754
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 7,
+          "value": 0.5913045966829075
+        },
+        {
+          "source": 2,
+          "target": 3,
+          "value": 0.5930826183109824
+        },
+        {
+          "source": 2,
+          "target": 5,
+          "value": 0.5934125931163328
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.6032715978843299
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 7,
+          "value": 0.5424921374089638
+        },
+        {
+          "source": 3,
+          "target": 5,
+          "value": 0.5438445303452232
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 3,
+          "value": 0.5424921023259441
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 3,
+          "value": 0.5557048427478554
+        },
+        {
+          "source": 6,
+          "target": 5,
+          "value": 0.5627924289106744
+        },
+        {
+          "source": 6,
+          "target": 7,
+          "value": 0.5671903297136326
+        },
+        {
+          "source": 6,
+          "target": 8,
+          "value": 0.5754279744050518
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 7,
+          "value": 0.5926159107817407
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1957": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 5,
+          "value": 0.5895545022011286
+        },
+        {
+          "source": 1,
+          "target": 3,
+          "value": 0.5924314876830605
+        },
+        {
+          "source": 1,
+          "target": 7,
+          "value": 0.5978662610669493
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 5,
+          "value": 0.5852883218673838
+        },
+        {
+          "source": 2,
+          "target": 3,
+          "value": 0.5856128057005567
+        },
+        {
+          "source": 2,
+          "target": 7,
+          "value": 0.6101680910163989
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 5,
+          "value": 0.5402222607474414
+        },
+        {
+          "source": 3,
+          "target": 7,
+          "value": 0.5489099923856364
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 3,
+          "value": 0.5402222607474414
+        },
+        {
+          "source": 5,
+          "target": 0,
+          "value": 0.5453688050914303
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 0,
+          "value": 0.5566179720960058
+        },
+        {
+          "source": 6,
+          "target": 5,
+          "value": 0.563580289421979
+        },
+        {
+          "source": 6,
+          "target": 3,
+          "value": 0.5701498373359022
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1958": {
+      "links": [
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 0,
+          "value": 0.6070733831076199
+        },
+        {
+          "source": 8,
+          "target": 6,
+          "value": 0.6093497388205267
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 4,
+          "value": 0.6047258553145426
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5657467148451719
+        },
+        {
+          "source": 6,
+          "target": 0,
+          "value": 0.5808270882329277
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1959": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 6,
+          "value": 0.5946960543947232
+        },
+        {
+          "source": 3,
+          "target": 4,
+          "value": 0.5949936628688801
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 4,
+          "value": 0.5765939548560618
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5772869664925653
+        },
+        {
+          "source": 6,
+          "target": 1,
+          "value": 0.5802048629028178
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1960": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 6,
+          "value": 0.5899472690209656
+        },
+        {
+          "source": 3,
+          "target": 4,
+          "value": 0.5905777502301189
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 7,
+          "value": 0.5648236836540609
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 4,
+          "value": 0.5782451181103095
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5898768907584002
+        },
+        {
+          "source": 6,
+          "target": 3,
+          "value": 0.5899472690209656
+        },
+        {
+          "source": 6,
+          "target": 1,
+          "value": 0.6119519308226374
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1961": {
+      "links": [
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 6,
+          "value": 0.5590324241962192
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.5840506750472931
+        },
+        {
+          "source": 2,
+          "target": 3,
+          "value": 0.6026080015556906
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 0,
+          "value": 0.5590324241962192
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5840506953793436
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1962": {
+      "links": [
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.551237936588904
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 6,
+          "value": 0.6001161227810977
+        },
+        {
+          "source": 3,
+          "target": 4,
+          "value": 0.6135218145208874
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 7,
+          "value": 0.5567011780231924
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.551237936588904
+        },
+        {
+          "source": 6,
+          "target": 1,
+          "value": 0.5974040161754571
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1963": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 6,
+          "value": 0.5543553507191674
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.5809095034490906
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 5,
+          "value": 0.5588051310020942
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 7,
+          "value": 0.5543553507191674
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5809095034490906
+        },
+        {
+          "source": 6,
+          "target": 3,
+          "value": 0.5964261956881256
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 3,
+          "value": 0.5588051310020942
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 0,
+          "value": 0.6033129896573268
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1964": {
+      "links": [
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 5,
+          "value": 0.6126957007480364
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.5857075853165484
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 7,
+          "value": 0.5492131461674471
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 3,
+          "value": 0.5492131461674471
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 0,
+          "value": 0.5632659510032414
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5857075853165484
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 6,
+          "value": 0.5632659320925639
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1965": {
+      "links": [
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.5630974316516022
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 6,
+          "value": 0.5731549785369427
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 7,
+          "value": 0.5558533298969404
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5630974316516022
+        },
+        {
+          "source": 6,
+          "target": 3,
+          "value": 0.5731549785369427
+        },
+        {
+          "source": 6,
+          "target": 4,
+          "value": 0.5974517339676442
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1966": {
+      "links": [
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.5805679284106707
+        },
+        {
+          "source": 2,
+          "target": 0,
+          "value": 0.601828009763141
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 7,
+          "value": 0.5578425427317447
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 0,
+          "value": 0.5722153250913378
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5805678882300953
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 6,
+          "value": 0.6363219675639651
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1967": {
+      "links": [
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 6,
+          "value": 0.5663729433250178
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.5778712965581331
+        },
+        {
+          "source": 2,
+          "target": 7,
+          "value": 0.5915330522109608
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 5,
+          "value": 0.5555368984565995
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 7,
+          "value": 0.5663729433250178
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5778712965581331
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 0,
+          "value": 0.6307287133021706
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1968": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 6,
+          "value": 0.5885247603249125
+        },
+        {
+          "source": 2,
+          "target": 7,
+          "value": 0.5936628045760244
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 5,
+          "value": 0.5488859642829252
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 7,
+          "value": 0.5733860630737055
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5885247603249125
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 6,
+          "value": 0.6361823815127939
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1969": {
+      "links": [
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 0,
+          "value": 0.587749396160694
+        },
+        {
+          "source": 6,
+          "target": 2,
+          "value": 0.5970349342965767
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1970": {
+      "links": [
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 3,
+          "value": 0.6196187906978531
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1971": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 7,
+          "value": 0.5545816958530934
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 8,
+          "value": 0.6088910080618498
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1972": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1973": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1974": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1975": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1976": {
+      "links": [
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1977": {
+      "links": [
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1978": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1979": {
+      "links": [
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1980": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1981": {
+      "links": [
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1982": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1983": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1984": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
+          "type": "seed"
+        }
+      ]
+    },
+    "1985": {
+      "links": [
+        {
+          "source": 0,
+          "target": 0,
+          "value": 1.0
+        },
+        {
+          "source": 1,
+          "target": 1,
+          "value": 1.0
+        },
+        {
+          "source": 2,
+          "target": 2,
+          "value": 1.0
+        },
+        {
+          "source": 3,
+          "target": 3,
+          "value": 1.0
+        },
+        {
+          "source": 4,
+          "target": 4,
+          "value": 1.0
+        },
+        {
+          "source": 5,
+          "target": 5,
+          "value": 1.0
+        },
+        {
+          "source": 6,
+          "target": 6,
+          "value": 1.0
+        },
+        {
+          "source": 7,
+          "target": 7,
+          "value": 1.0
+        },
+        {
+          "source": 8,
+          "target": 8,
+          "value": 1.0
+        },
+        {
+          "source": 9,
+          "target": 9,
+          "value": 1.0
+        }
+      ],
+      "nodes": [
+        {
+          "count": 1,
+          "name": "chlle",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "guatemale",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domlngos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "lolde",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "brasll",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "urbasa",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "domingos",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "argentlna",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "chile",
+          "type": "seed"
+        },
+        {
+          "count": 1,
+          "name": "equador",
           "type": "seed"
         }
       ]
@@ -361,28 +4020,228 @@
   },
   "stream": {
     "1954": {
-      "bevr?ding": 0.4291989803314209,
-      "burgeroorlog": 0.44755804538726807,
-      "hongerwinter": 0.42302602529525757,
-      "ooriog": 0.37595045566558838,
-      "oorlof": 0.46442264318466187,
-      "oorlog": 1.0,
-      "oorlogen": 0.45737606287002563,
-      "oorlogse": 0.44380879402160645,
-      "oorlogsjaren": 0.38341015577316284,
-      "wereldoorlog": 0.37409096956253052
+      "argentlna": 0.45884352922439575,
+      "brasil": 1.0,
+      "brasll": 0.45726901292800903,
+      "domlngos": 0.46210181713104248,
+      "equador": 0.45494025945663452
     },
     "1955": {
-      "bevrijding": 1.0374479293823242,
-      "bezettingsjaren": 1.1248369812965393,
-      "boerenoorlog": 1.3093280792236328,
-      "crisisjaren": 1.2414479851722717,
-      "hongerwinter": 1.3582479357719421,
-      "oorloe": 1.3803946971893311,
-      "oorlog": 3.9714372456073761,
-      "oorlogsdagen": 1.1780251264572144,
-      "oorlogse": 1.0,
-      "oorlogsjaren": 1.4099999666213989
+      "argentlna": 2.1493321657180786,
+      "brasll": 1.630064845085144,
+      "chlle": 1.5410743355751038,
+      "domingos": 1.3809847831726074,
+      "domlngos": 1.5075607895851135
+    },
+    "1956": {
+      "argentlna": 2.1922941207885742,
+      "brasll": 1.6756170392036438,
+      "chlle": 1.5379778146743774,
+      "domingos": 1.3423718214035034,
+      "guatemale": 1.0
+    },
+    "1957": {
+      "argentlna": 1.8667001724243164,
+      "brasll": 1.9994133114814758,
+      "chlle": 1.8208742737770081,
+      "domlngos": 1.0,
+      "guatemale": 1.0
+    },
+    "1958": {
+      "brasll": 1.3463581204414368,
+      "chile": 1.0,
+      "chlle": 1.6310698986053467,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1959": {
+      "brasll": 1.5849871039390564,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "domingos": 1.3184687495231628,
+      "lolde": 1.0
+    },
+    "1960": {
+      "brasll": 1.5773724317550659,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "domingos": 1.3049332499504089,
+      "lolde": 1.0
+    },
+    "1961": {
+      "brasll": 1.3405464291572571,
+      "domingos": 1.4990147948265076,
+      "domlngos": 1.0,
+      "guatemale": 1.0,
+      "lolde": 1.0
+    },
+    "1962": {
+      "brasll": 1.3700661063194275,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "domingos": 1.5195571780204773,
+      "lolde": 1.0
+    },
+    "1963": {
+      "brasll": 1.2104673981666565,
+      "domingos": 1.4746643900871277,
+      "domlngos": 1.0,
+      "guatemale": 1.0,
+      "lolde": 1.0
+    },
+    "1964": {
+      "brasll": 1.179213285446167,
+      "domingos": 1.5173030495643616,
+      "domlngos": 1.0,
+      "guatemale": 1.0,
+      "lolde": 1.0
+    },
+    "1965": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "domingos": 1.4793795943260193,
+      "lolde": 1.0
+    },
+    "1966": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "domingos": 1.7060171961784363,
+      "domlngos": 1.3383957147598267,
+      "lolde": 1.0
+    },
+    "1967": {
+      "brasll": 1.0,
+      "domingos": 1.503889799118042,
+      "domlngos": 1.3094773888587952,
+      "guatemale": 1.0,
+      "lolde": 1.0
+    },
+    "1968": {
+      "argentlna": 1.1781279444694519,
+      "domingos": 1.728959858417511,
+      "domlngos": 1.3155421018600464,
+      "guatemale": 1.0,
+      "lolde": 1.0
+    },
+    "1969": {
+      "argentlna": 1.0,
+      "brasll": 1.0,
+      "chile": 1.0,
+      "domlngos": 1.0,
+      "lolde": 1.0
+    },
+    "1970": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1971": {
+      "brasll": 1.0,
+      "chlle": 1.0,
+      "guatemale": 1.3576699495315552,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1972": {
+      "brasll": 1.0,
+      "chlle": 1.0,
+      "guatemale": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1973": {
+      "brasll": 1.0,
+      "chlle": 1.0,
+      "guatemale": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1974": {
+      "brasll": 1.0,
+      "chlle": 1.0,
+      "guatemale": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1975": {
+      "brasll": 1.0,
+      "chlle": 1.0,
+      "guatemale": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1976": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "domlngos": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1977": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1978": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1979": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "domlngos": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1980": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "domlngos": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1981": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1982": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1983": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1984": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
+    },
+    "1985": {
+      "brasll": 1.0,
+      "chile": 1.0,
+      "chlle": 1.0,
+      "lolde": 1.0,
+      "urbasa": 1.0
     }
   }
 }
