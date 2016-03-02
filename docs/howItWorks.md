@@ -65,4 +65,17 @@ This adds an additional possibility: it allows for the semantic models to be use
 
 ## Vocabulary Aggregator
 
+![Vocabulary aggregator](./vaYears.png)
+
 *Detailed explanation of vocab aggregator  -- refer to paper for more details*
+
+Weighting functions are used to aggregate topics in a year:
+
+Gaussian
+![Gaussian weighting function](./vaWeightGauss.png)
+
+JSD
+![JSD weighting function](./vaWeightJSD.png)
+
+Linear
+![Linear weighting function](./vaWeightLinear.png)
