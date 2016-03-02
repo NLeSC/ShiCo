@@ -68,7 +68,9 @@ class VocabularyAggregator():
 
 
 def _adaptiveAggregation(V, n, yIntervals, weightF, param, freq):
-    '''Apply adaptive aggregation algorithm to the given vocabulary.'''
+    '''Apply adaptive aggregation algorithm to the given vocabulary.
+    Algorithm 2 from paper.
+    '''
     # Initialize returned parameters
     finalVocabs = SortedDict()
     periodGroups = SortedDict()
