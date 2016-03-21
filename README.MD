@@ -25,7 +25,7 @@ http://localhost:5000/track/nederland?maxTerms=5&sumDistances=
 http://localhost:5000/track/oorlog,oorlogse
 ```
 
-## Web app 
+## Web app
 
 ### Adding hooks
 
@@ -57,3 +57,8 @@ To run Python unit tests, run:
 ```
 $ nosetests
 ```
+
+
+## Speeding up ShiCo
+
+Current implementation of ShiCo relies on gensim word2vec model `most_similar` function, which in turn requires the calculation of the dot product between two large matrices, via `numpy.dot` function. For this reason, ShiCo greatly benefits from using libraries which accelerate matrix multiplications, such as OpenBLAS. ShiCo has been tested using [Numpy with OpenBLAS](https://hunseblog.wordpress.com/2014/09/15/installing-numpy-and-openblas/), producing a significant increase in speed.
