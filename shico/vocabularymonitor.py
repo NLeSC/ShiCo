@@ -5,6 +5,7 @@ import six
 
 from sortedcontainers import SortedDict
 from collections import defaultdict, Counter
+from functools32 import lru_cache
 
 
 class VocabularyMonitor():
@@ -18,7 +19,7 @@ class VocabularyMonitor():
     order and overlap between different models.
     '''
 
-    def __init__(self, globPattern, binary=True):
+    def __init__(self, globPattern, binary=True, useCache=True):
         '''Create a Vocabulary monitor using the gensim w2v models located in
         the given glob pattern.
 
@@ -27,9 +28,9 @@ class VocabularyMonitor():
         binary          True if w2v files have been saved as binary
         '''
         self._models = SortedDict()
-        self._loadAllModels(globPattern, binary=True)
+        self._loadAllModels(globPattern, binary=True, useCache=useCache)
 
-    def _loadAllModels(self, globPattern, binary=True):
+    def _loadAllModels(self, globPattern, binary=True, useCache=False):
         '''Load word2vec models from given globPattern and return a dictionary
         of Word2Vec models.
         '''
@@ -40,6 +41,9 @@ class VocabularyMonitor():
             print '[%s]: %s' % (sModelName, sModelFile)
             self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
                 load_word2vec_format(sModelFile, binary=binary)
+            if useCache:
+                print '...caching model ',sModelName
+                self._models[sModelName] = CachedW2VModelEvaluator(self._models[sModelName])
 
     def getAvailableYears(self):
         '''Returns a list of year key's of w2v models currently loaded on this
@@ -213,3 +217,13 @@ def _getCommonTerms(terms, N):
     termCounter = Counter(terms)
     topTerms = termCounter.most_common(N)
     return topTerms
+
+class CachedW2VModelEvaluator():
+    '''Wrapper class for applying lru_cache. This will keep maxsize=1000
+    results from each model cached, making querying much faster.'''
+    def __init__(self, model):
+        self._model = model
+
+    @lru_cache(maxsize=1000)
+    def most_similar(self, term, topn):
+        return self._model.most_similar(term, topn=topn)

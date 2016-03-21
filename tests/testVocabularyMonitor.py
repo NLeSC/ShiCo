@@ -11,7 +11,7 @@ class VocabularyMonitorTest(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
-        self.vm = shVM('tests/w2vModels/*.w2v')
+        self.vm = shVM('tests/w2vModels/*.w2v', useCache=False)
 
     def testLoad(self):
         '''Test loading of w2v models'''
