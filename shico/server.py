@@ -111,4 +111,4 @@ if __name__ == '__main__':
     arguments = docopt(__doc__)
     initApp(arguments['-f'], not arguments['--non-binary'])
     app.debug = arguments['-d']
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',threaded=True)
