@@ -11,7 +11,7 @@ Usage:
 from docopt import docopt
 
 from flask import Flask, jsonify
-from flask_restful import reqparse
+from flask_restful import reqparse, inputs
 from flask.ext.cors import CORS
 
 from vocabularymonitor import VocabularyMonitor
@@ -54,8 +54,8 @@ trackParser.add_argument('startKey', type=validatestr, default=None)
 trackParser.add_argument('endKey', type=validatestr, default=None)
 trackParser.add_argument('minDist', type=float, default=0.0)
 trackParser.add_argument('wordBoost', type=float, default=1.0)
-trackParser.add_argument('forwards', type=bool, default=True)
-trackParser.add_argument('sumDistances', type=bool, default=False)
+trackParser.add_argument('forwards', type=inputs.boolean, default=True)
+trackParser.add_argument('sumDistances', type=inputs.boolean, default=False)
 trackParser.add_argument('algorithm', type=str, default='adaptive')
 
 # VocabularyAggregator parameters:
