@@ -227,6 +227,7 @@ def _getRelatedTermsThread(model, term, maxRelatedTerms, queries):
         # list.append is thread safe, so we should be ok
         queries.append((term, newTerms))
     except KeyError:
+        queries.append((term, []))
         pass
 
 
