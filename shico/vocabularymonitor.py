@@ -187,18 +187,15 @@ class VocabularyMonitor():
 
         # Get the first tier related terms
         for term, newTerms in relatedTermQueries:
-            try:
-                # The terms are always related to themselves
-                dRelatedTerms[term] = wordBoost
-                links[term].append((term, 0.0))
+            # The terms are always related to themselves
+            dRelatedTerms[term] = wordBoost
+            links[term].append((term, 0.0))
 
-                for newTerm, tDist in newTerms:
-                    if tDist < minDist:
-                        break
-                    dRelatedTerms[newTerm] += reward(tDist)
-                    links[term].append((newTerm, tDist))
-            except KeyError:
-                pass
+            for newTerm, tDist in newTerms:
+                if tDist < minDist:
+                    break
+                dRelatedTerms[newTerm] += reward(tDist)
+                links[term].append((newTerm, tDist))
 
         # Select the top N terms with biggest weights (where N=maxTerms)
         topTerms = _getCommonTerms(dRelatedTerms, maxTerms)
@@ -225,9 +222,12 @@ def _getRelatedTerms(model, seedTerms, maxRelatedTerms):
 
 
 def _getRelatedTermsThread(model, term, maxRelatedTerms, queries):
-    newTerms = model.most_similar(term, topn=maxRelatedTerms)
-    # list.append is thread safe, so we should be ok
-    queries.append((term, newTerms))
+    try:
+        newTerms = model.most_similar(term, topn=maxRelatedTerms)
+        # list.append is thread safe, so we should be ok
+        queries.append((term, newTerms))
+    except KeyError:
+        pass
 
 
 def _pruned(pairs, words):
