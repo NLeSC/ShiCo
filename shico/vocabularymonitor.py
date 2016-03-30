@@ -2,6 +2,7 @@ import glob
 import os
 import gensim
 import six
+import threading
 
 from sortedcontainers import SortedDict
 from collections import defaultdict, Counter
@@ -9,6 +10,7 @@ from functools32 import lru_cache
 
 
 class VocabularyMonitor():
+
     '''Vocabulary Monitor tracks a concept through time. It uses a series of
     gensim Word2Vec models (one for each group of years) to produce a group of
     concept words.
@@ -42,8 +44,9 @@ class VocabularyMonitor():
             self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
                 load_word2vec_format(sModelFile, binary=binary)
             if useCache:
-                print '...caching model ',sModelName
-                self._models[sModelName] = CachedW2VModelEvaluator(self._models[sModelName])
+                print '...caching model ', sModelName
+                self._models[sModelName] = CachedW2VModelEvaluator(
+                    self._models[sModelName])
 
     def getAvailableYears(self):
         '''Returns a list of year key's of w2v models currently loaded on this
@@ -179,21 +182,20 @@ class VocabularyMonitor():
         dRelatedTerms = defaultdict(float)
         links = defaultdict(list)
 
-        # Get the first tier related terms
-        for term in seedTerms:
-            try:
-                # The terms are always related to themselves
-                dRelatedTerms[term] = wordBoost
-                links[term].append((term, 0.0))
+        relatedTermQueries = _getRelatedTerms(
+            model, seedTerms, maxRelatedTerms)
 
-                newTerms = model.most_similar(term, topn=maxRelatedTerms)
-                for newTerm, tDist in newTerms:
-                    if tDist < minDist:
-                        break
-                    dRelatedTerms[newTerm] += reward(tDist)
-                    links[term].append((newTerm, tDist))
-            except KeyError:
-                pass
+        # Get the first tier related terms
+        for term, newTerms in relatedTermQueries:
+            # The terms are always related to themselves
+            dRelatedTerms[term] = wordBoost
+            links[term].append((term, 0.0))
+
+            for newTerm, tDist in newTerms:
+                if tDist < minDist:
+                    break
+                dRelatedTerms[newTerm] += reward(tDist)
+                links[term].append((newTerm, tDist))
 
         # Select the top N terms with biggest weights (where N=maxTerms)
         topTerms = _getCommonTerms(dRelatedTerms, maxTerms)
@@ -202,6 +204,31 @@ class VocabularyMonitor():
         links = {seed: _pruned(pairs, selectedTerms)
                  for seed, pairs in links.iteritems()}
         return topTerms, links
+
+
+def _getRelatedTerms(model, seedTerms, maxRelatedTerms):
+    queries = []
+    threads = []
+
+    for term in seedTerms:
+        t = threading.Thread(target=_getRelatedTermsThread,
+                             args=(model, term, maxRelatedTerms, queries))
+        threads.append(t)
+        t.start()
+    for t in threads:
+        t.join()
+    queries.sort()
+    return queries
+
+
+def _getRelatedTermsThread(model, term, maxRelatedTerms, queries):
+    try:
+        newTerms = model.most_similar(term, topn=maxRelatedTerms)
+        # list.append is thread safe, so we should be ok
+        queries.append((term, newTerms))
+    except KeyError:
+        queries.append((term, []))
+        pass
 
 
 def _pruned(pairs, words):
@@ -218,9 +245,12 @@ def _getCommonTerms(terms, N):
     topTerms = termCounter.most_common(N)
     return topTerms
 
+
 class CachedW2VModelEvaluator():
+
     '''Wrapper class for applying lru_cache. This will keep maxsize=1000
     results from each model cached, making querying much faster.'''
+
     def __init__(self, model):
         self._model = model
 
