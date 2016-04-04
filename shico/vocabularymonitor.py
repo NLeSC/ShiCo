@@ -206,15 +206,18 @@ class VocabularyMonitor():
         return topTerms, links
 
 
-def _getRelatedTerms(model, seedTerms, maxRelatedTerms):
+def _getRelatedTerms(model, seedTerms, maxRelatedTerms, useThreads=True):
     queries = []
     threads = []
 
     for term in seedTerms:
-        t = threading.Thread(target=_getRelatedTermsThread,
-                             args=(model, term, maxRelatedTerms, queries))
-        threads.append(t)
-        t.start()
+        if useThreads:
+            t = threading.Thread(target=_getRelatedTermsThread,
+                                 args=(model, term, maxRelatedTerms, queries))
+            threads.append(t)
+            t.start()
+        else:
+            _getRelatedTermsThread(model, term, maxRelatedTerms, queries)
     for t in threads:
         t.join()
     queries.sort()
