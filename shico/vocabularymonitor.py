@@ -36,17 +36,24 @@ class VocabularyMonitor():
         '''Load word2vec models from given globPattern and return a dictionary
         of Word2Vec models.
         '''
+        threads = []
         for sModelFile in glob.glob(globPattern):
-            # Chop off the path and the extension
-            sModelName = os.path.splitext(os.path.basename(sModelFile))[0]
+            t = threading.Thread(target=self._loadModel, args=(sModelFile, binary, useCache))
+            threads.append(t)
+            t.start()
+        for t in threads:
+            t.join()
 
-            print '[%s]: %s' % (sModelName, sModelFile)
-            self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
-                load_word2vec_format(sModelFile, binary=binary)
-            if useCache:
-                print '...caching model ', sModelName
-                self._models[sModelName] = CachedW2VModelEvaluator(
-                    self._models[sModelName])
+    def _loadModel(self, sModelFile, binary, useCache):
+        # Chop off the path and the extension
+        sModelName = os.path.splitext(os.path.basename(sModelFile))[0]
+        print '[%s]: %s' % (sModelName, sModelFile)
+        self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
+            load_word2vec_format(sModelFile, binary=binary)
+        if useCache:
+            print '...caching model ', sModelName
+            self._models[sModelName] = CachedW2VModelEvaluator(
+                self._models[sModelName])
 
     def getAvailableYears(self):
         '''Returns a list of year key's of w2v models currently loaded on this
