@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/c-martinez/ShiCo.svg?branch=master)](https://travis-ci.org/c-martinez/ShiCo)
+[![Build Status](https://travis-ci.org/NLeSC/ShiCo.svg?branch=master)](https://travis-ci.org/NLeSC/ShiCo)
 
 # ShiCo package
 
