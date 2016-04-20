@@ -31,8 +31,10 @@
       </div>
 
       <div class="form-group form-inline col-md-4">
-        <label for="sumDistances">Sum distances</label>
-        <input type="checkbox" ng-model="vm.parameters.sumDistances" class="form-control" id="sumDistances">
+        <label for="sumDistances">Boost method</label>
+        <select ng-model="vm.parameters.boostMethod" name="boostMethod">
+          <option data-ng-repeat="method in vm.boostMethods" value="{{ method }}">{{ method }}</option>
+        </select>
       </div>
 
       <div class="form-group form-inline col-md-4">
@@ -44,18 +46,9 @@
 
       <div class="form-group col-md-12"><!-- TODO: Should this be col-md-4 ?-->
         <label for="forward">Track direction</label>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="vm.parameters.forwards" ng-value="true" id="forward">
-            Forwards
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="vm.parameters.forwards" ng-value="false" id="forward">
-            Backwards
-          </label>
-        </div>
+        <select ng-model="vm.parameters.forwards" name="forward">
+          <option data-ng-repeat="dir in vm.directions" value="{{ dir }}">{{ dir }}</option>
+        </select>
       </div>
 
       <div class="form-group form-inline col-md-4">

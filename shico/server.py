@@ -11,7 +11,7 @@ Usage:
 from docopt import docopt
 
 from flask import Flask, jsonify
-from flask_restful import reqparse, inputs
+from flask_restful import reqparse
 from flask.ext.cors import CORS
 
 from vocabularymonitor import VocabularyMonitor
@@ -33,6 +33,29 @@ def validatestr(value):
     except:
         raise ValueError
 
+def isValidOption(value, options):
+    '''Validate that given value is a string from a predetermined set.
+    Used to validate tracker parameters.'''
+    if value in options:
+        return value
+    else:
+        raise ValueError
+
+def validAlgorithm(value):
+    '''Validate algorithm -- in lower case'''
+    return isValidOption(value, _algorithms).lower()
+
+def validWeighting(value):
+    '''Validate weighting function'''
+    return isValidOption(value, _weighFuncs)
+
+def validDirection(value):
+    '''Validate direction is Forward (false means backward)'''
+    return isValidOption(value, _directions)=='Forward'
+
+def sumDistances(value):
+    '''Validate boost methods is Sum distances (false means Counts)'''
+    return isValidOption(value, _boostMethods)=='Sum distances'
 
 def initApp(files, binary):
     '''Initialize Flask app by loading VocabularyMonitor.
@@ -54,15 +77,20 @@ trackParser.add_argument('startKey', type=validatestr, default=None)
 trackParser.add_argument('endKey', type=validatestr, default=None)
 trackParser.add_argument('minDist', type=float, default=0.0)
 trackParser.add_argument('wordBoost', type=float, default=1.0)
-trackParser.add_argument('forwards', type=inputs.boolean, default=True)
-trackParser.add_argument('sumDistances', type=inputs.boolean, default=False)
-trackParser.add_argument('algorithm', type=str, default='adaptive')
+trackParser.add_argument('forwards', type=validDirection, default=True)
+trackParser.add_argument('boostMethod', type=sumDistances, default=True)
+trackParser.add_argument('algorithm', type=validAlgorithm, default='adaptive')
 
 # VocabularyAggregator parameters:
-trackParser.add_argument('aggWeighFunction', type=str, default='Gaussian')
+trackParser.add_argument('aggWeighFunction', type=validWeighting, default='Gaussian')
 trackParser.add_argument('aggWFParam', type=float, default=1.0)
 trackParser.add_argument('aggYearsInInterval', type=int, default=5)
 trackParser.add_argument('aggWordsPerYear', type=int, default=10)
+
+_algorithms = ('Adaptive', 'Non-adaptive')
+_weighFuncs = ('Gaussian', 'Linear', 'JSD')
+_directions = ('Forward', 'Backward')
+_boostMethods = ('Sum distances', 'Counts')
 
 
 @app.route('/available-years')
@@ -92,7 +120,7 @@ def trackWord(terms):
                         minDist=params['minDist'],
                         wordBoost=params['wordBoost'],
                         forwards=params['forwards'],
-                        sumDistances=params['sumDistances'],
+                        sumDistances=params['boostMethod'],
                         algorithm=params['algorithm'],
                         )
     agg = VocabularyAggregator(weighF=params['aggWeighFunction'],
@@ -102,7 +130,6 @@ def trackWord(terms):
                                )
     aggResults, aggMetadata = agg.aggregate(results)
 
-    # TODO: use used seeds for next loop query
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
     return jsonify(stream=yearTuplesAsDict(aggResults),
                    networks=networks)

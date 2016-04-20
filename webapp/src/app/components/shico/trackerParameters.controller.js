@@ -7,8 +7,10 @@
 
   function TrackerParametersController(TrackerParametersService) {
     var vm = this;
-    vm.algorithms = ['adaptive', 'non-adaptive'];
+    vm.algorithms = ['Adaptive', 'Non-adaptive'];
     vm.weighFuncs = ['Gaussian', 'Linear', 'JSD'];
+    vm.directions = ['Forward', 'Backward'];
+    vm.boostMethods = ['Sum distances', 'Counts'];
     // Years not defined  here because it gets loaded by service
     vm.years = TrackerParametersService.availableYears;
 
