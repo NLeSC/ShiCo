@@ -19,8 +19,8 @@
     vm.downloadData = downloadData;
 
     function yearsInSight(yearIdx) {
-      return (vm.forceGraph.currYearIdx - 2) <= yearIdx &&
-              yearIdx < (vm.forceGraph.currYearIdx + 2);
+      return (vm.forceGraph.currYearIdx - 1) <= yearIdx &&
+              yearIdx <= (vm.forceGraph.currYearIdx + 1);
     }
 
     function addBorder(scope) {
