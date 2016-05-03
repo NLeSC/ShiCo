@@ -6,7 +6,7 @@
     </nvd3>
   </div>
   <div class="row col-md-12">
-    <div class="col-md-3" ng-repeat="(yearIdx,yearData) in vm.forceGraph.data" ng-if="vm.yearsInSight(yearIdx)">
+    <div class="col-md-4" ng-repeat="(yearIdx,yearData) in vm.forceGraph.data" ng-if="vm.yearsInSight(yearIdx)">
       <span class="label label-default">{{ vm.getYearLabel(yearIdx) }}</span>
       <nvd3
         data='yearData'
