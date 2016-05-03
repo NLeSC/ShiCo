@@ -10,7 +10,7 @@
     vm.algorithms = ['Adaptive', 'Non-adaptive'];
     vm.weighFuncs = ['Gaussian', 'Linear', 'JSD'];
     vm.directions = ['Forward', 'Backward'];
-    vm.boostMethods = ['Sum distances', 'Counts'];
+    vm.boostMethods = ['Sum similarity', 'Counts'];
     // Years not defined  here because it gets loaded by service
     vm.years = TrackerParametersService.availableYears;
 

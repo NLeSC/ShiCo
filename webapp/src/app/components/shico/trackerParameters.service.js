@@ -17,12 +17,12 @@
       minDist: 0.7,
       wordBoost: 1.0,
       forwards: 'Forward',
-      boostMethod: 'Sum distances',
+      boostMethod: 'Sum similarity',
       algorithm: 'Adaptive',   //  'adaptive' or 'non-adaptive'
       // Aggregator parameters:
       aggWeighFunction: 'Gaussian',
       aggWFParam: 1,
-      aggYearsInInterval: 1,
+      aggYearsInInterval: 5,
       aggWordsPerYear: 5
     };
 

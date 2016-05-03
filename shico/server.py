@@ -53,9 +53,9 @@ def validDirection(value):
     '''Validate direction is Forward (false means backward)'''
     return isValidOption(value, _directions)=='Forward'
 
-def sumDistances(value):
+def sumSimilarity(value):
     '''Validate boost methods is Sum distances (false means Counts)'''
-    return isValidOption(value, _boostMethods)=='Sum distances'
+    return isValidOption(value, _boostMethods)=='Sum similarity'
 
 def initApp(files, binary):
     '''Initialize Flask app by loading VocabularyMonitor.
@@ -78,7 +78,7 @@ trackParser.add_argument('endKey', type=validatestr, default=None)
 trackParser.add_argument('minDist', type=float, default=0.0)
 trackParser.add_argument('wordBoost', type=float, default=1.0)
 trackParser.add_argument('forwards', type=validDirection, default=True)
-trackParser.add_argument('boostMethod', type=sumDistances, default=True)
+trackParser.add_argument('boostMethod', type=sumSimilarity, default=True)
 trackParser.add_argument('algorithm', type=validAlgorithm, default='adaptive')
 
 # VocabularyAggregator parameters:
@@ -90,7 +90,7 @@ trackParser.add_argument('aggWordsPerYear', type=int, default=10)
 _algorithms = ('Adaptive', 'Non-adaptive')
 _weighFuncs = ('Gaussian', 'Linear', 'JSD')
 _directions = ('Forward', 'Backward')
-_boostMethods = ('Sum distances', 'Counts')
+_boostMethods = ('Sum similarity', 'Counts')
 
 
 @app.route('/available-years')
@@ -120,7 +120,7 @@ def trackWord(terms):
                         minDist=params['minDist'],
                         wordBoost=params['wordBoost'],
                         forwards=params['forwards'],
-                        sumDistances=params['boostMethod'],
+                        sumSimilarity=params['boostMethod'],
                         algorithm=params['algorithm'],
                         )
     agg = VocabularyAggregator(weighF=params['aggWeighFunction'],
