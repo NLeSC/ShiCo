@@ -55,7 +55,7 @@ class VocabularyMonitor():
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
-                    forwards=True, sumDistances=False, algorithm='adaptive'):
+                    forwards=True, sumSimilarity=False, algorithm='adaptive'):
         '''Given a list of seed terms, generate a set of results from the
         word2vec models currently loaded in this vocabularymonitor.
 
@@ -73,7 +73,7 @@ class VocabularyMonitor():
         wordBoost       -- Weight boost automatically given to seed terms.
         forwards        -- Perform search in the forward time direction. Set to
                            False for backward direction.
-        sumDistances    -- Use the 1-distance as weighting factor. If set to
+        sumSimilarity   -- Use the 1-distance as weighting factor. If set to
                            False, weighting is 1 for each occurrence.
         algorithm       -- 'adaptive' or 'non-adaptive' algorithm (adaptive
                            previously known as inlinks). Adaptive algorithm
@@ -120,7 +120,6 @@ class VocabularyMonitor():
                 raise KeyError('Key ' + startKey + ' not a valid model index')
             keyIdx = sortedKeys.index(startKey)
             sortedKeys = sortedKeys[keyIdx:]
-
         # Select end key
         if (endKey is not None):
             if endKey not in sortedKeys:
@@ -141,7 +140,7 @@ class VocabularyMonitor():
                                       maxRelatedTerms=maxRelatedTerms,
                                       minDist=minDist,
                                       wordBoost=wordBoost,
-                                      sumDistances=sumDistances)
+                                      sumSimilarity=sumSimilarity)
             elif algorithm == 'non-adaptive':
                 # Non-adaptive algorithm uses always same set of seeds
                 terms, links = \
@@ -159,9 +158,9 @@ class VocabularyMonitor():
         return yTerms, yLinks
 
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                     minDist=0.0, wordBoost=1.0, sumDistances=False):
+                     minDist=0.0, wordBoost=1.0, sumSimilarity=False):
         '''Perform in link search'''
-        if sumDistances:
+        if sumSimilarity:
             terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
                 maxRelatedTerms=maxRelatedTerms, minDist=minDist,

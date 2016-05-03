@@ -14,15 +14,15 @@
       maxRelatedTerms: 10,
       startKey: '',
       endKey: '',
-      minDist: 0.1,
+      minDist: 0.7,
       wordBoost: 1.0,
-      forwards: true,
-      sumDistances: false,
-      algorithm: 'adaptive',   //  'adaptive' or 'non-adaptive'
+      forwards: 'Forward',
+      boostMethod: 'Sum similarity',
+      algorithm: 'Adaptive',   //  'adaptive' or 'non-adaptive'
       // Aggregator parameters:
       aggWeighFunction: 'Gaussian',
       aggWFParam: 1,
-      aggYearsInInterval: 1,
+      aggYearsInInterval: 5,
       aggWordsPerYear: 5
     };
 
