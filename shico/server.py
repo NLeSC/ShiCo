@@ -22,7 +22,7 @@ from format import yearlyNetwork, getRangeMiddle, yearTuplesAsDict
 app = Flask(__name__)
 CORS(app)
 _vm = None
-
+_useThreads = False
 
 def validatestr(value):
     '''Validate that given value is a non-empty string. Used to validate
@@ -94,6 +94,7 @@ def trackWord(terms):
                         forwards=params['forwards'],
                         sumDistances=params['sumDistances'],
                         algorithm=params['algorithm'],
+                        useThreads=_useThreads
                         )
     agg = VocabularyAggregator(weighF=params['aggWeighFunction'],
                                wfParam=params['aggWFParam'],

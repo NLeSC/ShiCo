@@ -55,7 +55,8 @@ class VocabularyMonitor():
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
-                    forwards=True, sumDistances=False, algorithm='adaptive'):
+                    forwards=True, sumDistances=False, algorithm='adaptive',
+                    useThreads=True):
         '''Given a list of seed terms, generate a set of results from the
         word2vec models currently loaded in this vocabularymonitor.
 
@@ -141,14 +142,16 @@ class VocabularyMonitor():
                                       maxRelatedTerms=maxRelatedTerms,
                                       minDist=minDist,
                                       wordBoost=wordBoost,
-                                      sumDistances=sumDistances)
+                                      sumDistances=sumDistances,
+                                      useThreads=useThreads)
             elif algorithm == 'non-adaptive':
                 # Non-adaptive algorithm uses always same set of seeds
                 terms, links = \
                     self._trackCore(self._models[sKey], aSeedSet,
                                     maxTerms=maxTerms,
                                     maxRelatedTerms=maxRelatedTerms,
-                                    minDist=minDist)
+                                    minDist=minDist,
+                                    useThreads=useThreads)
             else:
                 raise Exception('Algorithm not supported: ' + algorithm)
 
@@ -159,23 +162,26 @@ class VocabularyMonitor():
         return yTerms, yLinks
 
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                     minDist=0.0, wordBoost=1.0, sumDistances=False):
+                     minDist=0.0, wordBoost=1.0, sumDistances=False,
+                     useThreads=True):
         '''Perform in link search'''
         if sumDistances:
             terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
                 maxRelatedTerms=maxRelatedTerms, minDist=minDist,
-                wordBoost=wordBoost,  reward=lambda tDist: 1.0 - tDist)
+                wordBoost=wordBoost,  reward=lambda tDist: 1.0 - tDist,
+                useThreads=useThreads)
         else:
             terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
-                maxRelatedTerms=maxRelatedTerms, minDist=minDist)
+                maxRelatedTerms=maxRelatedTerms, minDist=minDist,
+                useThreads=useThreads)
         # Make a new seed set
         newSeedSet = [word for word, weight in terms]
         return terms, links, newSeedSet
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                   minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
+                   minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0, useThreads=True):
         '''Given a list of seed terms, queries the given model to produce a
         list of terms. A dictionary of links is also returned as a dictionary:
         { seed: [(word,weight),...]}'''
@@ -183,7 +189,7 @@ class VocabularyMonitor():
         links = defaultdict(list)
 
         relatedTermQueries = _getRelatedTerms(
-            model, seedTerms, maxRelatedTerms)
+            model, seedTerms, maxRelatedTerms, useThreads=useThreads)
 
         # Get the first tier related terms
         for term, newTerms in relatedTermQueries:
@@ -206,7 +212,7 @@ class VocabularyMonitor():
         return topTerms, links
 
 
-def _getRelatedTerms(model, seedTerms, maxRelatedTerms, useThreads=True):
+def _getRelatedTerms(model, seedTerms, maxRelatedTerms, useThreads):
     queries = []
     threads = []
 
