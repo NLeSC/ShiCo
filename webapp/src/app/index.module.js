@@ -11,6 +11,7 @@
       'rzModule',
       'cgBusy',
       'ngSanitize',
-      'ngCsv'
+      'ngCsv',
+      'hc.marked'
     ]);
 })();
