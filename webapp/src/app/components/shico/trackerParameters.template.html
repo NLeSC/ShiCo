@@ -37,9 +37,7 @@
 
       <div class="form-group form-inline col-md-4">
         <label uib-popover-html="vm.tooltips['algorithm']"
-              data-html="true"
-              popover-trigger="mouseenter" for="algorithm">Algorithm: </label>
-
+              popover-trigger="click" popover-placement="bottom" for="algorithm">Algorithm: </label>
         <select ng-model="vm.parameters.algorithm" name="algorithm">
           <option data-ng-repeat="algo in vm.algorithms" value="{{ algo }}">{{ algo }}</option>
         </select>
