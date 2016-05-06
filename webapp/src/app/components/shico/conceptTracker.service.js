@@ -21,6 +21,13 @@
 
     function parseTermTrack(data) {
       // If data needs to be parsed, it should be done here.
+
+      // Copy year into each node
+      angular.forEach(data.networks, function(net,year) {
+        angular.forEach(net.nodes, function(node) {
+          node.year = year;
+        });
+      });
       return data.toJSON();
     }
   }

@@ -93,7 +93,7 @@
 
     // Helper functions for forceConfig
     function processNode(node) {
-      // Nodes have: {'name': 'str', 'type': 'seed', 'count': N},
+      // Nodes have: {'name': 'str', 'type': 'seed', 'count': N, year: XXXX},
       addTextLabels(node);
       setSize(node);
       angular.forEach(forceGraphHooks, function(hook) {
