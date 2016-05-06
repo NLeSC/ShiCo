@@ -14,5 +14,8 @@
 
     // We use the parameters variable from ParameterService directly.
     vm.parameters = TrackerParametersService.getParameters();
+
+    // 
+    vm.tooltips = TrackerParametersService.tooltips;
   }
 })();

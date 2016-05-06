@@ -5,7 +5,7 @@
     .module('shico')
     .service('TrackerParametersService', TrackerParametersService);
 
-  function TrackerParametersService() {
+  function TrackerParametersService($http, marked) {
     var vm = this;
 
     vm.parameters = {
@@ -37,9 +37,13 @@
       }
     };
 
+    vm.tooltips = {};
+    loadToolTip('/help/algorithm.md', 'algorithm');
+
     var service = {
       getParameters: getParameters,
       setParameters: setParameters,
+      tooltips: vm.tooltips,
       availableYears: vm.availableYears
     };
     return service;
@@ -67,6 +71,13 @@
 
       vm.parameters.startKey = yearValues[idxYearFrom];
       vm.parameters.endKey   = yearValues[idxYearTo];
+    }
+
+    function loadToolTip(url, ttKey) {
+      $http({method: 'GET',url: url})
+        .success(function(content){
+            vm.tooltips[ttKey] = marked(content);
+        });
     }
   }
 })();
