@@ -1,8 +1,25 @@
 [![Build Status](https://travis-ci.org/NLeSC/ShiCo.svg?branch=master)](https://travis-ci.org/NLeSC/ShiCo)
 
-# ShiCo package
+# ShiCo --  Exploring Shifting Concepts Through Time
 
-More documentation will follow
+## What is ShiCo?
+
+ShiCo is a tool for visualizing time shifting concepts. We refer to a concept as the set of words which are related to a given seed word. ShiCo uses a set of semantic models (word2vec) spanning a number of years to explore how concepts change over time -- words related to a given concept at time *t=0* may differ from the words related to the same concept at time *t=n*. For example:
+
+![Mock concept shift](./docs/mockConcept1.png)
+![Mock concept shift](./docs/mockConcept2.png)
+
+You can find more details of how the concept shift works [here](./docs/howItWorks.md).
+
+ - *How is it structured (backend/frontend)*
+  - *What the back end does?*
+  - *What do I see in the front end?*
+
+*How to use it?*
+ - *What do I need to run it? (python, some web server, word2vec models)*
+
+*How to extend it?*
+ - *Use different semantic model (other than word2vec)*
 
 ## Launching server
 

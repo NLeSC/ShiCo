@@ -35,14 +35,14 @@ def yearTuplesAsDict(results):
     E.g.
     From:
         {
-            1950: ('a',1), ('b',2),('c',3)
+            1950: ('a',w1), ('b',w2),('c',w3)
         }
     To:
         {
             1950: {
-                'a': 1,
-                'b': 2,
-                'c': 3
+                'a': w1,
+                'b': w2,
+                'c': w3
             }
         }
     '''
@@ -64,29 +64,29 @@ def _buildNode(word, counts, seedSet, finalWords):
     }
 
 
-def _buildLink(seed, word, weight, nodeIdx):
+def _buildLink(seed, word, distance, nodeIdx):
     ''' Build a node for a force directed graph in format used by front end'''
     seedIdx = nodeIdx[seed]
     wordIdx = nodeIdx[word]
     return {
         'source': seedIdx,
         'target': wordIdx,
-        'value':  1 / (weight + 1)
+        'value':  1 / (distance + 1)
     }
 
 
 def _buildLinks(yLinks, nodeIdx):
     '''Build a list of links from the given yearly links. For each year group,
     link all seeds to all their results (with strength proportional to their
-    weight)'''
+    distance)'''
     linkList = []
     # We are not doing anything with the years in yLinks
     for links in yLinks.values():
         for seed, results in links.iteritems():
-            for word, weight in results:
+            for word, distance in results:
                 # TODO: check seeds present in dict more elegantly
                 if seed in nodeIdx and word in nodeIdx:
-                    linkList.append(_buildLink(seed, word, weight, nodeIdx))
+                    linkList.append(_buildLink(seed, word, distance, nodeIdx))
                 else:
                     print 'Seed or word not in index!'
     return linkList
