@@ -23,7 +23,8 @@
       aggWeighFunction: 'Gaussian',
       aggWFParam: 1,
       aggYearsInInterval: 5,
-      aggWordsPerYear: 5
+      aggWordsPerYear: 5,
+      doCleaning: 'No'
     };
 
     vm.availableYears = {

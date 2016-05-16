@@ -22,6 +22,7 @@ from format import yearlyNetwork, getRangeMiddle, yearTuplesAsDict
 app = Flask(__name__)
 CORS(app)
 _vm = None
+_cleaningFunction = None
 
 
 def validatestr(value):
@@ -57,15 +58,26 @@ def sumSimilarity(value):
     '''Validate boost methods is Sum distances (false means Counts)'''
     return isValidOption(value, _boostMethods)=='Sum similarity'
 
+def validCleaning(value):
+    return isValidOption(value, _yesNo)=='Yes'
+
+
 def initApp(files, binary):
     '''Initialize Flask app by loading VocabularyMonitor.
 
     files    Files to be loaded by VocabularyMonitor
     binary   Whether files are binary
     '''
-    global _vm
+    global _vm, _cleaningFunction
     _vm = VocabularyMonitor(files, binary)
     # _vm = "VocabularyMonitor(files, binary)"
+
+    moduleName = 'shico.extras'
+    functionName = 'cleanTermList'
+
+    customModule = __import__(moduleName, fromlist=[functionName])
+    _cleaningFunction = getattr(customModule,functionName)
+
 
 # trackClouds parameters
 
@@ -81,6 +93,8 @@ trackParser.add_argument('forwards', type=validDirection, default=True)
 trackParser.add_argument('boostMethod', type=sumSimilarity, default=True)
 trackParser.add_argument('algorithm', type=validAlgorithm, default='adaptive')
 
+trackParser.add_argument('doCleaning', type=validCleaning, default=False)
+
 # VocabularyAggregator parameters:
 trackParser.add_argument('aggWeighFunction', type=validWeighting, default='Gaussian')
 trackParser.add_argument('aggWFParam', type=float, default=1.0)
@@ -92,6 +106,7 @@ _weighFuncs = ('Gaussian', 'Linear', 'JSD')
 _directions = ('Forward', 'Backward')
 _boostMethods = ('Sum similarity', 'Counts')
 
+_yesNo = ('Yes', 'No')
 
 @app.route('/available-years')
 def avlYears():
@@ -122,6 +137,7 @@ def trackWord(terms):
                         forwards=params['forwards'],
                         sumSimilarity=params['boostMethod'],
                         algorithm=params['algorithm'],
+                        cleaningFunction=_cleaningFunction if params['doCleaning'] else None
                         )
     agg = VocabularyAggregator(weighF=params['aggWeighFunction'],
                                wfParam=params['aggWFParam'],
