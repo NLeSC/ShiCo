@@ -1,12 +1,14 @@
 '''ShiCo server.
 
 Usage:
-  server.py  [-f FILES] [-n] [-d]
+  server.py  [-f FILES] [-n] [-d] [-c FUNCTIONNAME]
 
   -f FILES         Path to word2vec model files (glob format is supported)
                    [default: word2vecModels/195[0-1]_????.w2v]
   -n,--non-binary  w2v files are NOT binary.
   -d               Run in development mode (debug mode).
+  -c FUNCTIONNAME  Name of cleaning function to be applied to output.
+                   (example: shico.extras.cleanTermList)
 '''
 from docopt import docopt
 
@@ -62,7 +64,7 @@ def validCleaning(value):
     return isValidOption(value, _yesNo)=='Yes'
 
 
-def initApp(files, binary):
+def initApp(files, binary, cleaningFunctionStr):
     '''Initialize Flask app by loading VocabularyMonitor.
 
     files    Files to be loaded by VocabularyMonitor
@@ -72,12 +74,18 @@ def initApp(files, binary):
     _vm = VocabularyMonitor(files, binary)
     # _vm = "VocabularyMonitor(files, binary)"
 
-    moduleName = 'shico.extras'
-    functionName = 'cleanTermList'
+    _cleaningFunction = _getCallableFunction(cleaningFunctionStr)
 
+
+def _getCallableFunction(functionFullName):
+    ''' TODO: Add documentation '''
+    if functionFullName is None:
+        return None
+    nameParts = functionFullName.split('.')
+    moduleName = '.'.join(nameParts[:-1])
+    functionName = nameParts[-1]
     customModule = __import__(moduleName, fromlist=[functionName])
-    _cleaningFunction = getattr(customModule,functionName)
-
+    return getattr(customModule,functionName)
 
 # trackClouds parameters
 
@@ -92,7 +100,6 @@ trackParser.add_argument('wordBoost', type=float, default=1.0)
 trackParser.add_argument('forwards', type=validDirection, default=True)
 trackParser.add_argument('boostMethod', type=sumSimilarity, default=True)
 trackParser.add_argument('algorithm', type=validAlgorithm, default='adaptive')
-
 trackParser.add_argument('doCleaning', type=validCleaning, default=False)
 
 # VocabularyAggregator parameters:
@@ -101,11 +108,11 @@ trackParser.add_argument('aggWFParam', type=float, default=1.0)
 trackParser.add_argument('aggYearsInInterval', type=int, default=5)
 trackParser.add_argument('aggWordsPerYear', type=int, default=10)
 
+# Fixed options
 _algorithms = ('Adaptive', 'Non-adaptive')
 _weighFuncs = ('Gaussian', 'Linear', 'JSD')
 _directions = ('Forward', 'Backward')
 _boostMethods = ('Sum similarity', 'Counts')
-
 _yesNo = ('Yes', 'No')
 
 @app.route('/available-years')
@@ -152,6 +159,9 @@ def trackWord(terms):
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
-    initApp(arguments['-f'], not arguments['--non-binary'])
+    files = arguments['-f']
+    binary = not arguments['--non-binary']
+    cleaningFunctionStr = arguments['-c']
+    initApp(files, binary, cleaningFunctionStr)
     app.debug = arguments['-d']
     app.run(host='0.0.0.0',threaded=True)

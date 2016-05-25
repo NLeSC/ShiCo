@@ -1,3 +1,3 @@
-from termlistcleaner import cleanTermList
+from .termlistcleaner import cleanTermList
 
 __all__ = ['cleanTermList']
