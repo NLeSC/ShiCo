@@ -13,8 +13,9 @@
     vm.boostMethods = ['Sum similarity', 'Counts'];
     vm.doCleaning = [ 'Yes', 'No' ];
 
-    // Years not defined  here because it gets loaded by service
+    // Years and features gets loaded by SettingsService
     vm.years = TrackerParametersService.availableYears;
+    vm.features = TrackerParametersService.features;
 
     // We use the parameters variable from ParameterService directly.
     vm.parameters = TrackerParametersService.getParameters();

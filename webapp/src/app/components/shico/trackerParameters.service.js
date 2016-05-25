@@ -38,6 +38,10 @@
       }
     };
 
+    vm.features = {
+      canClean: false
+    }
+
     vm.tooltips = {};
     loadToolTip('/help/algorithm.md', 'algorithm');
 
@@ -45,7 +49,8 @@
       getParameters: getParameters,
       setParameters: setParameters,
       tooltips: vm.tooltips,
-      availableYears: vm.availableYears
+      availableYears: vm.availableYears,
+      features: vm.features
     };
     return service;
 

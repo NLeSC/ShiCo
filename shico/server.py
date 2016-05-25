@@ -115,17 +115,19 @@ _directions = ('Forward', 'Backward')
 _boostMethods = ('Sum similarity', 'Counts')
 _yesNo = ('Yes', 'No')
 
-@app.route('/available-years')
-def avlYears():
+@app.route('/load-settings')
+def appData():
     '''VocabularyMonitor.getAvailableYears service. Takes no parameters.
     Returns JSON structure with years available.'''
-    years = _vm.getAvailableYears()
-    yearLabels = {int(getRangeMiddle(y)): y for y in years}
-    return jsonify(values=yearLabels,
-                   first=min(yearLabels.keys()),
-                   last=max(yearLabels.keys())
-                   )
-
+    avlYears = _vm.getAvailableYears()
+    yearLabels = {int(getRangeMiddle(y)): y for y in avlYears}
+    years = {
+        'values': yearLabels,
+        'first' : min(yearLabels.keys()),
+        'last'  : max(yearLabels.keys())
+    }
+    canClean = _cleaningFunction is not None
+    return jsonify(years=years, cleaning=canClean)
 
 @app.route('/track/<terms>')
 def trackWord(terms):
