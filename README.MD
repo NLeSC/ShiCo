@@ -75,6 +75,11 @@ To run Python unit tests, run:
 $ nosetests
 ```
 
+## Cleaning functions
+In some cases, resulting vocabularies may contain words which we would like to filter. ShiCo offers the possibility of using a *cleaning* function, for filtering vocabularies after they have been generated. To use this option, it is necessary to indicate the name of the cleaning function when starting the ShiCo server. A sample cleaning function is provided (*shico.extras.cleanTermList*). You can use this function as follows:
+```
+$ python shico/server.py -c "shico.extras.cleanTermList"
+```
 
 ## Speeding up ShiCo
 
