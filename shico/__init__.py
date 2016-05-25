@@ -4,4 +4,5 @@ import format
 import server
 import extras
 
-__all__ = ['VocabularyMonitor', 'VocabularyAggregator', 'server', 'format', 'extras']
+__all__ = ['VocabularyMonitor',
+           'VocabularyAggregator', 'server', 'format', 'extras']

@@ -219,7 +219,8 @@ def _getRelatedTerms(model, seedTerms, maxRelatedTerms, cleaningFunction):
 
     for term in seedTerms:
         t = threading.Thread(target=_getRelatedTermsThread,
-                             args=(model, term, maxRelatedTerms, queries, cleaningFunction))
+                             args=(model, term, maxRelatedTerms, queries,
+                                   cleaningFunction))
         threads.append(t)
         t.start()
     for t in threads:
@@ -228,7 +229,8 @@ def _getRelatedTerms(model, seedTerms, maxRelatedTerms, cleaningFunction):
     return queries
 
 
-def _getRelatedTermsThread(model, term, maxRelatedTerms, queries, cleaningFunction):
+def _getRelatedTermsThread(model, term, maxRelatedTerms, queries,
+                           cleaningFunction):
     try:
         newTerms = model.most_similar(term, topn=maxRelatedTerms)
         if cleaningFunction is not None:

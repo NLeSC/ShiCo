@@ -36,6 +36,7 @@ def validatestr(value):
     except:
         raise ValueError
 
+
 def isValidOption(value, options):
     '''Validate that given value is a string from a predetermined set.
     Used to validate tracker parameters.'''
@@ -44,24 +45,29 @@ def isValidOption(value, options):
     else:
         raise ValueError
 
+
 def validAlgorithm(value):
     '''Validate algorithm -- in lower case'''
     return isValidOption(value, _algorithms).lower()
+
 
 def validWeighting(value):
     '''Validate weighting function'''
     return isValidOption(value, _weighFuncs)
 
+
 def validDirection(value):
     '''Validate direction is Forward (false means backward)'''
-    return isValidOption(value, _directions)=='Forward'
+    return isValidOption(value, _directions) == 'Forward'
+
 
 def sumSimilarity(value):
     '''Validate boost methods is Sum distances (false means Counts)'''
-    return isValidOption(value, _boostMethods)=='Sum similarity'
+    return isValidOption(value, _boostMethods) == 'Sum similarity'
+
 
 def validCleaning(value):
-    return isValidOption(value, _yesNo)=='Yes'
+    return isValidOption(value, _yesNo) == 'Yes'
 
 
 def initApp(files, binary, cleaningFunctionStr):
@@ -85,7 +91,7 @@ def _getCallableFunction(functionFullName):
     moduleName = '.'.join(nameParts[:-1])
     functionName = nameParts[-1]
     customModule = __import__(moduleName, fromlist=[functionName])
-    return getattr(customModule,functionName)
+    return getattr(customModule, functionName)
 
 # trackClouds parameters
 
@@ -103,7 +109,8 @@ trackParser.add_argument('algorithm', type=validAlgorithm, default='adaptive')
 trackParser.add_argument('doCleaning', type=validCleaning, default=False)
 
 # VocabularyAggregator parameters:
-trackParser.add_argument('aggWeighFunction', type=validWeighting, default='Gaussian')
+trackParser.add_argument(
+    'aggWeighFunction', type=validWeighting, default='Gaussian')
 trackParser.add_argument('aggWFParam', type=float, default=1.0)
 trackParser.add_argument('aggYearsInInterval', type=int, default=5)
 trackParser.add_argument('aggWordsPerYear', type=int, default=10)
@@ -115,6 +122,7 @@ _directions = ('Forward', 'Backward')
 _boostMethods = ('Sum similarity', 'Counts')
 _yesNo = ('Yes', 'No')
 
+
 @app.route('/load-settings')
 def appData():
     '''VocabularyMonitor.getAvailableYears service. Takes no parameters.
@@ -123,11 +131,12 @@ def appData():
     yearLabels = {int(getRangeMiddle(y)): y for y in avlYears}
     years = {
         'values': yearLabels,
-        'first' : min(yearLabels.keys()),
-        'last'  : max(yearLabels.keys())
+        'first': min(yearLabels.keys()),
+        'last': max(yearLabels.keys())
     }
     canClean = _cleaningFunction is not None
     return jsonify(years=years, cleaning=canClean)
+
 
 @app.route('/track/<terms>')
 def trackWord(terms):
@@ -146,7 +155,8 @@ def trackWord(terms):
                         forwards=params['forwards'],
                         sumSimilarity=params['boostMethod'],
                         algorithm=params['algorithm'],
-                        cleaningFunction=_cleaningFunction if params['doCleaning'] else None
+                        cleaningFunction=_cleaningFunction if params[
+                            'doCleaning'] else None
                         )
     agg = VocabularyAggregator(weighF=params['aggWeighFunction'],
                                wfParam=params['aggWFParam'],
@@ -166,4 +176,4 @@ if __name__ == '__main__':
     cleaningFunctionStr = arguments['-c']
     initApp(files, binary, cleaningFunctionStr)
     app.debug = arguments['-d']
-    app.run(host='0.0.0.0',threaded=True)
+    app.run(host='0.0.0.0', threaded=True)
