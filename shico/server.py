@@ -112,6 +112,7 @@ def trackWord(terms):
     response.'''
     params = trackParser.parse_args()
     termList = terms.split(',')
+    termList = [ term.lower() for term in termList ]
     results, links = \
         _vm.trackClouds(termList, maxTerms=params['maxTerms'],
                         maxRelatedTerms=params['maxRelatedTerms'],
