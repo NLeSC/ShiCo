@@ -9,7 +9,7 @@ class ServerTest(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
-        shico.server.initApp('tests/w2vModels/*.w2v', True)
+        shico.server.initApp('tests/w2vModels/*.w2v', True, None)
         self.app = shico.server.app.test_client()
 
     def testTrackService(self):
@@ -48,9 +48,9 @@ class ServerTest(unittest.TestCase):
                                      'Items in wordList should be word: ' +
                                      'weight dictionary entries')
 
-    def testAvlYearsService(self):
-        '''Test calls to /available-years. Response should be valid JSON.'''
-        resp = self.app.get('/available-years')
+    def testAppData(self):
+        '''Test calls to /load-settings. Response should be valid JSON.'''
+        resp = self.app.get('/load-settings')
 
         self.assertEqual(resp.status_code, 200,
                          'Response should be code 200')
@@ -60,13 +60,15 @@ class ServerTest(unittest.TestCase):
         except:
             self.fail('Response should be valid JSON')
 
-        expectedKeys = ['first', 'last', 'values']
-        for key in expectedKeys:
+        for key in ['cleaning', 'years']:
             self.assertTrue(key in respJson,
                             '"' + key + '" should be a key in the response')
 
-        baseKeys = ['first', 'last']
-        values = respJson['values']
-        for key in baseKeys:
-            self.assertTrue(str(respJson[key]) in values,
+        years = respJson['years']
+        for key in ['first', 'last', 'values']:
+            self.assertTrue(key in years,
+                            '"' + key + '" should be a key in the response')
+
+        for key in ['first', 'last']:
+            self.assertTrue(str(years[key]) in years['values'],
                             '"' + key + '" should be a key in values')

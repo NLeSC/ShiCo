@@ -55,7 +55,8 @@ class VocabularyMonitor():
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
                     startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
-                    forwards=True, sumSimilarity=False, algorithm='adaptive'):
+                    forwards=True, sumSimilarity=False, algorithm='adaptive',
+                    cleaningFunction=None):
         '''Given a list of seed terms, generate a set of results from the
         word2vec models currently loaded in this vocabularymonitor.
 
@@ -81,6 +82,7 @@ class VocabularyMonitor():
                            them as seeds for the next time period. Non-adaptive
                            algorithm uses the initial seeds for every time
                            period.
+        cleaningFunction -- ???
 
         Returns:
         terms  -- A dictionary with the year key of every model as its keys and
@@ -140,14 +142,16 @@ class VocabularyMonitor():
                                       maxRelatedTerms=maxRelatedTerms,
                                       minDist=minDist,
                                       wordBoost=wordBoost,
-                                      sumSimilarity=sumSimilarity)
+                                      sumSimilarity=sumSimilarity,
+                                      cleaningFunction=cleaningFunction)
             elif algorithm == 'non-adaptive':
                 # Non-adaptive algorithm uses always same set of seeds
                 terms, links = \
                     self._trackCore(self._models[sKey], aSeedSet,
                                     maxTerms=maxTerms,
                                     maxRelatedTerms=maxRelatedTerms,
-                                    minDist=minDist)
+                                    minDist=minDist,
+                                    cleaningFunction=cleaningFunction)
             else:
                 raise Exception('Algorithm not supported: ' + algorithm)
 
@@ -158,23 +162,27 @@ class VocabularyMonitor():
         return yTerms, yLinks
 
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                     minDist=0.0, wordBoost=1.0, sumSimilarity=False):
+                     minDist=0.0, wordBoost=1.0, sumSimilarity=False,
+                     cleaningFunction=None):
         '''Perform in link search'''
         if sumSimilarity:
             terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
                 maxRelatedTerms=maxRelatedTerms, minDist=minDist,
-                wordBoost=wordBoost,  reward=lambda tDist: 1.0 - tDist)
+                wordBoost=wordBoost,  reward=lambda tDist: 1.0 - tDist,
+                cleaningFunction=cleaningFunction)
         else:
             terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
-                maxRelatedTerms=maxRelatedTerms, minDist=minDist)
+                maxRelatedTerms=maxRelatedTerms, minDist=minDist,
+                cleaningFunction=cleaningFunction)
         # Make a new seed set
         newSeedSet = [word for word, weight in terms]
         return terms, links, newSeedSet
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                   minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0):
+                   minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0,
+                   cleaningFunction=None):
         '''Given a list of seed terms, queries the given model to produce a
         list of terms. A dictionary of links is also returned as a dictionary:
         { seed: [(word,weight),...]}'''
@@ -182,7 +190,7 @@ class VocabularyMonitor():
         links = defaultdict(list)
 
         relatedTermQueries = _getRelatedTerms(
-            model, seedTerms, maxRelatedTerms)
+            model, seedTerms, maxRelatedTerms, cleaningFunction)
 
         # Get the first tier related terms
         for term, newTerms in relatedTermQueries:
@@ -205,13 +213,14 @@ class VocabularyMonitor():
         return topTerms, links
 
 
-def _getRelatedTerms(model, seedTerms, maxRelatedTerms):
+def _getRelatedTerms(model, seedTerms, maxRelatedTerms, cleaningFunction):
     queries = []
     threads = []
 
     for term in seedTerms:
         t = threading.Thread(target=_getRelatedTermsThread,
-                             args=(model, term, maxRelatedTerms, queries))
+                             args=(model, term, maxRelatedTerms, queries,
+                                   cleaningFunction))
         threads.append(t)
         t.start()
     for t in threads:
@@ -220,9 +229,13 @@ def _getRelatedTerms(model, seedTerms, maxRelatedTerms):
     return queries
 
 
-def _getRelatedTermsThread(model, term, maxRelatedTerms, queries):
+def _getRelatedTermsThread(model, term, maxRelatedTerms, queries,
+                           cleaningFunction):
     try:
         newTerms = model.most_similar(term, topn=maxRelatedTerms)
+        if cleaningFunction is not None:
+            newTerms = cleaningFunction(newTerms)
+
         # list.append is thread safe, so we should be ok
         queries.append((term, newTerms))
     except KeyError:

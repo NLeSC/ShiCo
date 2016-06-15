@@ -16,24 +16,28 @@
       configFile.get().$promise.then(function(config) {
         var baseURL = config.baseURL;
         var trackerURL = baseURL + '/track/:terms';
-        var avlYearSvcURL = baseURL + '/available-years';
+        var serverSettingsUrl = baseURL + '/load-settings';
 
         if(baseURL.length==0) {
           trackerURL = 'dummy2.json';
-          avlYearSvcURL = 'http://localhost:5000/available-years';
+          serverSettingsUrl = 'http://localhost:5000/load-settings';
         }
 
         // Copy config from JSON to the service
         service.trackerURL = trackerURL;
 
-        // Call avlYearSvc resource to get years
-        var avlYearResource = $resource(avlYearSvcURL);
-        avlYearResource.get().$promise.then(function(years) {
-          TrackerParametersService.availableYears.from = years.first;
-          TrackerParametersService.availableYears.to = years.last;
-          TrackerParametersService.availableYears.values = years.values;
-          TrackerParametersService.availableYears.options.floor = years.first;
-          TrackerParametersService.availableYears.options.ceil = years.last;
+        // Call serverSettingsUrl resource to server setting
+        var serverSettingsResource = $resource(serverSettingsUrl);
+        serverSettingsResource.get().$promise.then(function(settings) {
+          // Years available
+          TrackerParametersService.availableYears.from = settings.years.first;
+          TrackerParametersService.availableYears.to = settings.years.last;
+          TrackerParametersService.availableYears.values = settings.years.values;
+          TrackerParametersService.availableYears.options.floor = settings.years.first;
+          TrackerParametersService.availableYears.options.ceil = settings.years.last;
+
+          // Cleaning capabilities
+          TrackerParametersService.features.canClean = settings.cleaning;
         });
       });
     }
