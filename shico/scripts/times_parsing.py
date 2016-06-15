@@ -1,4 +1,3 @@
-
 from BeautifulSoup import BeautifulSoup
 import re
 import nltk
@@ -52,18 +51,18 @@ def getArticlesFromSoup(soup):
 # print 'Title  :',title
 # print 'Content:\n', body
 
-
 # ## Load XML and save as CSV
 from glob2 import glob
 import pandas as pd
+import os
 
-origPath = '../data/times-20101217/'
-savePath = './'
+origPath = 'TDA_GDA/TDA_2010/'
+savePath = 'myTimes/'
 
 # Save / load as CSV
-for datafile in glob(origPath + '0FFO*.xml'):
+for datafile in glob(origPath + '**/0FFO*.xml'):
     print 'Loading   : ',datafile
-    saveFile = datafile.replace(origPath, savePath)
+    saveFile = savePath + os.path.basename(datafile)
     saveFile = saveFile.replace('.xml', '.csv')
     print '...save as: ',saveFile
 
@@ -72,3 +71,4 @@ for datafile in glob(origPath + '0FFO*.xml'):
 
     df = pd.DataFrame(articles, columns=['Title', 'Content'])
     df.to_csv(saveFile, encoding='UTF8')
+
