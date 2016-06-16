@@ -269,3 +269,9 @@ class CachedW2VModelEvaluator():
     @lru_cache(maxsize=1000)
     def most_similar(self, term, topn):
         return self._model.most_similar(term, topn=topn)
+
+    def n_similarity(self, term1, term2):
+        try:
+            return self._model.n_similarity(term1, term2)
+        except KeyError:
+            return 0
