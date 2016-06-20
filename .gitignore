@@ -1,5 +1,6 @@
 *.ipynb
 .ipynb_checkpoints/
+!notebooks/*.ipynb
 *.pyc
 ./word2vecModels
 
