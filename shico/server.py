@@ -166,7 +166,7 @@ def trackWord(terms):
                                )
 
     aggResults, aggMetadata = agg.aggregate(results)
-    embedded = _doSpaceEmbedding(results)
+    embedded = _doSpaceEmbedding(results, aggMetadata)
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
     return jsonify(stream=yearTuplesAsDict(aggResults),
                    networks=networks,
@@ -207,7 +207,14 @@ def findTransform(wordsT0, locsT0, wordsT1, locsT1):
     T, residuals, rank, s = np.linalg.lstsq(F1, F0)
     return T
 
-def _doSpaceEmbedding(results):
+def _wordLocationAsDict(word,loc):
+    return {
+        'word': word,
+        'x': loc[0],
+        'y': loc[1]
+    }
+
+def _doSpaceEmbedding(results, aggMetadata):
     embeddedResults = SortedDict()
 
     wordsT0 = None
@@ -226,9 +233,13 @@ def _doSpaceEmbedding(results):
         wordsT0 = wordsT1
         locsT0  = locsT1
 
-        embeddedResults[label] = [ (wordsT1[i], locsT1[i,:].tolist()) for i in range(len(wordsT1)) ]
+        embeddedResults[label] = [ _wordLocationAsDict(wordsT1[i],locsT1[i,:]) for i in range(len(wordsT1)) ]
 
-    return embeddedResults
+    # UGLY HACK -- FIX!
+    embeddedResultsAgg = SortedDict()
+    for year,aggYears in aggMetadata.iteritems():
+        embeddedResultsAgg[year] = embeddedResults[aggYears[0]]
+    return embeddedResultsAgg
 
 
 if __name__ == '__main__':

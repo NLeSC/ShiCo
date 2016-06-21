@@ -47,6 +47,77 @@
           tooltip: { contentGenerator: customTooltipContent }
       }
     };
+
+    // NVD3 configuration for scatter plot
+    var scatterGraph = {
+      chart: {
+          type: "scatterChart",
+          height: 450,
+          color: [ "#1f77b4" ],
+          duration: 350,
+          zoom: {
+            enabled: true,
+            scaleExtent: [ 1, 10 ],
+            useFixedDomain: false,
+            useNiceScale: false,
+            horizontalOff: false,
+            verticalOff: false,
+            unzoomEventType: "dblclick.zoom"
+          },
+          tooltip: { contentGenerator: scatterTooltipGenerator },
+          showLabels: true,
+          // pointShape: 'thin-x',
+          // pointShape: 'cross',
+          pointShape: myCustomPointFunction,
+          dispatch: {
+            renderEnd: postProcess
+          }
+      }
+    };
+
+    function myCustomPointFunction(d) {
+      return 'circle';
+    }
+
+    function postProcess(e) {
+      debugger
+
+      d3.selectAll(".label").remove();
+
+      d3.selectAll(".nv-scatterChart path")[0].forEach(function(d) {
+        var tf = d3.select(d).attr("transform")
+        var t = d3.transform(tf).translate;
+        t[0] = t[0] +10;//moving the translate x by 5 pixel.
+
+        // console.log(d3.select(d).data())//data associated with teh point
+
+        d3.select(d.parentNode)
+          .append("text")
+          .attr("class", "label")
+          // .text("data: "+ d3.select(d).data()[0][1])
+          // .text("data: xxx" )
+          .text(function (d,i, j, k) {
+            console.log(d);
+            console.log(i);
+            console.log(j);
+            return "data: xxx";
+          })
+          .attr("transform", "translate("+t[0]+","+t[1]+")");
+      });
+/*      d3.selectAll(".nv-scatter path")[0].forEach(
+        function(d){
+        var tf = d3.select(d).attr("transform")
+        var t = d3.transform(tf).translate;
+        t[0] = t[0] +10;//moving the translate x by 5 pixel.
+        console.log(d3.select(d).data()[0])//data associated with teh point
+        d3.select(d.parentNode)
+          .append("text")
+          .attr("class", "label")
+          .text("data: "+ d3.select(d).data()[0][1])
+          .attr("transform", "translate("+t[0]+","+t[1]+")")
+      });*/
+    }
+
     var colours = d3.scale.category20();
 
     var yearTickLabels = {};   // Year markers for stream graph
@@ -147,6 +218,15 @@
       return html;
     }
 
+    function scatterTooltipGenerator(d) {
+      var html = '<table>';
+      html += '<thead><tr><td colspan="2"><strong class="x-value">' + d.point['word'] + '</strong></td></tr></thead>';
+      html += '<tbody>';
+      html += '</tbody>';
+      html += '</table>';
+      return html;
+    }
+
     function addForceGraphHook(callback) {
       forceGraphHooks.push(callback);
     }
@@ -156,6 +236,8 @@
         return streamConfig;
       } else if(graphName === 'forceGraph'){
         return forceConfig;
+      } else if(graphName === 'scatterGraph'){
+        return scatterGraph;
       }
     }
   }
