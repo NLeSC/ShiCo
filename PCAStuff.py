@@ -1,163 +1,94 @@
+#!/usr/bin/env python
 
 # coding: utf-8
 
 # In[1]:
 
 import gensim
+import numpy as np
+import sys
+
+print sys.stdout.encoding
+
+model1_name = '/data/hdd/ShiCo/1950_1959.w2v'
+model2_name = '/data/hdd/ShiCo/1951_1960.w2v'
+
+model1 = gensim.models.word2vec.Word2Vec.load_word2vec_format(model1_name, binary=True)
+model2 = gensim.models.word2vec.Word2Vec.load_word2vec_format(model2_name, binary=True)
+
+M1pinv = np.linalg.pinv(model1.syn0norm).T
+
+for i in range(300):
+
+    v1 = np.zeros(300) # vector in space 1
+    v1[i] = 1
+    
+    words = np.dot(M1pinv, v1)
+    best = words.argsort()[::-1][0:50]
+    print "Dimension", i
+    for w in best: 
+      print "%30s %f" % (model1.index2word[w], words[w])
+    print
+
+    v2 = np.zeros(300) # vector in space 2
+    for w1 in range(len(words)):
+        word1 = model1.index2word[w1]
+        if word1 in model2.vocab:
+            v2 = v2 + words[w1] * model2.syn0norm[w]
+    v2 = v2 / np.linalg.norm(v2)
+    print v2 
+
+sys.exit(-1)
 
 
-# In[11]:
 
-model1 = gensim.models.word2vec.Word2Vec.load_word2vec_format('./word2vecModels/1950_1959.w2v', binary=True)
+print "Most similar words"
 
-
-# In[15]:
-
-model2 = gensim.models.word2vec.Word2Vec.load_word2vec_format('./word2vecModels/1951_1960.w2v', binary=True)
-
-
-# In[17]:
-
+print " = Model 1 = "
 for w,_ in model1.most_similar('stoel', topn=10):
     print w
-print '======='
+
+print " = Model 2 = "
 for w,_ in model2.most_similar('stoel', topn=10):
     print w
 
 
-# In[21]:
+print "Amsterdam + Antwerpen - Nederland = "
 
-print model1.most_similar('stoel', topn=False)[:100]
+#print " = Model 1 = "
+#vocab = model1.most_similar(positive=['amsterdam', 'antwerpen'], negative=['nederland'])
+#for w, _ in vocab:
+#    print w
 
-
-# In[26]:
-
-# model1.vocab.keys()[:100]
-v = model1.vocab[u'soestdijk']
-
-
-# In[44]:
-
-import numpy as np
-
-
-# In[49]:
-
-import sklearn.decomposition
-
-
-# In[153]:
-
-#pca = sklearn.decomposition.PCA(n_components=10, whiten=True)
-#pca.fit(model1.syn0)
-svd = sklearn.decomposition.TruncatedSVD(n_components=10, )
-
-
-# In[154]:
-
-pca.components_.shape
-
-
-# In[150]:
-
-pca0 = pca.components_[0,:]
-pca0.shape
-
-
-# In[159]:
-
-
-
-
-# In[180]:
+#print " = Model 2 = "
+#vocab = model2.most_similar(positive=['amsterdam', 'antwerpen'], negative=['nederland'])
+#for w, _ in vocab:
+#    print w
 
 for i in range(300):
     x = np.zeros(300)
     x[i] = 1
-    dist_from_x = model1.syn0.dot(x)
+    dist_from_x = model1.syn0norm.dot(x)
+    # print dist_from_x.shape # (692536, )
+    # print model1.syn0.shape # (692536, 300)
     idxmax, idxmin = dist_from_x.argmax(), dist_from_x.argmin()
-    wordMax = model1.index2word[idxmax]
-    wordMin = model1.index2word[idxmin]
-    print i,': ',wordMax,' '*(20-len(wordMax)),wordMin 
+    wordMax1 = model1.index2word[idxmax]
+    wordMin1 = model1.index2word[idxmin]
 
+    dist_from_x = model2.syn0norm.dot(x)
+    idxmax, idxmin = dist_from_x.argmax(), dist_from_x.argmin()
+    wordMax2 = model2.index2word[idxmax]
+    wordMin2 = model2.index2word[idxmin]
 
-# In[195]:
+    s = '%20s %20s   -   %20s %20s' % (wordMax1, wordMax2, wordMin1, wordMin2)
+    print s.decode('ascii') 
 
-vocab = model1.most_similar(positive=['amsterdam', 'londen'], negative=['nederland'])
-for w, _ in vocab:
-    print w
+sys.exit(-1)
 
-
-# In[178]:
-
-plot(model1.syn0[idxmax,:])
-plot(model1.syn0[idxmin,:])
-#plot(x)
-axis([-10,310,-1,2])
-
-
-# In[107]:
-
-model1.most_similar('otnen')
-
-
-# # Test2
-
-# In[198]:
-
-v0 = model1.syn0[0,:]
-v0.dot(v0)
-
-
-# In[244]:
-
-# for i in range(300):
-if True:
-    i = 0
-    x = zeros(300)
-    x[i] = 1
-    concept = model1.syn0.dot(x)
-    concept
-
-
-# In[245]:
-
-idx = concept.argsort()
-idx = idx[::-1]
-plot(concept[idx])
-
-
-# In[246]:
-
-for i in idx[:10]:
-    print '%2.4f'%concept[i], model1.index2word[i]
-
-
-# In[247]:
-
-accum = np.zeros(300)
-for i in idx[:100]:
-    try:
-        word = model1.index2word[i]
-        accum += concept[i] * model2[word]
-    except:
-        print 'Not in vocab: ', word
-accum /= accum.sum()
-
-
-# In[248]:
-
-sortIdx = accum.argsort()
-sortIdx = sortIdx[::-1]
-plot(accum[sortIdx])
-print sortIdx[0], accum[sortIdx[0]]
-
-
-# In[261]:
 
 mappings = []
 for i in range(300):
-    x = zeros(300)
+    x = np.zeros(300)
     x[i] = 1
     concept = model1.syn0.dot(x)
     
@@ -223,74 +154,3 @@ words1 = [ model1.index2word[idxc] for idxc in idxConcept1[:20] ]
 words2 = [ model2.index2word[idxc] for idxc in idxConcept2[:20] ]
 for w1,w2 in zip(words1, words2):
     print "%15s  %15s" % (w1,w2)
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
