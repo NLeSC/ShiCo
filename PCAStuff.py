@@ -7,6 +7,7 @@
 import gensim
 import numpy as np
 import sys
+import matplotlib.pyplot as plt
 
 print sys.stdout.encoding
 
@@ -18,25 +19,42 @@ model2 = gensim.models.word2vec.Word2Vec.load_word2vec_format(model2_name, binar
 
 M1pinv = np.linalg.pinv(model1.syn0norm).T
 
+transform = np.zeros([300,300])
+
 for i in range(300):
 
     v1 = np.zeros(300) # vector in space 1
     v1[i] = 1
     
     words = np.dot(M1pinv, v1)
-    best = words.argsort()[::-1][0:50]
+    best = words.argsort()[::-1]
     print "Dimension", i
-    for w in best: 
+    for w in best[0:50]: 
       print "%30s %f" % (model1.index2word[w], words[w])
     print
 
+    plt.figure()
+    plt.plot(words[best])
+    plt.savefig('em1_%03i_in_vocab1.png' % i)
+
     v2 = np.zeros(300) # vector in space 2
+    missing_vocab = []
     for w1 in range(len(words)):
         word1 = model1.index2word[w1]
         if word1 in model2.vocab:
             v2 = v2 + words[w1] * model2.syn0norm[w]
+        else:
+            missing_vocab.append(word1)
     v2 = v2 / np.linalg.norm(v2)
-    print v2 
+     
+    transform[i,:] = v2
+
+    plt.figure()
+    v2.sort()
+    plt.plot(v2)
+    plt.savefig('em1_%03i_in_em2.png' % i)
+
+    np.save('transform.np', transform)
 
 sys.exit(-1)
 
