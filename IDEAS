@@ -1,0 +1,35 @@
+
+A: Vocabulary space (size N, ~600K)
+a: embbeded vector space (size n,300), representing the semantic meaning
+
+B: Vocabulary space (size M, 600K)
+b: embbeded vector space (size m, 300)
+
+Word 2 vec is the model that maps the vocabulary on the semantic meaning space:
+    F_1 (A) -> a 
+with a matrix it has dimensions (n,N), with the representation `model.syn0norm`.
+Because N > n, the projection is not invertible, but there is a pseudoinverse G such that:
+    F_1( G_1(a) ) = a
+
+This allows us to compare the semantic spaces of A and B:
+1) take a unit vector ui, in a with ui = [0, 0,.. 1, .., 0, 0]
+2) find a word vector W in A via the inverse G_1:
+   W1 = G_1( ui )
+   note that this one is not unique, as the pseudoinverse is not a real inverse:
+   F( W1 + N ) = ui, with N an element in the kernel of F.
+   An interpretation is that as F(N) = 0 by definition, this vector N is meaning less wrt. the semantic subspace.
+3) As W1 is a vector over the vocabulary A, and vocabulary B could be different, map W1 to W2:
+   W2_i = W1_i iff word W1_i is in vocabulary B
+          0    else
+4) Map W2 to the semantic subspace to create the new basis vector ui'
+5) The set of ui' constitute a new basis for b, and define a mapping:
+         a -> b
+
+
+
+Measures for convergence:
+1) distance (difference, interpretation of the word cloud / vector) of:
+    || e' - e || -> 0,
+    e' = G_1( F_1(e) ),   e c A
+
+Comparison of models: 
