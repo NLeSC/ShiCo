@@ -32,4 +32,79 @@ Measures for convergence:
     || e' - e || -> 0,
     e' = G_1( F_1(e) ),   e c A
 
-Comparison of models: 
+
+
+Construct more interpertable semantic space:
+
+use the freedom the arbitrary orientation of the embedded space gives us, to rotate
+the basis such that the maximum number of elements of the basis in vocabulary space is zero.
+
+start with seed word S
+get vector v_0
+get word with inverse
+set middle 50% of vector to zero (keep max negative and positive values)
+
+def setZero(W):
+    d = 40
+    c0 = np.percentile(W, d)
+    c1 = np.percentile(W, 100 - d)
+    Wp = np.where(W < c0, W, 0)
+    Wp = np.where(W > c1, W, Wp)
+    Wp = Wp / np.linalg.norm(Wp)
+    return Wp
+
+def show(v):
+    W = V2W_A(v)
+    W.sort()
+    W = W[::-1]
+    plt.plot(W)
+    plt.show()
+
+def loop(v):
+    W = V2W_A(v)
+    W = setZero(W)
+    v = W2V_A(W)
+    return v
+
+def pp(v):
+    W = V2W_A(v)
+    printVocabTopW(A, W, 10)
+    remaining = np.sum( np.where( W > 0.005, 1, 0) )
+    print "Elements larger than 0.005: ", remaining
+
+Wmens = setZero( V2W_A( vmens ) )
+Wmens /= np.linalg.norm(Wmens)
+
+while True:
+    # constrain
+    W = V2W_A( v )
+    W = setZero( W )
+
+    # orthogonalize
+    print "Dot product: ", np.dot(W, Wmens)
+    W -= 0.01 * np.dot(W, Wmens)
+
+    # re normalize
+    W = W / np.linalg.norm(W)
+
+    # get vector
+    v = W2V_A(W)
+    pp(v)
+
+seed = 'boek'
+v = A[seed]
+for i in range(1000):
+   v = loop(v)
+
+
+W2V( W1 ) -> v1
+V2W( v1 ) = W2 -> W1 + e1
+
+W2V( W1 + e1 ) = W2V(W1) + W2V(e1) = v1 + W2V(e1)
+W2V( W2 - W1 ) = W2V(W2) - W2V(W1)
+               = v1 - v1 = 0
+
+OBSERVATION:
+    noise and OCR mistakes seem to cluster: printVocabTopW(A, V2W_A( A['dc7xd6'] ), 1000)
+
+    investigate if we can get a proper rotation having:  O x O.transpose = 1

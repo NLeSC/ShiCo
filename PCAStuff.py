@@ -19,9 +19,9 @@ def printVocabTopW (A, W, top=20):
     best = W.argsort()[::-1]
     for idx in best[:top]:
         print "%30s %f" % (A.index2word[idx], W[idx])
-    best = best[::-1]
-    for idx in best[:top]:
-        print "%30s %f" % (A.index2word[idx], W[idx])
+    #best = best[::-1]
+    #for idx in best[:top]:
+    #    print "%30s %f" % (A.index2word[idx], W[idx])
 
 def WfromAtoB(W1,A,B):
     N = len(B.vocab)
@@ -67,6 +67,7 @@ Binv = np.linalg.pinv(B.syn0norm)
 # Word vector over the vocabulary A to a vector in the embedded space
 def W2V_A(W):
     return (A.syn0norm.T).dot(W)
+
 # Word vector over the vocabulary B to a vector in the embedded space
 def W2V_B(W):
     return (B.syn0norm.T).dot(W)
@@ -74,12 +75,12 @@ def W2V_B(W):
 # Vector in the semantic space, embedded in A, to a vector over the vocabulary A
 def V2W_A(V):
     v = (Ainv.T).dot(V)
-    return v / np.linalg.norm(v)
+    return v
 
 # Vector in the semantic space, embedded in B, to a vector over the vocabulary B
 def V2W_B(V):
     v = (Binv.T).dot(V)
-    return v / np.linalg.norm(v)
+    return v
 
 
 # for each dimension in the semantic, embedded, space
