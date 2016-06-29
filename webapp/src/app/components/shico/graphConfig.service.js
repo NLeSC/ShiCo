@@ -64,58 +64,35 @@
             verticalOff: false,
             unzoomEventType: "dblclick.zoom"
           },
-          tooltip: { contentGenerator: scatterTooltipGenerator },
-          showLabels: true,
-          // pointShape: 'thin-x',
-          // pointShape: 'cross',
-          pointShape: myCustomPointFunction,
+          tooltip: { enabled: false },
+          showLabels: false,
+          showXAxis: false,
+          showYAxis: false,
           dispatch: {
             renderEnd: postProcess
           }
       }
     };
 
-    function myCustomPointFunction(d) {
-      return 'circle';
-    }
-
     function postProcess(e) {
-      debugger
-
+      // Remove old labels
       d3.selectAll(".label").remove();
 
       d3.selectAll(".nv-scatterChart path")[0].forEach(function(d) {
         var tf = d3.select(d).attr("transform")
         var t = d3.transform(tf).translate;
-        t[0] = t[0] +10;//moving the translate x by 5 pixel.
+        t[0] = t[0] + 10;  //moving the translate x by 10 pixel.
+        var d_data = d3.select(d).data();
 
-        // console.log(d3.select(d).data())//data associated with teh point
-
-        d3.select(d.parentNode)
-          .append("text")
-          .attr("class", "label")
-          // .text("data: "+ d3.select(d).data()[0][1])
-          // .text("data: xxx" )
-          .text(function (d,i, j, k) {
-            console.log(d);
-            console.log(i);
-            console.log(j);
-            return "data: xxx";
-          })
-          .attr("transform", "translate("+t[0]+","+t[1]+")");
+        if(d_data[0][0]) { // Make sure we can read an object
+          var word = d_data[0][0].word;
+          d3.select(d.parentNode)
+            .append("text")
+            .attr("class", "label")
+            .text(word)
+            .attr("transform", "translate("+t[0]+","+t[1]+")");
+        }
       });
-/*      d3.selectAll(".nv-scatter path")[0].forEach(
-        function(d){
-        var tf = d3.select(d).attr("transform")
-        var t = d3.transform(tf).translate;
-        t[0] = t[0] +10;//moving the translate x by 5 pixel.
-        console.log(d3.select(d).data()[0])//data associated with teh point
-        d3.select(d.parentNode)
-          .append("text")
-          .attr("class", "label")
-          .text("data: "+ d3.select(d).data()[0][1])
-          .attr("transform", "translate("+t[0]+","+t[1]+")")
-      });*/
     }
 
     var colours = d3.scale.category20();
@@ -213,15 +190,6 @@
         html += '</tr>';
       });
 
-      html += '</tbody>';
-      html += '</table>';
-      return html;
-    }
-
-    function scatterTooltipGenerator(d) {
-      var html = '<table>';
-      html += '<thead><tr><td colspan="2"><strong class="x-value">' + d.point['word'] + '</strong></td></tr></thead>';
-      html += '<tbody>';
       html += '</tbody>';
       html += '</table>';
       return html;
