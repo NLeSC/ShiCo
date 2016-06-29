@@ -18,6 +18,7 @@ from flask.ext.cors import CORS
 
 from vocabularymonitor import VocabularyMonitor
 from vocabularyaggregator import VocabularyAggregator
+from vocabularyembedding import doSpaceEmbedding
 
 from format import yearlyNetwork, getRangeMiddle, yearTuplesAsDict
 
@@ -166,80 +167,11 @@ def trackWord(terms):
                                )
 
     aggResults, aggMetadata = agg.aggregate(results)
-    embedded = _doSpaceEmbedding(results, aggMetadata)
+    embedded = doSpaceEmbedding(_vm, results, aggMetadata)
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
     return jsonify(stream=yearTuplesAsDict(aggResults),
                    networks=networks,
                    embedded=embedded)
-
-from sortedcontainers import SortedDict
-import numpy as np
-from sklearn import manifold
-
-def getPairwiseDistances(wordsT1, model):
-    dists = np.zeros((len(wordsT1),len(wordsT1)))
-    for i,w1 in enumerate(wordsT1):
-        for j,w2 in enumerate(wordsT1[i:]):
-            dists[i,i+j] = 1-model.n_similarity(w1,w2)
-            dists[i+j,i] = dists[i,i+j]
-    return dists
-
-def getMDSEmbedding(dists):
-    seed = np.random.RandomState(seed=3)
-    mds = manifold.MDS(n_components=2, max_iter=3000, eps=1e-9, random_state=seed,
-                       dissimilarity="precomputed", n_jobs=1)
-    xyEmbedding = mds.fit(dists).embedding_
-    return xyEmbedding
-
-def findTransform(wordsT0, locsT0, wordsT1, locsT1):
-    matchingTerms = list(set(wordsT0).intersection(set(wordsT1)))
-
-    F0 = []
-    F1 = []
-
-    for word in matchingTerms:
-        F0.append(locsT0[wordsT0.index(word)])
-        F1.append(locsT1[wordsT1.index(word)])
-
-    F0 = np.array(F0)
-    F1 = np.array(F1)
-
-    T, residuals, rank, s = np.linalg.lstsq(F1, F0)
-    return T
-
-def _wordLocationAsDict(word,loc):
-    return {
-        'word': word,
-        'x': loc[0],
-        'y': loc[1]
-    }
-
-def _doSpaceEmbedding(results, aggMetadata):
-    embeddedResults = SortedDict()
-
-    wordsT0 = None
-    locsT0  = None
-    for label,r in results.iteritems():
-        model = _vm._models[label]
-        wordsT1 = [ w for w,_ in r ]
-
-        dists = getPairwiseDistances(wordsT1, model)
-        locsT1 = getMDSEmbedding(dists)
-
-        if wordsT0 is not None:
-            T = findTransform(wordsT0, locsT0, wordsT1, locsT1)
-            locsT1 = locsT1.dot(T)
-
-        wordsT0 = wordsT1
-        locsT0  = locsT1
-
-        embeddedResults[label] = [ _wordLocationAsDict(wordsT1[i],locsT1[i,:]) for i in range(len(wordsT1)) ]
-
-    # UGLY HACK -- FIX!
-    embeddedResultsAgg = SortedDict()
-    for year,aggYears in aggMetadata.iteritems():
-        embeddedResultsAgg[year] = embeddedResults[aggYears[0]]
-    return embeddedResultsAgg
 
 
 if __name__ == '__main__':

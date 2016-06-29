@@ -66,8 +66,14 @@
           },
           tooltip: { enabled: false },
           showLabels: false,
-          showXAxis: false,
-          showYAxis: false,
+          xAxis: {
+            showMaxMin: false,
+            tickFormat: function() { return ''; }
+          },
+          yAxis: {
+            showMaxMin: false,
+            tickFormat: function() { return ''; }
+          },
           dispatch: {
             renderEnd: postProcess
           }
@@ -86,6 +92,7 @@
 
         if(d_data[0][0]) { // Make sure we can read an object
           var word = d_data[0][0].word;
+          console.log(word);
           d3.select(d.parentNode)
             .append("text")
             .attr("class", "label")
