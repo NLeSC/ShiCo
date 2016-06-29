@@ -1,7 +1,7 @@
 '''ShiCo server.
 
 Usage:
-  server.py  [-f FILES] [-n] [-d] [-c FUNCTIONNAME]
+  server.py  [-f FILES] [-n] [-d] [-p PORT] [-c FUNCTIONNAME]
 
   -f FILES         Path to word2vec model files (glob format is supported)
                    [default: word2vecModels/195[0-1]_????.w2v]
@@ -9,6 +9,7 @@ Usage:
   -d               Run in development mode (debug mode).
   -c FUNCTIONNAME  Name of cleaning function to be applied to output.
                    (example: shico.extras.cleanTermList)
+  -p PORT          Port in which ShiCo should run [default: 8000].
 '''
 from docopt import docopt
 
@@ -179,6 +180,7 @@ if __name__ == '__main__':
     files = arguments['-f']
     binary = not arguments['--non-binary']
     cleaningFunctionStr = arguments['-c']
+    port = int(arguments['-p'])
     initApp(files, binary, cleaningFunctionStr)
     app.debug = arguments['-d']
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(host='0.0.0.0', port=port, threaded=True)
