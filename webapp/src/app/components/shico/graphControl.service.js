@@ -19,6 +19,11 @@
       currYearIdx: 0
     };
 
+    vm.scatterGraph = {
+      options: GraphConfigService.getConfig('scatterGraph'),
+      data: []
+    };
+
     vm.yearLabels = [];
     vm.slider_options = {
       floor: 0,
@@ -33,6 +38,7 @@
       getYearLabel: getYearLabel,
       streamGraph: vm.streamGraph,
       forceGraph:  vm.forceGraph,
+      scatterGraph: vm.scatterGraph,
       slider_options: vm.slider_options
 
     };
@@ -70,10 +76,12 @@
       // Prepare data on format suitable from NVD3
       var streamData = formatForStream(data.stream, yearIdx, allWords, allYears);
       var forceData  = formatForForce(data.networks, yearIdx);
+      var scatterData = formatForScatter(data.embedded, yearIdx);
 
       // Register data on graph
       vm.streamGraph.data = streamData;
       vm.forceGraph.data = forceData;
+      vm.scatterGraph.data = scatterData;
 
       vm.slider_options.ceil = vm.yearLabels.length-1;
     }
@@ -106,6 +114,22 @@
       });
 
       return forceData;
+    }
+
+    function formatForScatter(data, yearIdx) {
+      var scatterData = {};
+
+      angular.forEach(data, function(embedding, year) {
+        var embedding2 = [
+          {
+            key   : 'Group0',
+            values: embedding
+          }
+        ];
+        scatterData[yearIdx[year]] = embedding2;
+      });
+
+      return scatterData;
     }
   }
 })();

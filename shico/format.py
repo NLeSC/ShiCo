@@ -125,3 +125,11 @@ def _metaToNetwork(results, seeds, finalVocab, yLinks):
 def _tuplesAsDict(pairList):
     '''Convert list of (words,weight) to dict of word: weight'''
     return {word: weight for word, weight in pairList}
+
+
+def wordLocationAsDict(word,loc):
+    return {
+        'word': word,
+        'x': loc[0],
+        'y': loc[1]
+    }

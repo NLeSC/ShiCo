@@ -18,6 +18,7 @@ from flask.ext.cors import CORS
 
 from vocabularymonitor import VocabularyMonitor
 from vocabularyaggregator import VocabularyAggregator
+from vocabularyembedding import doSpaceEmbedding
 
 from format import yearlyNetwork, getRangeMiddle, yearTuplesAsDict
 
@@ -164,11 +165,14 @@ def trackWord(terms):
                                yearsInInterval=params['aggYearsInInterval'],
                                nWordsPerYear=params['aggWordsPerYear']
                                )
-    aggResults, aggMetadata = agg.aggregate(results)
 
+    aggResults, aggMetadata = agg.aggregate(results)
+    embedded = doSpaceEmbedding(_vm, results, aggMetadata)
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
     return jsonify(stream=yearTuplesAsDict(aggResults),
-                   networks=networks)
+                   networks=networks,
+                   embedded=embedded)
+
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)

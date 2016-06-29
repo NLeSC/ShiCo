@@ -1,5 +1,5 @@
 {
-  "baseURL": "",
-  "baseURL-local": "http://localhost:5000",
+  "baseURL-fake": "",
+  "baseURL": "http://localhost:5000",
   "baseURL-real": "http://145.100.59.88:5000"
 }
