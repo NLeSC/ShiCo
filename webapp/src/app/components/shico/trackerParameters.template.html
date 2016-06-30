@@ -37,7 +37,7 @@
     <div class="form-group form-inline col-md-4">
       <label uib-popover-html="vm.tooltips['boostMethod']"
             popover-trigger="click" popover-placement="bottom" for="boostMethod">Boost method</label>
-      <select ng-model="vm.parameters.boostMethod" name="boostMethod">
+      <select ng-model="vm.parameters.boostMethod" name="boostMethod" class="form-control">
         <option data-ng-repeat="method in vm.boostMethods" value="{{ method }}">{{ method }}</option>
       </select>
     </div>
@@ -45,15 +45,15 @@
     <div class="form-group form-inline col-md-4">
       <label uib-popover-html="vm.tooltips['algorithm']"
             popover-trigger="click" popover-placement="bottom" for="algorithm">Algorithm</label>
-      <select ng-model="vm.parameters.algorithm" name="algorithm">
+      <select ng-model="vm.parameters.algorithm" name="algorithm" class="form-control" >
         <option data-ng-repeat="algo in vm.algorithms" value="{{ algo }}">{{ algo }}</option>
       </select>
     </div>
 
-    <div class="form-group col-md-12"><!-- TODO: Should this be col-md-4 ?-->
+    <div class="form-group form-inline col-md-4">
       <label uib-popover-html="vm.tooltips['direction']"
             popover-trigger="click" popover-placement="bottom" for="forward">Track direction</label>
-      <select ng-model="vm.parameters.forwards" name="forward">
+      <select ng-model="vm.parameters.forwards" name="forward" class="form-control">
         <option data-ng-repeat="dir in vm.directions" value="{{ dir }}">{{ dir }}</option>
       </select>
     </div>
@@ -73,21 +73,21 @@
     <div class="form-group form-inline col-md-4">
       <label uib-popover-html="vm.tooltips['weighFunc']"
             popover-trigger="click" popover-placement="bottom" for="aggWeighFunc">Weighing function</label>
-      <select ng-model="vm.parameters.aggWeighFunction" name="aggWeighFunc">
+      <select ng-model="vm.parameters.aggWeighFunction" name="aggWeighFunc" class="form-control">
         <option data-ng-repeat="wFunc in vm.weighFuncs" value="{{ wFunc }}">{{ wFunc }}</option>
       </select>
     </div>
 
     <div class="form-group form-inline col-md-4">
       <label uib-popover-html="vm.tooltips['wFParam']"
-            popover-trigger="click" popover-placement="bottom" for="aggWFParam">Weighing function parameter</label>
+            popover-trigger="click" popover-placement="bottom" for="aggWFParam">Function shape</label>
       <input type="number" ng-model="vm.parameters.aggWFParam" min="1" max="10" step="0.1" class="form-control" id="aggWFParam">
     </div>
 
     <div class="form-group form-inline col-md-4" ng-if="vm.features.canClean">
       <label uib-popover-html="vm.tooltips['doCleaning']"
             popover-trigger="click" popover-placement="bottom" for="doCleaning">Do cleaning ?</label>
-      <select ng-model="vm.parameters.doCleaning" name="doCleaning">
+      <select ng-model="vm.parameters.doCleaning" name="doCleaning" class="form-control">
         <option data-ng-repeat="opt in vm.doCleaning" value="{{ opt }}">{{ opt }}</option>
       </select>
     </div>
