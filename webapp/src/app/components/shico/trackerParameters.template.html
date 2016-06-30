@@ -24,8 +24,9 @@
       </div>
 
       <div class="form-group form-inline col-md-4">
-        <label for="minDist">Minimum concept distance</label>
-        <input type="number" ng-model="vm.parameters.minDist" min="0.1" max="10.0" step="0.1" class="form-control" id="minDist">
+        <label uib-popover-html="vm.tooltips['minSim']"
+              popover-trigger="click" popover-placement="bottom" for="minSim">Minimum concept similarity</label>
+        <input type="number" ng-model="vm.parameters.minSim" min="0.1" max="10.0" step="0.1" class="form-control" id="minSim">
       </div>
 
       <div class="form-group form-inline col-md-4">

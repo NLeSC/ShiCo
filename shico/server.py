@@ -103,7 +103,7 @@ trackParser.add_argument('maxTerms', type=int, default=10)
 trackParser.add_argument('maxRelatedTerms', type=int, default=10)
 trackParser.add_argument('startKey', type=validatestr, default=None)
 trackParser.add_argument('endKey', type=validatestr, default=None)
-trackParser.add_argument('minDist', type=float, default=0.0)
+trackParser.add_argument('minSim', type=float, default=0.0)
 trackParser.add_argument('wordBoost', type=float, default=1.0)
 trackParser.add_argument('forwards', type=validDirection, default=True)
 trackParser.add_argument('boostMethod', type=sumSimilarity, default=True)
@@ -153,7 +153,7 @@ def trackWord(terms):
                         maxRelatedTerms=params['maxRelatedTerms'],
                         startKey=params['startKey'],
                         endKey=params['endKey'],
-                        minDist=params['minDist'],
+                        minSim=params['minSim'],
                         wordBoost=params['wordBoost'],
                         forwards=params['forwards'],
                         sumSimilarity=params['boostMethod'],

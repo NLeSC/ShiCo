@@ -14,7 +14,7 @@
       maxRelatedTerms: 10,
       startKey: '',
       endKey: '',
-      minDist: 0.7,
+      minSim: 0.7,
       wordBoost: 1.0,
       forwards: 'Forward',
       boostMethod: 'Sum similarity',
@@ -47,6 +47,7 @@
     loadToolTip('/help/maxTerms.md'       , 'maxTerms');
     loadToolTip('/help/algorithm.md'      , 'algorithm');
     loadToolTip('/help/maxRelatedTerms.md', 'maxRelatedTerms');
+    loadToolTip('/help/minSim.md'         , 'minSim');
 
     var service = {
       getParameters: getParameters,

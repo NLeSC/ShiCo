@@ -100,22 +100,22 @@ class VocabularyMonitorTest(unittest.TestCase):
         self.assertGreater(len(keys), len(results),
                            'Should have less results than number of models')
 
-    def testTrackTermMinDist(self):
+    def testTrackTermMinSim(self):
         '''Test that min distance gives only terms with distance greater than
         given distance'''
         seedTerms = 'x'
-        minDists = [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        minSims = [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
-        for minDist in minDists:
-            _, yLinks = self.vm.trackClouds(seedTerms, minDist=minDist)
+        for minSim in minSims:
+            _, yLinks = self.vm.trackClouds(seedTerms, minSim=minSim)
             for links in yLinks.itervalues():
                 for seed, terms in links.iteritems():
                     dists = [dist for word, dist in terms if word != seed]
                     if len(dists) > 0:
-                        self.assertGreater(min(dists), minDist,
+                        self.assertGreater(min(dists), minSim,
                                            'Minimum possible distance should '
                                            'be %.2f but seed %s is %.2f of '
-                                           'some terms' % (minDist, seed,
+                                           'some terms' % (minSim, seed,
                                                            min(dists)))
 
     def testTrackTermNonAdaptive(self):
