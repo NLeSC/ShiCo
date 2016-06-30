@@ -24,6 +24,11 @@ def _getMDSEmbedding(dists):
     xyEmbedding = mds.fit(dists).embedding_
     return xyEmbedding
 
+def _normalizeCloud(X):
+    X -= X.min(axis=0)
+    X /= X.max(axis=0)
+    X -= X.mean(axis=0)
+    return X
 
 def _findTransform(wordsT0, locsT0, wordsT1, locsT1):
     matchingTerms = list(set(wordsT0).intersection(set(wordsT1)))
@@ -62,6 +67,7 @@ def doSpaceEmbedding(monitor, results, aggMetadata):
         if wordsT0 is not None:
             T = _findTransform(wordsT0, locsT0, wordsT1, locsT1)
             locsT1 = locsT1.dot(T)
+            locsT1 = _normalizeCloud(locsT1)
 
         wordsT0 = wordsT1
         locsT0  = locsT1
