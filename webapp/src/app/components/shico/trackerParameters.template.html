@@ -9,7 +9,7 @@
     <button type="button" class="btn btn-primary" ng-click="vm.toggleOpen()"> + </button>
   </div>
 
-  <div uib-collapse="!isOpen" class="col-md-12">
+  <div uib-collapse="!vm.isOpen" class="col-md-12">
     <div class="form-group form-inline col-md-4">
       <label uib-popover-html="vm.tooltips['maxTerms']"
             popover-trigger="click" popover-placement="bottom" for="maxConcepts">Max terms</label>

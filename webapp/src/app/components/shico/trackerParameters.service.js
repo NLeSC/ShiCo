@@ -14,7 +14,7 @@
       maxRelatedTerms: 10,
       startKey: '',
       endKey: '',
-      minDist: 0.5,
+      minSim: 0.5,
       wordBoost: 1.0,
       forwards: 'Forward',
       boostMethod: 'Sum similarity',
