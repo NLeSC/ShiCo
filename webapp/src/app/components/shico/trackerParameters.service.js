@@ -14,7 +14,7 @@
       maxRelatedTerms: 10,
       startKey: '',
       endKey: '',
-      minDist: 0.7,
+      minDist: 0.5,
       wordBoost: 1.0,
       forwards: 'Forward',
       boostMethod: 'Sum similarity',
@@ -22,7 +22,7 @@
       // Aggregator parameters:
       aggWeighFunction: 'Gaussian',
       aggWFParam: 1,
-      aggYearsInInterval: 5,
+      aggYearsInInterval: 2,
       aggWordsPerYear: 5,
       doCleaning: 'No'
     };
