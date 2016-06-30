@@ -24,6 +24,10 @@
       data: []
     };
 
+    vm.vocabularies = {
+      plainText: ''
+    };
+
     vm.yearLabels = [];
     vm.slider_options = {
       floor: 0,
@@ -39,8 +43,8 @@
       streamGraph: vm.streamGraph,
       forceGraph:  vm.forceGraph,
       scatterGraph: vm.scatterGraph,
+      vocabularies: vm.vocabularies,
       slider_options: vm.slider_options
-
     };
     return service;
 
@@ -50,6 +54,7 @@
 
     // Update graphs with the given data
     function update(data) {
+      // Keep raw data for further processing if required
       vm.rawData = data;
 
       // Collect all words and year labels on data
@@ -82,6 +87,14 @@
       vm.streamGraph.data = streamData;
       vm.forceGraph.data = forceData;
       vm.scatterGraph.data = scatterData;
+      vm.vocabularies.plainText = 'We will need to send data from the server...';
+      vm.vocabularies['1980'] = {
+        'seed1': [ 'word1','word2','word3']
+      };
+      vm.vocabularies['1981'] = {
+        'seed1': [ 'word1','word2','word3'],
+        'seed2': [ 'word4','word5','word6']
+      };
 
       vm.slider_options.ceil = vm.yearLabels.length-1;
     }

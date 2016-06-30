@@ -24,6 +24,9 @@
       options='vm.scatterGraph.options'>
     </nvd3>
   </div>
+  <div class="row col-md-12">
+    Vocabularies: {{ vm.vocabularies.plainText }}
+  </div>
   <div class="row col-md-12 pager">
     <button class="btn btn-success" ng-csv="vm.downloadData()" filename="test.csv">Save data</button>
   </div>
