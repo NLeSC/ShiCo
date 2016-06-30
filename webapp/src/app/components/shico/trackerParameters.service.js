@@ -43,7 +43,10 @@
     }
 
     vm.tooltips = {};
-    loadToolTip('/help/algorithm.md', 'algorithm');
+    loadToolTip('/help/seedConcept.md'    , 'seedConcept');
+    loadToolTip('/help/maxTerms.md'       , 'maxTerms');
+    loadToolTip('/help/algorithm.md'      , 'algorithm');
+    loadToolTip('/help/maxRelatedTerms.md', 'maxRelatedTerms');
 
     var service = {
       getParameters: getParameters,

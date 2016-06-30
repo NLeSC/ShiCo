@@ -1,5 +1,6 @@
 <div class="row form-horizontal col-md-12">
-  <p class="lead">Concept search</p>
+  <p class="lead" uib-popover-html="vm.tooltips['seedConcept']"
+        popover-trigger="click" popover-placement="bottom">Concept search</p>
   <div class="form-group col-md-11">
     <input type="text" ng-model="vm.parameters.terms" class="form-control" id="terms" placeholder="Search concepts">
   </div>
@@ -11,12 +12,14 @@
   <div uib-collapse="!isOpen">
     <div>
       <div class="form-group form-inline col-md-4">
-        <label for="maxConcepts">Max terms</label>
+        <label uib-popover-html="vm.tooltips['maxTerms']"
+              popover-trigger="click" popover-placement="bottom" for="maxConcepts">Max terms</label>
         <input type="number" ng-model="vm.parameters.maxTerms" min="1" max="20" class="form-control" id="maxConcepts">
       </div>
 
       <div class="form-group form-inline col-md-4">
-        <label for="maxRelatedTerms">Max related terms</label>
+        <label uib-popover-html="vm.tooltips['maxRelatedTerms']"
+              popover-trigger="click" popover-placement="bottom" for="maxRelatedTerms">Max related terms</label>
         <input type="number" ng-model="vm.parameters.maxRelatedTerms" min="1" max="20" class="form-control" id="maxRelatedTerms">
       </div>
 
