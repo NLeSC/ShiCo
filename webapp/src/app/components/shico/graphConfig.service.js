@@ -92,7 +92,6 @@
 
         if(d_data[0][0]) { // Make sure we can read an object
           var word = d_data[0][0].word;
-          console.log(word);
           d3.select(d.parentNode)
             .append("text")
             .attr("class", "label")

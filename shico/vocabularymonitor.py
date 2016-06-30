@@ -54,7 +54,7 @@ class VocabularyMonitor():
         return list(self._models.keys())
 
     def trackClouds(self, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                    startKey=None, endKey=None, minDist=0.0, wordBoost=1.00,
+                    startKey=None, endKey=None, minSim=0.0, wordBoost=1.00,
                     forwards=True, sumSimilarity=False, algorithm='adaptive',
                     cleaningFunction=None):
         '''Given a list of seed terms, generate a set of results from the
@@ -69,8 +69,9 @@ class VocabularyMonitor():
                            w2v model for each seed term.
         startKey        -- Year key of first w2v model to be used.
         endKey          -- Year key of last w2v model to be used.
-        minDist         -- Distance threshold (in embeded space) for distance
-                           of terms found.
+        minSim          -- Minimum similarity threshold (in embeded space) for
+                           of terms found (terms with similarity smaller than
+                           minSim are discarded).
         wordBoost       -- Weight boost automatically given to seed terms.
         forwards        -- Perform search in the forward time direction. Set to
                            False for backward direction.
@@ -140,7 +141,7 @@ class VocabularyMonitor():
                     self._trackInlink(self._models[sKey], aSeedSet,
                                       maxTerms=maxTerms,
                                       maxRelatedTerms=maxRelatedTerms,
-                                      minDist=minDist,
+                                      minSim=minSim,
                                       wordBoost=wordBoost,
                                       sumSimilarity=sumSimilarity,
                                       cleaningFunction=cleaningFunction)
@@ -150,7 +151,7 @@ class VocabularyMonitor():
                     self._trackCore(self._models[sKey], aSeedSet,
                                     maxTerms=maxTerms,
                                     maxRelatedTerms=maxRelatedTerms,
-                                    minDist=minDist,
+                                    minSim=minSim,
                                     cleaningFunction=cleaningFunction)
             else:
                 raise Exception('Algorithm not supported: ' + algorithm)
@@ -162,26 +163,26 @@ class VocabularyMonitor():
         return yTerms, yLinks
 
     def _trackInlink(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                     minDist=0.0, wordBoost=1.0, sumSimilarity=False,
+                     minSim=0.0, wordBoost=1.0, sumSimilarity=False,
                      cleaningFunction=None):
         '''Perform in link search'''
         if sumSimilarity:
             terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
-                maxRelatedTerms=maxRelatedTerms, minDist=minDist,
-                wordBoost=wordBoost,  reward=lambda tDist: 1.0 - tDist,
+                maxRelatedTerms=maxRelatedTerms, minSim=minSim,
+                wordBoost=wordBoost,  reward=lambda tSim: 1.0 - tSim,
                 cleaningFunction=cleaningFunction)
         else:
             terms, links = self._trackCore(
                 model, seedTerms, maxTerms=maxTerms,
-                maxRelatedTerms=maxRelatedTerms, minDist=minDist,
+                maxRelatedTerms=maxRelatedTerms, minSim=minSim,
                 cleaningFunction=cleaningFunction)
         # Make a new seed set
         newSeedSet = [word for word, weight in terms]
         return terms, links, newSeedSet
 
     def _trackCore(self, model, seedTerms, maxTerms=10, maxRelatedTerms=10,
-                   minDist=0.0, wordBoost=1.0, reward=lambda x: 1.0,
+                   minSim=0.0, wordBoost=1.0, reward=lambda x: 1.0,
                    cleaningFunction=None):
         '''Given a list of seed terms, queries the given model to produce a
         list of terms. A dictionary of links is also returned as a dictionary:
@@ -198,11 +199,11 @@ class VocabularyMonitor():
             dRelatedTerms[term] = wordBoost
             links[term].append((term, 0.0))
 
-            for newTerm, tDist in newTerms:
-                if tDist < minDist:
+            for newTerm, tSim in newTerms:
+                if tSim < minSim:
                     break
-                dRelatedTerms[newTerm] += reward(tDist)
-                links[term].append((newTerm, tDist))
+                dRelatedTerms[newTerm] += reward(tSim)
+                links[term].append((newTerm, tSim))
 
         # Select the top N terms with biggest weights (where N=maxTerms)
         topTerms = _getCommonTerms(dRelatedTerms, maxTerms)
