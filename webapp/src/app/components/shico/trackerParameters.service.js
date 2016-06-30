@@ -42,6 +42,7 @@
       canClean: false
     }
 
+    // Load tool tips for all parameters
     vm.tooltips = {};
     loadToolTip('/help/seedConcept.md'    , 'seedConcept');
     loadToolTip('/help/maxTerms.md'       , 'maxTerms');
@@ -51,6 +52,12 @@
     loadToolTip('/help/boostMethod.md'    , 'boostMethod');
     loadToolTip('/help/algorithm.md'      , 'algorithm');
     loadToolTip('/help/direction.md'      , 'direction');
+    loadToolTip('/help/yearsInInterval.md', 'yearsInInterval');
+    loadToolTip('/help/wordsPerYear.md'   , 'wordsPerYear');
+    loadToolTip('/help/weighFunc.md'      , 'weighFunc');
+    loadToolTip('/help/wFParam.md'        , 'wFParam');
+    loadToolTip('/help/doCleaning.md'     , 'doCleaning');
+    loadToolTip('/help/yearPeriod.md'     , 'yearPeriod');
 
     var service = {
       getParameters: getParameters,
