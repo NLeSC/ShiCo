@@ -9,84 +9,85 @@
     <button type="button" class="btn btn-primary" ng-click="isOpen = !isOpen"> + </button>
   </div>
 
-  <div uib-collapse="!isOpen">
-    <div>
-      <div class="form-group form-inline col-md-4">
-        <label uib-popover-html="vm.tooltips['maxTerms']"
-              popover-trigger="click" popover-placement="bottom" for="maxConcepts">Max terms</label>
-        <input type="number" ng-model="vm.parameters.maxTerms" min="1" max="20" class="form-control" id="maxConcepts">
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label uib-popover-html="vm.tooltips['maxRelatedTerms']"
-              popover-trigger="click" popover-placement="bottom" for="maxRelatedTerms">Max related terms</label>
-        <input type="number" ng-model="vm.parameters.maxRelatedTerms" min="1" max="20" class="form-control" id="maxRelatedTerms">
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label uib-popover-html="vm.tooltips['minSim']"
-              popover-trigger="click" popover-placement="bottom" for="minSim">Minimum concept similarity</label>
-        <input type="number" ng-model="vm.parameters.minSim" min="0.1" max="10.0" step="0.1" class="form-control" id="minSim">
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label for="wordBoost">Word boost</label>
-        <input type="number" ng-model="vm.parameters.wordBoost" min="0.1" max="10.0" step="0.1" class="form-control" id="wordBoost">
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label for="sumDistances">Boost method</label>
-        <select ng-model="vm.parameters.boostMethod" name="boostMethod">
-          <option data-ng-repeat="method in vm.boostMethods" value="{{ method }}">{{ method }}</option>
-        </select>
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label uib-popover-html="vm.tooltips['algorithm']"
-              popover-trigger="click" popover-placement="bottom" for="algorithm">Algorithm</label>
-        <select ng-model="vm.parameters.algorithm" name="algorithm">
-          <option data-ng-repeat="algo in vm.algorithms" value="{{ algo }}">{{ algo }}</option>
-        </select>
-      </div>
-
-      <div class="form-group col-md-12"><!-- TODO: Should this be col-md-4 ?-->
-        <label for="forward">Track direction</label>
-        <select ng-model="vm.parameters.forwards" name="forward">
-          <option data-ng-repeat="dir in vm.directions" value="{{ dir }}">{{ dir }}</option>
-        </select>
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label for="yearsInterval">Years in interval</label>
-        <input type="number" ng-model="vm.parameters.aggYearsInInterval" min="1" max="10" step="1" class="form-control" id="yearsInterval">
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label for="wordsPerYear">Words per year</label>
-        <input type="number" ng-model="vm.parameters.aggWordsPerYear" min="1" max="100" step="1" class="form-control" id="wordsPerYear">
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label for="aggWeighFunc">Weighing function</label>
-        <select ng-model="vm.parameters.aggWeighFunction" name="aggWeighFunc">
-          <option data-ng-repeat="wFunc in vm.weighFuncs" value="{{ wFunc }}">{{ wFunc }}</option>
-        </select>
-      </div>
-
-      <div class="form-group form-inline col-md-4">
-        <label for="aggWFParam">Weighing function parameter</label>
-        <input type="number" ng-model="vm.parameters.aggWFParam" min="1" max="10" step="0.1" class="form-control" id="aggWFParam">
-      </div>
-
-      <div class="form-group form-inline col-md-4" ng-if="vm.features.canClean">
-        <label for="doCleaning">Do cleaning ?</label>
-        <select ng-model="vm.parameters.doCleaning" name="doCleaning">
-          <option data-ng-repeat="opt in vm.doCleaning" value="{{ opt }}">{{ opt }}</option>
-        </select>
-      </div>
+  <div uib-collapse="!isOpen" class="col-md-12">
+    <div class="form-group form-inline col-md-4">
+      <label uib-popover-html="vm.tooltips['maxTerms']"
+            popover-trigger="click" popover-placement="bottom" for="maxConcepts">Max terms</label>
+      <input type="number" ng-model="vm.parameters.maxTerms" min="1" max="20" class="form-control" id="maxConcepts">
     </div>
 
-    <div class="form-group col-md-11">
+    <div class="form-group form-inline col-md-4">
+      <label uib-popover-html="vm.tooltips['maxRelatedTerms']"
+            popover-trigger="click" popover-placement="bottom" for="maxRelatedTerms">Max related terms</label>
+      <input type="number" ng-model="vm.parameters.maxRelatedTerms" min="1" max="20" class="form-control" id="maxRelatedTerms">
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label uib-popover-html="vm.tooltips['minSim']"
+            popover-trigger="click" popover-placement="bottom" for="minSim">Minimum concept similarity</label>
+      <input type="number" ng-model="vm.parameters.minSim" min="0.1" max="10.0" step="0.1" class="form-control" id="minSim">
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label uib-popover-html="vm.tooltips['wordBoost']"
+            popover-trigger="click" popover-placement="bottom" for="wordBoost">Word boost</label>
+      <input type="number" ng-model="vm.parameters.wordBoost" min="0.1" max="10.0" step="0.1" class="form-control" id="wordBoost">
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label uib-popover-html="vm.tooltips['boostMethod']"
+            popover-trigger="click" popover-placement="bottom" for="boostMethod">Boost method</label>
+      <select ng-model="vm.parameters.boostMethod" name="boostMethod">
+        <option data-ng-repeat="method in vm.boostMethods" value="{{ method }}">{{ method }}</option>
+      </select>
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label uib-popover-html="vm.tooltips['algorithm']"
+            popover-trigger="click" popover-placement="bottom" for="algorithm">Algorithm</label>
+      <select ng-model="vm.parameters.algorithm" name="algorithm">
+        <option data-ng-repeat="algo in vm.algorithms" value="{{ algo }}">{{ algo }}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-12"><!-- TODO: Should this be col-md-4 ?-->
+      <label uib-popover-html="vm.tooltips['direction']"
+            popover-trigger="click" popover-placement="bottom" for="forward">Track direction</label>
+      <select ng-model="vm.parameters.forwards" name="forward">
+        <option data-ng-repeat="dir in vm.directions" value="{{ dir }}">{{ dir }}</option>
+      </select>
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label for="yearsInterval">Years in interval</label>
+      <input type="number" ng-model="vm.parameters.aggYearsInInterval" min="1" max="10" step="1" class="form-control" id="yearsInterval">
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label for="wordsPerYear">Words per year</label>
+      <input type="number" ng-model="vm.parameters.aggWordsPerYear" min="1" max="100" step="1" class="form-control" id="wordsPerYear">
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label for="aggWeighFunc">Weighing function</label>
+      <select ng-model="vm.parameters.aggWeighFunction" name="aggWeighFunc">
+        <option data-ng-repeat="wFunc in vm.weighFuncs" value="{{ wFunc }}">{{ wFunc }}</option>
+      </select>
+    </div>
+
+    <div class="form-group form-inline col-md-4">
+      <label for="aggWFParam">Weighing function parameter</label>
+      <input type="number" ng-model="vm.parameters.aggWFParam" min="1" max="10" step="0.1" class="form-control" id="aggWFParam">
+    </div>
+
+    <div class="form-group form-inline col-md-4" ng-if="vm.features.canClean">
+      <label for="doCleaning">Do cleaning ?</label>
+      <select ng-model="vm.parameters.doCleaning" name="doCleaning">
+        <option data-ng-repeat="opt in vm.doCleaning" value="{{ opt }}">{{ opt }}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-12">
       Year period:
       <rzslider rz-slider-model='vm.years.from'
                 rz-slider-high='vm.years.to'

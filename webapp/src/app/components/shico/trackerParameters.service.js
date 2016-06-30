@@ -45,9 +45,12 @@
     vm.tooltips = {};
     loadToolTip('/help/seedConcept.md'    , 'seedConcept');
     loadToolTip('/help/maxTerms.md'       , 'maxTerms');
-    loadToolTip('/help/algorithm.md'      , 'algorithm');
     loadToolTip('/help/maxRelatedTerms.md', 'maxRelatedTerms');
     loadToolTip('/help/minSim.md'         , 'minSim');
+    loadToolTip('/help/wordBoost.md'      , 'wordBoost');
+    loadToolTip('/help/boostMethod.md'    , 'boostMethod');
+    loadToolTip('/help/algorithm.md'      , 'algorithm');
+    loadToolTip('/help/direction.md'      , 'direction');
 
     var service = {
       getParameters: getParameters,
