@@ -172,7 +172,8 @@ def trackWord(terms):
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
     return jsonify(stream=yearTuplesAsDict(aggResults),
                    networks=networks,
-                   embedded=embedded)
+                   embedded=embedded,
+                   vocabs=links)
 
 
 if __name__ == '__main__':

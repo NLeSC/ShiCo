@@ -11,6 +11,7 @@
       chart: {
           type: 'stackedAreaChart',
           height: 500,
+          width: 1000,
           margin : {
               top: 20,
               right: 20,
@@ -52,7 +53,8 @@
     var scatterGraph = {
       chart: {
           type: "scatterChart",
-          height: 450,
+          height: 500,
+          width: 1000,
           color: [ "#1f77b4" ],
           duration: 350,
           zoom: {

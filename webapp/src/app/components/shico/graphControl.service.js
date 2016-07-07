@@ -25,7 +25,7 @@
     };
 
     vm.vocabularies = {
-      plainText: ''
+      data: []
     };
 
     vm.yearLabels = [];
@@ -87,14 +87,7 @@
       vm.streamGraph.data = streamData;
       vm.forceGraph.data = forceData;
       vm.scatterGraph.data = scatterData;
-      vm.vocabularies.plainText = 'We will need to send data from the server...';
-      vm.vocabularies['1980'] = {
-        'seed1': [ 'word1','word2','word3']
-      };
-      vm.vocabularies['1981'] = {
-        'seed1': [ 'word1','word2','word3'],
-        'seed2': [ 'word4','word5','word6']
-      };
+      vm.vocabularies.data = data.vocabs;
 
       vm.slider_options.ceil = vm.yearLabels.length-1;
     }
