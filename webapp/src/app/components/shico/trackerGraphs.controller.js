@@ -12,6 +12,8 @@
     // so directive can find them.
     vm.streamGraph = GraphControlService.streamGraph;
     vm.forceGraph = GraphControlService.forceGraph;
+    vm.scatterGraph = GraphControlService.scatterGraph;
+    vm.vocabularies = GraphControlService.vocabularies;
     vm.slider_options = GraphControlService.slider_options;
     vm.getYearLabel = GraphControlService.getYearLabel;
     vm.yearsInSight = yearsInSight;

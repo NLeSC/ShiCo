@@ -11,6 +11,7 @@
       chart: {
           type: 'stackedAreaChart',
           height: 500,
+          width: 1000,
           margin : {
               top: 20,
               right: 20,
@@ -47,6 +48,61 @@
           tooltip: { contentGenerator: customTooltipContent }
       }
     };
+
+    // NVD3 configuration for scatter plot
+    var scatterGraph = {
+      chart: {
+          type: "scatterChart",
+          height: 500,
+          width: 1000,
+          color: [ "#1f77b4" ],
+          duration: 350,
+          zoom: {
+            enabled: true,
+            scaleExtent: [ 1, 10 ],
+            useFixedDomain: false,
+            useNiceScale: false,
+            horizontalOff: false,
+            verticalOff: false,
+            unzoomEventType: "dblclick.zoom"
+          },
+          tooltip: { enabled: false },
+          showLabels: false,
+          xAxis: {
+            showMaxMin: false,
+            tickFormat: function() { return ''; }
+          },
+          yAxis: {
+            showMaxMin: false,
+            tickFormat: function() { return ''; }
+          },
+          dispatch: {
+            renderEnd: postProcess
+          }
+      }
+    };
+
+    function postProcess(e) {
+      // Remove old labels
+      d3.selectAll(".label").remove();
+
+      d3.selectAll(".nv-scatterChart path")[0].forEach(function(d) {
+        var tf = d3.select(d).attr("transform")
+        var t = d3.transform(tf).translate;
+        t[0] = t[0] + 10;  //moving the translate x by 10 pixel.
+        var d_data = d3.select(d).data();
+
+        if(d_data[0][0]) { // Make sure we can read an object
+          var word = d_data[0][0].word;
+          d3.select(d.parentNode)
+            .append("text")
+            .attr("class", "label")
+            .text(word)
+            .attr("transform", "translate("+t[0]+","+t[1]+")");
+        }
+      });
+    }
+
     var colours = d3.scale.category20();
 
     var yearTickLabels = {};   // Year markers for stream graph
@@ -156,6 +212,8 @@
         return streamConfig;
       } else if(graphName === 'forceGraph'){
         return forceConfig;
+      } else if(graphName === 'scatterGraph'){
+        return scatterGraph;
       }
     }
   }

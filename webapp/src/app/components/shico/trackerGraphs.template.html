@@ -1,23 +1,63 @@
 <div class="row" ng-if="vm.forceGraph.data.length != 0 ">
-  <div class="row col-md-12">
-    <nvd3
-      data='vm.streamGraph.data'
-      options='vm.streamGraph.options'>
-    </nvd3>
-  </div>
-  <div class="row col-md-12">
-    <div class="col-md-4" ng-repeat="(yearIdx,yearData) in vm.forceGraph.data" ng-if="vm.yearsInSight(yearIdx)">
-      <span class="label label-default">{{ vm.getYearLabel(yearIdx) }}</span>
-      <nvd3
-        data='yearData'
-        options='vm.forceGraph.options'
-        on-ready="vm.addBorder">
-      </nvd3>
-    </div>
-    <rzslider ng-hide="!vm.slider_options.ceil"
-               rz-slider-model="vm.forceGraph.currYearIdx"
-               rz-slider-options="vm.slider_options"></rzslider>
-  </div>
+  <uib-tabset active="active">
+    <uib-tab index="0" heading="Stream graph">
+      <div class="row col-md-12">
+        <nvd3
+          data="vm.streamGraph.data"
+          options="vm.streamGraph.options">
+        </nvd3>
+      </div>
+    </uib-tab>
+    <uib-tab index="1" heading="Network graphs">
+      <div class="row col-md-12">
+        <div class="col-md-4" ng-repeat="(yearIdx,yearData) in vm.forceGraph.data" ng-if="vm.yearsInSight(yearIdx)">
+          <span class="badge">{{ vm.getYearLabel(yearIdx) }}</span>
+          <nvd3
+            data="yearData"
+            options="vm.forceGraph.options"
+            on-ready="vm.addBorder">
+          </nvd3>
+        </div>
+        <rzslider ng-hide="!vm.slider_options.ceil"
+                   rz-slider-model="vm.forceGraph.currYearIdx"
+                   rz-slider-options="vm.slider_options"></rzslider>
+      </div>
+    </uib-tab>
+    <uib-tab index="2" heading="Space embedding">
+      <div class="row col-md-12">
+        <nvd3
+          data="vm.scatterGraph.data[vm.forceGraph.currYearIdx]"
+          options="vm.scatterGraph.options">
+        </nvd3>
+        <rzslider ng-hide="!vm.slider_options.ceil"
+                   rz-slider-model="vm.forceGraph.currYearIdx"
+                   rz-slider-options="vm.slider_options"></rzslider>
+      </div>
+    </uib-tab>
+    <uib-tab index="3" heading="Plain text vocabulary">
+      <div class="row col-md-12">
+        <div class="row">
+          <div class="col-md-2 "><h4>Model for years</h4></div>
+          <div class="col-md-10">
+            <div class="col-md-2"><h4>Seed word</h4></div>
+            <div class="col-md-8"><h4>Vocabulary</h4></div>
+          </div>
+        </div>
+        <div class="row" ng-repeat="(year, yLinks) in vm.vocabularies.data">
+          <hr>
+          <div class="col-md-2"><strong>{{ year }}</strong></div>
+          <div class="col-md-10">
+            <div ng-repeat="(seed, terms) in yLinks">
+              <div class="col-md-4"><strong>{{ seed }}</strong></div>
+              <div class="col-md-8">
+                <span ng-repeat="term in terms"> {{ term[0] }} </span>&nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </uib-tab>
+  </uib-tabset>
   <div class="row col-md-12 pager">
     <button class="btn btn-success" ng-csv="vm.downloadData()" filename="test.csv">Save data</button>
   </div>

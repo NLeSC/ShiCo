@@ -14,7 +14,7 @@
       maxRelatedTerms: 10,
       startKey: '',
       endKey: '',
-      minDist: 0.7,
+      minSim: 0.5,
       wordBoost: 1.0,
       forwards: 'Forward',
       boostMethod: 'Sum similarity',
@@ -22,7 +22,7 @@
       // Aggregator parameters:
       aggWeighFunction: 'Gaussian',
       aggWFParam: 1,
-      aggYearsInInterval: 5,
+      aggYearsInInterval: 2,
       aggWordsPerYear: 5,
       doCleaning: 'No'
     };
@@ -42,8 +42,22 @@
       canClean: false
     }
 
+    // Load tool tips for all parameters
     vm.tooltips = {};
-    loadToolTip('/help/algorithm.md', 'algorithm');
+    loadToolTip('/help/seedConcept.md'    , 'seedConcept');
+    loadToolTip('/help/maxTerms.md'       , 'maxTerms');
+    loadToolTip('/help/maxRelatedTerms.md', 'maxRelatedTerms');
+    loadToolTip('/help/minSim.md'         , 'minSim');
+    loadToolTip('/help/wordBoost.md'      , 'wordBoost');
+    loadToolTip('/help/boostMethod.md'    , 'boostMethod');
+    loadToolTip('/help/algorithm.md'      , 'algorithm');
+    loadToolTip('/help/direction.md'      , 'direction');
+    loadToolTip('/help/yearsInInterval.md', 'yearsInInterval');
+    loadToolTip('/help/wordsPerYear.md'   , 'wordsPerYear');
+    loadToolTip('/help/weighFunc.md'      , 'weighFunc');
+    loadToolTip('/help/wFParam.md'        , 'wFParam');
+    loadToolTip('/help/doCleaning.md'     , 'doCleaning');
+    loadToolTip('/help/yearPeriod.md'     , 'yearPeriod');
 
     var service = {
       getParameters: getParameters,

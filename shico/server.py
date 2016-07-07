@@ -1,7 +1,7 @@
 '''ShiCo server.
 
 Usage:
-  server.py  [-f FILES] [-n] [-d] [-c FUNCTIONNAME]
+  server.py  [-f FILES] [-n] [-d] [-p PORT] [-c FUNCTIONNAME]
 
   -f FILES         Path to word2vec model files (glob format is supported)
                    [default: word2vecModels/195[0-1]_????.w2v]
@@ -9,6 +9,7 @@ Usage:
   -d               Run in development mode (debug mode).
   -c FUNCTIONNAME  Name of cleaning function to be applied to output.
                    (example: shico.extras.cleanTermList)
+  -p PORT          Port in which ShiCo should run [default: 8000].
 '''
 from docopt import docopt
 
@@ -18,6 +19,7 @@ from flask.ext.cors import CORS
 
 from vocabularymonitor import VocabularyMonitor
 from vocabularyaggregator import VocabularyAggregator
+from vocabularyembedding import doSpaceEmbedding
 
 from format import yearlyNetwork, getRangeMiddle, yearTuplesAsDict
 
@@ -101,7 +103,7 @@ trackParser.add_argument('maxTerms', type=int, default=10)
 trackParser.add_argument('maxRelatedTerms', type=int, default=10)
 trackParser.add_argument('startKey', type=validatestr, default=None)
 trackParser.add_argument('endKey', type=validatestr, default=None)
-trackParser.add_argument('minDist', type=float, default=0.0)
+trackParser.add_argument('minSim', type=float, default=0.0)
 trackParser.add_argument('wordBoost', type=float, default=1.0)
 trackParser.add_argument('forwards', type=validDirection, default=True)
 trackParser.add_argument('boostMethod', type=sumSimilarity, default=True)
@@ -151,7 +153,7 @@ def trackWord(terms):
                         maxRelatedTerms=params['maxRelatedTerms'],
                         startKey=params['startKey'],
                         endKey=params['endKey'],
-                        minDist=params['minDist'],
+                        minSim=params['minSim'],
                         wordBoost=params['wordBoost'],
                         forwards=params['forwards'],
                         sumSimilarity=params['boostMethod'],
@@ -164,17 +166,22 @@ def trackWord(terms):
                                yearsInInterval=params['aggYearsInInterval'],
                                nWordsPerYear=params['aggWordsPerYear']
                                )
-    aggResults, aggMetadata = agg.aggregate(results)
 
+    aggResults, aggMetadata = agg.aggregate(results)
+    embedded = doSpaceEmbedding(_vm, results, aggMetadata)
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
     return jsonify(stream=yearTuplesAsDict(aggResults),
-                   networks=networks)
+                   networks=networks,
+                   embedded=embedded,
+                   vocabs=links)
+
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     files = arguments['-f']
     binary = not arguments['--non-binary']
     cleaningFunctionStr = arguments['-c']
+    port = int(arguments['-p'])
     initApp(files, binary, cleaningFunctionStr)
     app.debug = arguments['-d']
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(host='0.0.0.0', port=port, threaded=True)
