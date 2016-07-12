@@ -111,8 +111,8 @@ trackParser.add_argument('algorithm', type=validAlgorithm, default='adaptive')
 trackParser.add_argument('doCleaning', type=validCleaning, default=False)
 
 # VocabularyAggregator parameters:
-trackParser.add_argument(
-    'aggWeighFunction', type=validWeighting, default='Gaussian')
+trackParser.add_argument('aggWeighFunction', type=validWeighting,
+                         default='Gaussian')
 trackParser.add_argument('aggWFParam', type=float, default=1.0)
 trackParser.add_argument('aggYearsInInterval', type=int, default=5)
 trackParser.add_argument('aggWordsPerYear', type=int, default=10)

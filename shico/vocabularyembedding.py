@@ -53,6 +53,7 @@ def _findTransform(wordsT0, locsT0, wordsT1, locsT1):
 
 
 def doSpaceEmbedding(monitor, results, aggMetadata):
+    '''Create 2D word embedding from given set of results'''
     embeddedResults = SortedDict()
 
     wordsT0 = None

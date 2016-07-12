@@ -3,6 +3,7 @@ from shico.extras import cleanTermList
 
 
 class ExtrasTest(unittest.TestCase):
+    '''Tests extras package.'''
 
     def testCleanTermList(self):
         '''Test cleanTermList function.'''
