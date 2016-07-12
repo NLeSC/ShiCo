@@ -128,6 +128,7 @@ def _tuplesAsDict(pairList):
 
 
 def wordLocationAsDict(word,loc):
+    '''Wrap the given word and it's (x,y) location in a dictionary.'''
     return {
         'word': word,
         'x': loc[0],
