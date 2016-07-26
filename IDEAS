@@ -1,37 +1,111 @@
 
-A: Vocabulary space (size N, ~600K)
-a: embbeded vector space (size n,300), representing the semantic meaning
 
-B: Vocabulary space (size M, 600K)
-b: embbeded vector space (size m, 300)
+Definitions
+===========
 
-Word 2 vec is the model that maps the vocabulary on the semantic meaning space:
-    F_1 (A) -> a 
-with a matrix it has dimensions (n,N), with the representation `model.syn0norm`.
-Because N > n, the projection is not invertible, but there is a pseudoinverse G such that:
-    F_1( G_1(a) ) = a
+ A: Vocabulary space [N]
+ a: embbeded vector space [M]
 
-This allows us to compare the semantic spaces of A and B:
-1) take a unit vector ui, in a with ui = [0, 0,.. 1, .., 0, 0]
-2) find a word vector W in A via the inverse G_1:
-   W1 = G_1( ui )
-   note that this one is not unique, as the pseudoinverse is not a real inverse:
-   F( W1 + N ) = ui, with N an element in the kernel of F.
-   An interpretation is that as F(N) = 0 by definition, this vector N is meaning less wrt. the semantic subspace.
-3) As W1 is a vector over the vocabulary A, and vocabulary B could be different, map W1 to W2:
-   W2_i = W1_i iff word W1_i is in vocabulary B
-          0    else
-4) Map W2 to the semantic subspace to create the new basis vector ui'
-5) The set of ui' constitute a new basis for b, and define a mapping:
-         a -> b
+ B: Vocabulary space
+ b: embbeded vector space
+
+Word2vec is the linear model that maps a vocabulary on a lower dimensional semantic meaning space:
+    F(A) -> a 
+with a matrix it has dimensions (M,N), with the representation `model.syn0norm`.
+Because N > M, the projection is not invertible, but there is a pseudoinverse G such that:
+    F( G(a) ) = a
+ie. its is a inverse wrt. to the semantic space.
+
+The model is trained in an iterative fasion using some (streamed) input data.
+This raises the question of convergence, or a stopping criterium for the iterative procedure.
 
 
+Interpretation of the semantic subspace is difficult.
+A word similarity score is computed as:
+    S(W1, W2) = < F(W1), F(W2) >
+ie. the dot product between the (normalized) vectors in the embedded space.
 
-Measures for convergence:
-1) distance (difference, interpretation of the word cloud / vector) of:
-    || e' - e || -> 0,
-    e' = G_1( F_1(e) ),   e c A
+Original approach for word similarity is:
 
+    w = F(W), W c A, w c a
+    most similiar word Ws to W is defined as  Ws := argmax_A <F(W),m>, Wi c A
+
+with Wi the most similar words in the vocabulary, and for the innerproduct typically is typically a dot product (cosine similarity).
+This leads to the familiar:
+    W_King - W_man + W_woman = W_Queen
+
+Where addition is addition and substraction of the vectors over the vocabulary, followed by a normalization, and equality means 'queen' is the most similar word in the vocabulary to the resulting sum.
+
+There are some issues with the vocabulary: when the original text is low quality OCR, spelling errors significantly increase the vocabulary, similar words are often random noise.
+
+Inversion of the W2V transformation
+===================================
+
+Although the transformation of the vacobulary on the embedded subspace is per construction not one to one, and so not invertable, we can construct a generalized inverse G with the following properties:
+
+    F( G( w ) = w or
+    F G F = F
+
+ie. G is an inverse on the embedded subspace
+
+
+Research questions
+==================
+
+ 1. When is a model converged?
+ 2. Can we quantify changes in concepts between two (converged) models?
+
+
+
+Alternative similar words algorithm
+-----------------------------------
+W = 'auto'
+Wp = G( w ) = G( F( W ) )
+
+S( W, Wp ) = < F(W), F(Wp) > = < F(W), F(G(F(W))) > = <F(W), F(W)> = 1
+so W and Wp have the same meaning wrt. the word to vec model.
+
+The words with the largest component are words similar to W (proof?)
+
+
+Subspaces
+---------
+English words are similar to other english words, not to dutch words
+
+Can we use this for something?
+Possibly, OCR mistakes are similar to OCR mistakes?
+Misspelt words are similar to correctly spelled words, so using some editing distance correct spelling can be inferred?
+
+Removing subspaces for words that are not interesting can reduce model size / improve performance
+or increase accuracy of model for the interesting words.
+
+
+Model convergence
+-----------------
+
+
+see compare function
+
+1) Using the inverse function create the transform T from embedded space a to embedded space b
+
+2) take Wi on vocab A, with wi_a over embedded space a
+
+3) take the same Wi, now on vocab B, with wi_b over embedded space b
+
+4) Calculate wi_a' = T( wi_a ), a vector over embedded space b
+
+5) the dotproduct si = < wi_a, wi_ap > is an indication of the similarity between spaces a and b.
+   For 'de' 'het', 'een' i get around 0.89, for random other words it goes down to ~ 0.5.
+
+6) Take a large (ish...) set of words Wi, Model convergence (or similarity) is than the average of the si
+
+
+
+
+EOF
+
+
+random thoughts:
 
 
 Construct more interpertable semantic space:
@@ -45,7 +119,7 @@ get word with inverse
 set middle 50% of vector to zero (keep max negative and positive values)
 
 def setZero(W):
-    d = 40
+    d = 35 # sets center interval to zero [40,60], 40 works
     c0 = np.percentile(W, d)
     c1 = np.percentile(W, 100 - d)
     Wp = np.where(W < c0, W, 0)
@@ -53,8 +127,8 @@ def setZero(W):
     Wp = Wp / np.linalg.norm(Wp)
     return Wp
 
-def show(v):
-    W = V2W_A(v)
+def show(x):
+    W = np.copy(x)
     W.sort()
     W = W[::-1]
     plt.plot(W)
@@ -66,8 +140,7 @@ def loop(v):
     v = W2V_A(W)
     return v
 
-def pp(v):
-    W = V2W_A(v)
+def pp(W):
     printVocabTopW(A, W, 10)
     remaining = np.sum( np.where( W > 0.005, 1, 0) )
     print "Elements larger than 0.005: ", remaining
@@ -76,20 +149,27 @@ Wmens = setZero( V2W_A( vmens ) )
 Wmens /= np.linalg.norm(Wmens)
 
 while True:
-    # constrain
-    W = V2W_A( v )
+    # # constrain
+    # W = V2W_A( v )
+    # W = setZero( W )
+    # 
+    # # orthogonalize
+    # print "Dot product: ", np.dot(W, Wmens)
+    # W -= 0.01 * np.dot(W, Wmens)
+    #
+    # # re normalize
+    # W = W / np.linalg.norm(W)
+    # pp(v)
+    # transform Vocab -> Semantic -> Vocab
+    v = W2V_A(W)
+    W = V2W_A(v)
+    # truncate
     W = setZero( W )
-
-    # orthogonalize
-    print "Dot product: ", np.dot(W, Wmens)
-    W -= 0.01 * np.dot(W, Wmens)
-
+    #
     # re normalize
     W = W / np.linalg.norm(W)
-
-    # get vector
-    v = W2V_A(W)
-    pp(v)
+    #
+    pp(W)
 
 seed = 'boek'
 v = A[seed]
@@ -104,7 +184,143 @@ W2V( W1 + e1 ) = W2V(W1) + W2V(e1) = v1 + W2V(e1)
 W2V( W2 - W1 ) = W2V(W2) - W2V(W1)
                = v1 - v1 = 0
 
+
+
+
+# attempt 2
+
+# seed a concept vector using random word:
+seed = 'auto'
+v0 = A[seed]
+w1 = V2W_A( v0 )
+
+wn = noise(w1)
+v1 -= W2V_A(wn)
+w2 = V2W_A( v1 )
+
+def denoise(W):
+    norm = np.linalg.norm(W)
+    # noise
+    wn = noise(W)
+    vn = W2V_A(wn)
+
+    # word
+    v = W2V_A(W)
+    W = V2W_A(v - vn)
+
+    return W * norm / np.linalg.norm(W)
+
+
+def noise(W):
+    d = 40
+    c0 = np.percentile(W, d)
+    c1 = np.percentile(W, 100 - d)
+    print "Noise are components between: ", c0, c1
+    N = np.where(W > c0, W, 0)
+    N = np.where(N < c1, N, 0)
+    return N
+
+def support(W, cutoff=0.005):
+    C = np.where(W > cutoff, 1, 0)
+    count = np.count_nonzero(C)
+    C = np.where(W < -cutoff, 1, 0)
+    count += np.count_nonzero(C)
+    return count
+
+
+
+
+
 OBSERVATION:
     noise and OCR mistakes seem to cluster: printVocabTopW(A, V2W_A( A['dc7xd6'] ), 1000)
 
     investigate if we can get a proper rotation having:  O x O.transpose = 1
+
+
+
+
+APPENDIX
+
+
+Single word from vocab to subspace and back, compared to most_similar using cosine similarity
+---------------------------------------------------------------------------------------------
+
+W_de = TextToWord(A, 'duitsland')
+w_de = W2V_A(W_de)
+W_dep = V2W_A(w_de)
+
+printVocabTopW(A, W_dep,20 )                 In [15]: A.most_similar('duitsland', topn=20)
+     1            duitsland 0.000625      duiteland          0.6922247  6
+     2   x          berlijn 0.000368      duisland           0.6888055  10
+     3   x           europa 0.000355      puitsland          0.6705341
+     4   x        dultsland 0.000353      dultsland          0.6495737  4
+     5   x       oostenrijk 0.000337      duitland           0.6345005  9
+     6   x        duiteland 0.000334      duitsiand          0.6214215  8
+     7            balboastr 0.000333      oostenrijk         0.6211544  5
+     8   x        duitsiand 0.000331      duitslan           0.6196972  
+     9   x         duitland 0.000328      saarland           0.6124124  
+    10   x         duisland 0.000320      europa             0.6115236  3
+    11              bcrlijn 0.000320      bcrlijn            0.5975686  
+    12             duitslar 0.000318      westduitsland      0.5970750  
+    13   x           berlün 0.000316      belgi\xeb          0.5910829  
+    14           berlijners 0.000310      duits\xefand       0.5843597  
+    15           denemarken 0.000303      duitsand           0.5822758
+    16               èuropa 0.000298      juitsland          0.5808008
+    17               italië 0.000298      potthof            0.5797810
+    18              oostals 0.000297      berl\xfcn          0.5766360   13
+    19              itsland 0.000296      tsjechoslawakije   0.5761960
+    20               beriyn 0.000294      berlijn            0.5743572   2
+
+printVocabTopW(A, W_autop, 20 )       A.most_similar('auto', topn= 20)
+     1              auto 0.000604        vrachtauto    , 0.8369817   2
+     2   x    vrachtauto 0.000472        personenauto  , 0.7809889   3
+     3   x  personenauto 0.000459        wagen         , 0.7532970   5
+     4   x    bestelauto 0.000402        bestelauto    , 0.7515405   4
+     5   x         wagen 0.000395        luxeauto      , 0.7153906   
+     6   x          taxi 0.000382        autobus       , 0.7139774   7
+     7   x       autobus 0.000356        motorfiets    , 0.7121499   9
+     8   x         betja 0.000355        bestelwagen   , 0.7118343   11
+     9   x    motorfiets 0.000352        taxi          , 0.7072196   6
+    10   x   vrachtwagen 0.000348        politieauto   , 0.7047043   17
+    11   x   bestelwagen 0.000343        vrachtwagen   , 0.7028629   10
+    12   x          jeep 0.000340        zandauto      , 0.6969267   18
+    13   x     bromfiets 0.000332        tankauto      , 0.6932210   20
+    14             truck 0.000322        bromfiets     , 0.6836514   13
+    15   x         fiets 0.000318        betja         , 0.6789190   8
+    16   x       scooter 0.000318        scooter       , 0.6765171   16
+    17   x   politieauto 0.000317        jeep          , 0.6692588   12
+    18   x      zandauto 0.000314        fiets         , 0.6658753   15
+    19      motorrijwiel 0.000311        brandweerauto , 0.6654439   
+    20   x      tankauto 0.000310        veeauto       , 0.6617125
+
+
+
+printVocabTopW(A, W_vakantiep, 20 )    A.most_similar('vakantie', topn=20)
+     1           vakantie 0.000643         vacantie              0.8268257  2
+     2   x       vacantie 0.000520         doorbrachten          0.5483300  9
+     3   x         verlof 0.000294         doorbrengt            0.5470107  10
+     4   x    doorbrengen 0.000287         vacantle              0.5408374  18
+     5   x      vacanties 0.000283         doorbrengen           0.5392920  4
+     6   x      vakanties 0.000277         vacanties             0.5362471  5
+     7   x       kamperen 0.000268         zomervacantie         0.5348774  19
+     8       ziekteverlof 0.000265         wintervakantie        0.5345404  
+     9   x   doorbrachten 0.000260         zomervakantie         0.5296334  17
+    10   x     doorbrengt 0.000254         vakanties             0.5253345  6
+    11           verblijf 0.000248         vaeantie              0.5161871  16
+    12               reis 0.000241         weekeinden            0.5048118  13
+    13   x     weekeinden 0.000238         vacantic              0.4983476  
+    14               trip 0.000238         kamperen              0.4972816  7
+    15           pensioen 0.000235         verlof                0.4934094  3
+    16   x       vaeantie 0.000233         paasvakantie          0.4889357  
+    17   x  zomervakantie 0.000233         huwelijksreis         0.4856010  20
+    18   x       vacantle 0.000228         doorbracht            0.4843416  
+    19   x  zomervacantie 0.000227         vacantietocht         0.4752012  
+    20   x  huwelijksreis 0.000223         wittebroodsweken      0.4738694
+
+
+
+w = W2V_A( W )
+W_koning = TextToWord(A, 'koning')
+w_koning = W2V_A( W_koning )
+wp = w_koning - W2V_A( TextToWord(A, 'man' ) ) + W2V_A( TextToWord(A, 'vrouw') )
+
