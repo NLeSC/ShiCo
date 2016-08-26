@@ -1,4 +1,5 @@
 from collections import Counter
+import numpy as np
 
 
 def getRangeMiddle(first, last=None):
@@ -131,6 +132,6 @@ def wordLocationAsDict(word,loc):
     '''Wrap the given word and it's (x,y) location in a dictionary.'''
     return {
         'word': word,
-        'x': loc[0],
-        'y': loc[1]
+        'x': 0 if np.isnan(loc[0]) else loc[0],
+        'y': 0 if np.isnan(loc[1]) else loc[1]
     }
