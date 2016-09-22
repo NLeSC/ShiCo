@@ -1,7 +1,8 @@
 import unittest
 import json
 import shico.server
-
+import shico.server.app
+from shico.server.utils import initApp
 
 class ServerTest(unittest.TestCase):
 
@@ -9,8 +10,8 @@ class ServerTest(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
-        shico.server.initApp('tests/w2vModels/*.w2v', True, None)
-        self.app = shico.server.app.test_client()
+        initApp(shico.server.app.app, 'tests/w2vModels/*.w2v', True, None)
+        self.app = shico.server.app.app.test_client()
 
     def testTrackService(self):
         '''Test calls to /track/<terms>. Response should be valid JSON with the
