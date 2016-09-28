@@ -1,5 +1,5 @@
 ''' RUN:
-$ gunicorn --bind 0.0.0.0:5000 shico.server.wsgi:app
+$ gunicorn --bind 0.0.0.0:8000 --timeout 1200 shico.server.wsgi:app
 '''
 
 from shico.server.app import app
