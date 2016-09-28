@@ -69,7 +69,7 @@ class TestFormat(unittest.TestCase):
                                  % year)
 
     def testYearTuplesAsDict(self):
-        '''???'''
+        '''Test converting tuple dictionary to nested dictionary'''
         dicts = fmt.yearTuplesAsDict(self._aggVocab)
         self.assertEqual(sorted(dicts.keys()), list(self._aggVocab.keys()),
                          'A dictionary should be created for each aggregated '
@@ -78,3 +78,13 @@ class TestFormat(unittest.TestCase):
             self.assertEqual(len(d), len(self._aggVocab[year]),
                              'Dict should have same number of items as '
                              'aggregated vocabulary but %s does not' % year)
+
+    def testWordLocationAsDict(self):
+        '''Test creating word-location dictionary'''
+        word = 'w1'
+        loc = (0,1)
+        d = fmt.wordLocationAsDict(word,loc)
+        self.assertIsInstance(d, dict,' Should be a dictionary')
+        self.assertEqual(sorted(d.keys()),
+                         sorted(['word', 'x', 'y']),
+                         'Should contain "word", "x" and "y"')
