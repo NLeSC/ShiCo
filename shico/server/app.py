@@ -1,7 +1,7 @@
 '''ShiCo server.
 
 Usage:
-  server.py  [-f FILES] [-n] [-d] [-p PORT] [-c FUNCTIONNAME]
+  app.py  [-f FILES] [-n] [-d] [-p PORT] [-c FUNCTIONNAME]
 
   -f FILES         Path to word2vec model files (glob format is supported)
                    [default: word2vecModels/195[0-1]_????.w2v]
