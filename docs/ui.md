@@ -18,19 +18,19 @@ The search bar has some additional features:
 
 The following is the list of parameters (with a link to a brief explanation) which can be used to control your concept search:
 
- - [Max Terms](/webapp/help/maxTerms.md)
- - [Max related terms](/webapp/help/maxRelatedTerms.md)
- - [Minimum concept similarity](/webapp/help/minSim.md)
- - [Word boost](/webapp/help/wordBoost.md)
- - [Boost method](/webapp/help/boostMethod.md)
- - [Algorithm](/webapp/help/algorithm.md)
- - [Track direction](/webapp/help/direction.md)
- - [Years in interval](/webapp/help/yearsInInterval.md)
- - [Words per year](/webapp/help/wordsPerYear.md)
- - [Weighing function](/webapp/help/weighFunc.md)
- - [Function shape](/webapp/help/wFParam.md)
- - [Do cleaning ?](/webapp/help/doCleaning.md) (only shown if your backend uses a cleaning function).
- - [Year period](/webapp/help/yearPeriod.md)
+ - [Max Terms](/webapp/src/help/maxTerms.md)
+ - [Max related terms](/webapp/src/help/maxRelatedTerms.md)
+ - [Minimum concept similarity](/webapp/src/help/minSim.md)
+ - [Word boost](/webapp/src/help/wordBoost.md)
+ - [Boost method](/webapp/src/help/boostMethod.md)
+ - [Algorithm](/webapp/src/help/algorithm.md)
+ - [Track direction](/webapp/src/help/direction.md)
+ - [Years in interval](/webapp/src/help/yearsInInterval.md)
+ - [Words per year](/webapp/src/help/wordsPerYear.md)
+ - [Weighing function](/webapp/src/help/weighFunc.md)
+ - [Function shape](/webapp/src/help/wFParam.md)
+ - [Do cleaning ?](/webapp/src/help/doCleaning.md) (only shown if your backend uses a cleaning function).
+ - [Year period](/webapp/src/help/yearPeriod.md)
 
 ## Produced graphics
 
