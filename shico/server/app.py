@@ -48,6 +48,7 @@ def trackWord(terms):
     response.'''
     params = app.config['trackParser'].parse_args()
     termList = terms.split(',')
+    termList = [ term.strip() for term in termList ]
     termList = [ term.lower() for term in termList ]
     results, links = \
         app.config['vm'].trackClouds(termList, maxTerms=params['maxTerms'],
