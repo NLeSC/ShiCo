@@ -1,6 +1,6 @@
 # What should you do if you want to modify ShiCo?
 
- - Be brave!
+Be brave! And get in touch if you need help. Pull requests are very welcome.
 
 ## Backend
 
@@ -15,6 +15,8 @@ $ nosetests
 ```
 
 ## Web app
+
+Written in Javascript (Angular).
 
 ### Adding hooks
 

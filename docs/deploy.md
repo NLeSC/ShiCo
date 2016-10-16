@@ -13,7 +13,7 @@ You are welcome to use our [existing w2v models](https://github.com/NLeSC/ShiCo/
 
 Once you have downloaded the code (or clone this repo), and install all Python requirements (contained in *requirements.txt*), you can launch the flask server as follows:
 ```
-# python shico/server/app.py -f "word2vecModels/????_????.w2v"
+$ python shico/server/app.py -f "word2vecModels/????_????.w2v"
 ```
 
 *Note:* loading the word2vec models takes some time and may consume a large amount of memory.
@@ -26,7 +26,7 @@ http://localhost:5000/load-settings
 Alternatively you use [Gunicorn](http://gunicorn.org/), by setting your configuration on *shico/server/config.py* and then running:
 
 ```
-# gunicorn --bind 0.0.0.0:8000 --timeout 1200 shico.server.wsgi:app
+$ gunicorn --bind 0.0.0.0:8000 --timeout 1200 shico.server.wsgi:app
 ```
 
 ## Launching the front end
@@ -58,5 +58,21 @@ If you are not familiar with the Javascript world (or just don't feel like build
 
 Once you have a *webapp/dist* folder (whether downloaded or self built) you can serve the content of it using your favorite web server. For example, you could use Python SimpleHTTPServer as follows (from the *webapp/dist* folder):
 ```
-python -m SimpleHTTPServer
+$ python -m SimpleHTTPServer
 ```
+
+## Cleaning functions
+In some cases, resulting vocabularies may contain words which we would like to filter. ShiCo offers the possibility of using a *cleaning* function, for filtering vocabularies after they have been generated. To use this option, it is necessary to indicate the name of the cleaning function when starting the ShiCo server. A sample cleaning function is provided (*shico.extras.cleanTermList*). You can use this function as follows:
+```
+$ python shico/server/app.py -c "shico.extras.cleanTermList"
+```
+
+If you are using gunicorn, in your *config.py*, you can set `cleaningFunctionStr` to the name of your cleaning function, for instance:
+
+```
+cleaningFunctionStr = "shico.extras.cleanTermList"
+```
+
+## Speeding up ShiCo
+
+Current implementation of ShiCo relies on gensim word2vec model `most_similar` function, which in turn requires the calculation of the dot product between two large matrices, via `numpy.dot` function. For this reason, ShiCo greatly benefits from using libraries which accelerate matrix multiplications, such as OpenBLAS. ShiCo has been tested using [Numpy with OpenBLAS](https://hunseblog.wordpress.com/2014/09/15/installing-numpy-and-openblas/), producing a significant increase in speed.
