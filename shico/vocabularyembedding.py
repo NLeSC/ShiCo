@@ -31,26 +31,36 @@ def _normalizeCloud(X):
     return X
 
 def _findTransform(wordsT0, locsT0, wordsT1, locsT1):
+    '''Given two sets of words (wordsT0, wordsT1) and their locations
+    (locsT0, locsT1), obtain the transformation paramters which will
+    transform (rotate, scale and translate) words1 as required for it to match
+    as closely as possible with words0.'''
     matchingTerms = list(set(wordsT0).intersection(set(wordsT1)))
 
-    # If we don't have any matching terms -- do not transform
+    # If we don't have enough matching terms -- do not transform
     # (or transform by identity matrix)
-    if len(matchingTerms)==0:
-        return np.eye(2)
+    if len(matchingTerms)<3:
+        return np.eye(2), np.array([0,0])
 
-    F0 = []
-    F1 = []
+    # Find locations of matching terms
+    L0 = np.array([ locsT0[wordsT0.index(w)] for w in matchingTerms ])
+    L1 = np.array([ locsT1[wordsT1.index(w)] for w in matchingTerms ])
 
-    for word in matchingTerms:
-        F0.append(locsT0[wordsT0.index(word)])
-        F1.append(locsT1[wordsT1.index(word)])
+    # Shift so the first point of both sets is aligned
+    sL0 = L0 - L0[0,:]
+    sL1 = L1 - L1[0,:]
 
-    F0 = np.array(F0)
-    F1 = np.array(F1)
+    # Find out rotation R and translation delta
+    R, residuals, rank, s = np.linalg.lstsq(sL1[1:,:], sL0[1:,:])
+    delta = L0[0,:] - L1[0,:].dot(R)
+    return R, delta
 
-    T, residuals, rank, s = np.linalg.lstsq(F1, F0)
-    return T
-
+def _applyTransform(data, params):
+    '''Apply transformation parameters found by _findTransform to data'''
+    R,delta = params
+    data_tilde = data.dot(R)
+    data_tilde = data_tilde + delta
+    return data_tilde
 
 def doSpaceEmbedding(monitor, results, aggMetadata):
     '''Create 2D word embedding from given set of results'''
@@ -67,7 +77,7 @@ def doSpaceEmbedding(monitor, results, aggMetadata):
 
         if wordsT0 is not None:
             T = _findTransform(wordsT0, locsT0, wordsT1, locsT1)
-            locsT1 = locsT1.dot(T)
+            locsT1 = _applyTransform(locsT1, T)
             locsT1 = _normalizeCloud(locsT1)
 
         wordsT0 = wordsT1
