@@ -87,5 +87,5 @@ if __name__ == "__main__":
     with app.app_context():
         initApp(current_app, files, binary, cleaningFunctionStr)
 
-    app.debug = True
+    app.debug = arguments['-d']
     app.run(host='0.0.0.0')
