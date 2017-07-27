@@ -41,7 +41,7 @@ class VocabularyMonitor():
             sModelName = os.path.splitext(os.path.basename(sModelFile))[0]
 
             print '[%s]: %s' % (sModelName, sModelFile)
-            self._models[sModelName] = gensim.models.word2vec.Word2Vec.\
+            self._models[sModelName] = gensim.models.KeyedVectors.\
                 load_word2vec_format(sModelFile, binary=binary)
             if useCache:
                 print '...caching model ', sModelName
