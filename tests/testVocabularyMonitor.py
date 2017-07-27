@@ -18,7 +18,7 @@ class VocabularyMonitorTest(unittest.TestCase):
         self.assertGreater(len(self.vm._models), 0,
                            'Should have at least 1 model')
         for label, model in self.vm._models.iteritems():
-            self.assertIsInstance(model, gensim.models.word2vec.Word2Vec,
+            self.assertIsInstance(model, gensim.models.keyedvectors.KeyedVectors,
                                   'Object should be a Word2Vec model')
 
     def testModelsWork(self):
