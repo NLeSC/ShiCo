@@ -27,14 +27,18 @@ def initParamParser():
     return trackParser
 
 
-def initApp(app, files, binary, cleaningFunctionStr):
+def initApp(app, files, binary, useMmap, w2vFormat, cleaningFunctionStr):
     '''Initialize Flask app by loading VocabularyMonitor,
     tracker parameter parser and callable functions (if any).
 
     files    Files to be loaded by VocabularyMonitor
     binary   Whether files are binary
+    useMmap  ???
+    w2vFormat ???
+    cleaningFunctionStr   ???
     '''
-    vm = VocabularyMonitor(files, binary)
+
+    vm = VocabularyMonitor(files, binary=binary, useMmap=useMmap, w2vFormat=w2vFormat)
     cleaningFunction = _getCallableFunction(cleaningFunctionStr)
     trackParser = initParamParser()
 

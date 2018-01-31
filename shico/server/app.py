@@ -81,6 +81,8 @@ if __name__ == "__main__":
     arguments = docopt(__doc__)
     files = arguments['-f']
     binary = not arguments['--non-binary']
+    useMmap = False
+    w2vFormat = True
     cleaningFunctionStr = arguments['-c']
     port = int(arguments['-p'])
 

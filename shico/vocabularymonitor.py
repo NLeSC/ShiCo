@@ -1,8 +1,8 @@
 import glob
 import os
-import gensim
 import six
 import threading
+from gensim.models import KeyedVectors
 
 from sortedcontainers import SortedDict
 from collections import defaultdict, Counter
@@ -21,18 +21,23 @@ class VocabularyMonitor():
     order and overlap between different models.
     '''
 
-    def __init__(self, globPattern, binary=True, useCache=True):
+    def __init__(self, globPattern, binary=True, useCache=True, useMmap=True,
+            w2vFormat=True):
         '''Create a Vocabulary monitor using the gensim w2v models located in
         the given glob pattern.
 
         Arguments:
         globPattern     glob pattern where w2v files can be found
         binary          True if w2v files have been saved as binary
+        useCache        ???
+        useMmap         ???
+        w2vFormat       ???
         '''
         self._models = SortedDict()
-        self._loadAllModels(globPattern, binary=True, useCache=useCache)
+        self._loadAllModels(globPattern, binary=True, useCache=useCache,
+            useMmap=useMmap, w2vFormat=w2vFormat)
 
-    def _loadAllModels(self, globPattern, binary=True, useCache=False):
+    def _loadAllModels(self, globPattern, binary, useCache, useMmap, w2vFormat):
         '''Load word2vec models from given globPattern and return a dictionary
         of Word2Vec models.
         '''
@@ -40,9 +45,14 @@ class VocabularyMonitor():
             # Chop off the path and the extension
             sModelName = os.path.splitext(os.path.basename(sModelFile))[0]
 
+            if w2vFormat:
+                loader = lambda name: KeyedVectors.load_word2vec_format(name, binary=binary)
+            else:
+                mmap = 'r' if useMmap else None
+                loader = lambda name: KeyedVectors.load(name, mmap=mmap)
+
             print '[%s]: %s' % (sModelName, sModelFile)
-            self._models[sModelName] = gensim.models.KeyedVectors.\
-                load_word2vec_format(sModelFile, binary=binary)
+            self._models[sModelName] = loader(sModelFile)
             if useCache:
                 print '...caching model ', sModelName
                 self._models[sModelName] = CachedW2VModelEvaluator(
@@ -266,6 +276,7 @@ class CachedW2VModelEvaluator():
 
     def __init__(self, model):
         self._model = model
+        self.vocab = model.vocab
 
     @lru_cache(maxsize=1000)
     def most_similar(self, term, topn):
