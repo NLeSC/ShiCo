@@ -1,0 +1,18 @@
+# YAML 1.2
+# Metadata for citation of this software according to the CFF format (https://citation-file-format.github.io/)
+cff-version: 1.0.3
+message: If you use this software, please cite it as below.
+# FIXME title as repository name might no be best name, please make human readable
+title: ShiCo
+doi: 10.5281/zenodo.1187090
+# FIXME splitting of full names is error prone, please check if given/family name are correct
+authors:
+- family-names: Martinez
+  affiliation: Netherlands eScience Center
+  given-names: Carlos
+- family-names: Kenter
+  given-names: Tom
+version: v0.9
+date-released: '2018-03-02'
+repository-code: https://github.com/NLeSC/ShiCo
+license: other-open

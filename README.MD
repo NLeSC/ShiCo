@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/NLeSC/ShiCo.svg?branch=master)](https://travis-ci.org/NLeSC/ShiCo)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1187090.svg)](https://doi.org/10.5281/zenodo.1187090)
+
 
 # ShiCo --  Exploring Shifting Concepts Through Time
 
