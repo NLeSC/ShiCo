@@ -7,7 +7,7 @@ If you want to run your own instance of ShiCo, there are a few things you will n
 
 ## Word2vec models
 
-You are welcome to use our [existing w2v models](https://github.com/NLeSC/ShiCo/tree/master/word2vecModels); you might need to use [git-lfs](https://git-lfs.github.com/) to download them. If you do, please contact us for more details on how the models were build and to know how to cite our work. You can also [create your own](./buildingModels.md) models, based on your own corpus.
+You are welcome to use our [existing w2v models](http://doi.org/10.5281/zenodo.1189328). If you do, please contact us for more details on how the models were build and to know how to cite our work. You can also [create your own](./buildingModels.md) models, based on your own corpus.
 
 ## Launching the back end
 
