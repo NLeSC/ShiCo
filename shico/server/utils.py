@@ -3,6 +3,7 @@ from shico.server.validations import validatestr, validAlgorithm, validWeighting
 
 from shico.vocabularymonitor import VocabularyMonitor
 
+
 def initParamParser():
     # VocabularyMonitor parameters:
     trackParser = reqparse.RequestParser()
@@ -14,7 +15,8 @@ def initParamParser():
     trackParser.add_argument('wordBoost', type=float, default=1.0)
     trackParser.add_argument('forwards', type=validDirection, default=True)
     trackParser.add_argument('boostMethod', type=sumSimilarity, default=True)
-    trackParser.add_argument('algorithm', type=validAlgorithm, default='adaptive')
+    trackParser.add_argument(
+        'algorithm', type=validAlgorithm, default='adaptive')
     trackParser.add_argument('doCleaning', type=validCleaning, default=False)
 
     # VocabularyAggregator parameters:
@@ -37,8 +39,9 @@ def initApp(app, files, binary, useMmap, w2vFormat, cleaningFunctionStr):
     w2vFormat ???
     cleaningFunctionStr   ???
     '''
-
-    vm = VocabularyMonitor(files, binary=binary, useMmap=useMmap, w2vFormat=w2vFormat)
+    # TODO: 'Add use cache on initApp'
+    vm = VocabularyMonitor(files, binary=binary,
+                           useMmap=useMmap, w2vFormat=w2vFormat)
     cleaningFunction = _getCallableFunction(cleaningFunctionStr)
     trackParser = initParamParser()
 

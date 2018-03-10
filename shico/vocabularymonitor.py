@@ -22,7 +22,7 @@ class VocabularyMonitor():
     '''
 
     def __init__(self, globPattern, binary=True, useCache=True, useMmap=True,
-            w2vFormat=True):
+                 w2vFormat=True):
         '''Create a Vocabulary monitor using the gensim w2v models located in
         the given glob pattern.
 
@@ -35,7 +35,7 @@ class VocabularyMonitor():
         '''
         self._models = SortedDict()
         self._loadAllModels(globPattern, binary=True, useCache=useCache,
-            useMmap=useMmap, w2vFormat=w2vFormat)
+                            useMmap=useMmap, w2vFormat=w2vFormat)
 
     def _loadAllModels(self, globPattern, binary, useCache, useMmap, w2vFormat):
         '''Load word2vec models from given globPattern and return a dictionary
@@ -46,10 +46,14 @@ class VocabularyMonitor():
             sModelName = os.path.splitext(os.path.basename(sModelFile))[0]
 
             if w2vFormat:
-                loader = lambda name: KeyedVectors.load_word2vec_format(name, binary=binary)
+                assert useMmap == False, 'Mmap cannot be used with w2v format'
+
+                def loader(name): return KeyedVectors.load_word2vec_format(
+                    name, binary=binary)
             else:
                 mmap = 'r' if useMmap else None
-                loader = lambda name: KeyedVectors.load(name, mmap=mmap)
+
+                def loader(name): return KeyedVectors.load(name, mmap=mmap)
 
             print '[%s]: %s' % (sModelName, sModelFile)
             self._models[sModelName] = loader(sModelFile)

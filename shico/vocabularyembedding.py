@@ -4,18 +4,20 @@ from sortedcontainers import SortedDict
 from sklearn import manifold
 from format import wordLocationAsDict, getRangeMiddle
 
+
 def _getPairwiseDistances(wordsT1, model):
-    dists = np.zeros((len(wordsT1),len(wordsT1)))
-    for i,w1 in enumerate(wordsT1):
-        for j,w2 in enumerate(wordsT1[i:]):
+    dists = np.zeros((len(wordsT1), len(wordsT1)))
+    for i, w1 in enumerate(wordsT1):
+        for j, w2 in enumerate(wordsT1[i:]):
             try:
-                dists[i,i+j] = 1-model.n_similarity(w1,w2)
+                dists[i, i+j] = 1-model.n_similarity(w1, w2)
             except:
                 # If we cannot calculate the similarity, they are
                 # as dissimilar as possible
-                dists[i,i+j] = 1
-            dists[i+j,i] = dists[i,i+j]
+                dists[i, i+j] = 1
+            dists[i+j, i] = dists[i, i+j]
     return dists
+
 
 def _getMDSEmbedding(dists):
     seed = np.random.RandomState(seed=3)
@@ -24,18 +26,20 @@ def _getMDSEmbedding(dists):
     xyEmbedding = mds.fit(dists).embedding_
     return xyEmbedding
 
+
 def _normalizeCloud(X):
     X -= X.min(axis=0)
     X /= X.max(axis=0)
     X -= X.mean(axis=0)
     return X
 
+
 def _findTransform(wordsT0, locsT0, wordsT1, locsT1):
     matchingTerms = list(set(wordsT0).intersection(set(wordsT1)))
 
     # If we don't have any matching terms -- do not transform
     # (or transform by identity matrix)
-    if len(matchingTerms)==0:
+    if len(matchingTerms) == 0:
         return np.eye(2)
 
     F0 = []
@@ -57,10 +61,10 @@ def doSpaceEmbedding(monitor, results, aggMetadata):
     embeddedResults = SortedDict()
 
     wordsT0 = None
-    locsT0  = None
-    for label,r in results.iteritems():
+    locsT0 = None
+    for label, r in results.iteritems():
         model = monitor._models[label]
-        wordsT1 = [ w for w,_ in r ]
+        wordsT1 = [w for w, _ in r]
 
         dists = _getPairwiseDistances(wordsT1, model)
         locsT1 = _getMDSEmbedding(dists)
@@ -71,13 +75,14 @@ def doSpaceEmbedding(monitor, results, aggMetadata):
             locsT1 = _normalizeCloud(locsT1)
 
         wordsT0 = wordsT1
-        locsT0  = locsT1
+        locsT0 = locsT1
 
         str_label = str(int(getRangeMiddle(label)))
-        embeddedResults[str_label] = [ wordLocationAsDict(wordsT1[i],locsT1[i,:]) for i in range(len(wordsT1)) ]
+        embeddedResults[str_label] = [wordLocationAsDict(
+            wordsT1[i], locsT1[i, :]) for i in range(len(wordsT1))]
 
     # Aggregation step (more like throwing away some years)
-    embeddedResultsAgg = { year: embeddedResults[year] for year in aggMetadata }
+    embeddedResultsAgg = {year: embeddedResults[year] for year in aggMetadata}
     embeddedResultsAgg = SortedDict(embeddedResultsAgg)
 
     return embeddedResultsAgg

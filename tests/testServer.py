@@ -10,7 +10,8 @@ class ServerTest(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
-        initApp(shico.server.app.app, 'tests/w2vModels/*.w2v', True, None)
+        initApp(shico.server.app.app, files='tests/w2vModels/*.w2v', binary=True,
+            useMmap=False, w2vFormat=True, cleaningFunctionStr=None)
         self.app = shico.server.app.app.test_client()
 
     def testTrackService(self):

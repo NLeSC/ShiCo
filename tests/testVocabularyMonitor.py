@@ -17,7 +17,8 @@ class VocabularyMonitorTest(VocabularyMonitorBase):
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
-        self.vm = shVM('tests/w2vModels/*.w2v', useCache=False)
+        self.vm = shVM('tests/w2vModels/*.w2v', useCache=False, useMmap=False,
+                w2vFormat=True)
 
     def testLoadClass(self):
         '''Test models are of expected class'''
