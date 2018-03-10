@@ -10,7 +10,8 @@ class VocabularyEmbeddingTest(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
-        vm = shVM('tests/w2vModels/*.w2v', useCache=False)
+        vm = shVM('tests/w2vModels/*.w2v', useCache=False, useMmap=False,
+                w2vFormat=True)
         results, links = vm.trackClouds('x')
         agg = shVA(yearsInInterval=1)
         aggResults, aggMetadata = agg.aggregate(results)

@@ -10,6 +10,8 @@ Usage:
   -c FUNCTIONNAME  Name of cleaning function to be applied to output.
                    (example: shico.extras.cleanTermList)
   -p PORT          Port in which ShiCo should run [default: 8000].
+  --use-mmap       ??? [default: False]
+  --w2v-format     ??? [default: True]
 '''
 from docopt import docopt
 
@@ -25,6 +27,7 @@ from shico.server.utils import initApp
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route('/load-settings')
 def appData():
@@ -48,21 +51,21 @@ def trackWord(terms):
     response.'''
     params = app.config['trackParser'].parse_args()
     termList = terms.split(',')
-    termList = [ term.strip() for term in termList ]
-    termList = [ term.lower() for term in termList ]
+    termList = [term.strip() for term in termList]
+    termList = [term.lower() for term in termList]
     results, links = \
         app.config['vm'].trackClouds(termList, maxTerms=params['maxTerms'],
-                        maxRelatedTerms=params['maxRelatedTerms'],
-                        startKey=params['startKey'],
-                        endKey=params['endKey'],
-                        minSim=params['minSim'],
-                        wordBoost=params['wordBoost'],
-                        forwards=params['forwards'],
-                        sumSimilarity=params['boostMethod'],
-                        algorithm=params['algorithm'],
-                        cleaningFunction=app.config['cleaningFunction'] if params[
-                            'doCleaning'] else None
-                        )
+                                     maxRelatedTerms=params['maxRelatedTerms'],
+                                     startKey=params['startKey'],
+                                     endKey=params['endKey'],
+                                     minSim=params['minSim'],
+                                     wordBoost=params['wordBoost'],
+                                     forwards=params['forwards'],
+                                     sumSimilarity=params['boostMethod'],
+                                     algorithm=params['algorithm'],
+                                     cleaningFunction=app.config['cleaningFunction'] if params[
+            'doCleaning'] else None
+        )
     agg = VocabularyAggregator(weighF=params['aggWeighFunction'],
                                wfParam=params['aggWFParam'],
                                yearsInInterval=params['aggYearsInInterval'],
@@ -77,15 +80,19 @@ def trackWord(terms):
                    embedded=embedded,
                    vocabs=links)
 
+
 if __name__ == "__main__":
     arguments = docopt(__doc__)
     files = arguments['-f']
     binary = not arguments['--non-binary']
+    useMmap = arguments['--use-mmap']
+    w2vFormat = arguments['--w2v-format']
     cleaningFunctionStr = arguments['-c']
     port = int(arguments['-p'])
 
     with app.app_context():
-        initApp(current_app, files, binary, cleaningFunctionStr)
+        initApp(current_app, files, binary, useMmap,
+                w2vFormat, cleaningFunctionStr)
 
     app.debug = arguments['-d']
     app.run(host='0.0.0.0')

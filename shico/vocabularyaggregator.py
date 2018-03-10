@@ -106,11 +106,11 @@ def _selectWeightingFunction(weightF, param):
     years as inputs: F(Y1, Y2).
     '''
     if weightF == 'Gaussian':
-        f = lambda y1, y2: weightGauss(y1, y2, param)
+        def f(y1, y2): return weightGauss(y1, y2, param)
     elif weightF == 'JSD':
-        f = lambda y1, y2: weightJSD(y1, y2, param)
+        def f(y1, y2): return weightJSD(y1, y2, param)
     elif weightF == 'Linear':
-        f = lambda y1, y2: weightLinear(y1, y2, param)
+        def f(y1, y2): return weightLinear(y1, y2, param)
     elif six.callable(weightF):
         f = weightF
     else:

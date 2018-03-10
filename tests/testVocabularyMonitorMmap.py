@@ -4,7 +4,7 @@ from shico import VocabularyMonitor as shVM
 
 from vocabularyMonitorHelper import VocabularyMonitorBase
 
-class VocabularyMonitorTest(VocabularyMonitorBase):
+class VocabularyMonitorMMapTest(VocabularyMonitorBase):
 
     # Do run these unit test
     __test__ = True
@@ -17,8 +17,7 @@ class VocabularyMonitorTest(VocabularyMonitorBase):
     @classmethod
     def setUpClass(self):
         # Fake models! Only made so we can do unittests
-        self.vm = shVM('tests/w2vModels/*.w2v', useCache=False, useMmap=False,
-                w2vFormat=True)
+        self.vm = shVM('tests/gensimModels/*.w2v', useMmap=True, w2vFormat=False, useCache=False)
 
     def testLoadClass(self):
         '''Test models are of expected class'''

@@ -1,6 +1,4 @@
 import re
-import nltk
-import string
 from HTMLParser import HTMLParser
 from lxml import etree
 from bs4 import BeautifulSoup
@@ -120,4 +118,3 @@ for year in yearFiles:
             del df
         else:
             print '...aleady exists: ',saveFile
-
