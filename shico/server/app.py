@@ -1,7 +1,7 @@
 '''ShiCo server.
 
 Usage:
-  app.py  [-f FILES] [-n] [-d] [-p PORT] [-c FUNCTIONNAME]
+  app.py  [-f FILES] [-n] [-d] [-p PORT] [-c FUNCTIONNAME] [--use-mmap] [--w2v-format]
 
   -f FILES         Path to word2vec model files (glob format is supported)
                    [default: word2vecModels/195[0-1]_????.w2v]
@@ -73,9 +73,12 @@ def trackWord(terms):
                                )
 
     aggResults, aggMetadata = agg.aggregate(results)
-    embedded = doSpaceEmbedding(app.config['vm'], results, aggMetadata)
+    print "ResKeys", results.keys()
+    print "AggResKeys", aggResults.keys()
+    stream = yearTuplesAsDict(aggResults)
     networks = yearlyNetwork(aggMetadata, aggResults, results, links)
-    return jsonify(stream=yearTuplesAsDict(aggResults),
+    embedded = doSpaceEmbedding(app.config['vm'], results, aggMetadata)
+    return jsonify(stream=stream,
                    networks=networks,
                    embedded=embedded,
                    vocabs=links)

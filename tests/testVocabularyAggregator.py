@@ -1,7 +1,7 @@
 import unittest
-from sortedcontainers import SortedDict
+from sortedcontainers import SortedDict, SortedList
 from shico import VocabularyAggregator as shVA
-
+from shico.vocabularyaggregator import _arrangeIntervals
 
 class TestVocabularyAggregation(unittest.TestCase):
     '''Tests for VocabularyAggregator'''
@@ -109,3 +109,52 @@ class TestVocabularyAggregation(unittest.TestCase):
         _, times2 = agg2.aggregate(self._data)
         self.assertGreater(len(times1), len(times2),
                            'Should have more intervals')
+
+    def testArrangeIntervals1(self):
+        targetKeys = SortedList(['1950_1959', '1951_1960', '1952_1961', '1953_1962', '1954_1963'])
+        targetIntervals = [ ['1950_1959', '1951_1960', '1952_1961'],
+                            ['1951_1960', '1952_1961', '1953_1962'],
+                            ['1952_1961', '1953_1962', '1954_1963'] ]
+        seedVocabulary = SortedDict({
+            key: {} for key in targetKeys
+        })
+
+        actualKeys = SortedList(seedVocabulary.keys())
+        actualIntervals = _arrangeIntervals(seedVocabulary, 3, 1)
+        self._doArrangeIntervalsTesting(targetKeys, actualKeys, targetIntervals, actualIntervals, 'Test1')
+
+    def testArrangeIntervals2(self):
+        targetKeys = SortedList(['1950_1959', '1952_1961', '1954_1963'])
+        targetIntervals = [ ['1950_1959', '1952_1961'],
+                            ['1952_1961', '1954_1963'] ]
+        seedVocabulary = SortedDict({
+            key: {} for key in targetKeys
+        })
+
+        actualKeys = SortedList(seedVocabulary.keys())
+        actualIntervals = _arrangeIntervals(seedVocabulary, 2, 1)
+        self._doArrangeIntervalsTesting(targetKeys, actualKeys, targetIntervals, actualIntervals, 'Test1')
+
+
+    def testArrangeIntervals3(self):
+        targetKeys = SortedList(
+        ['1835_1855', '1840_1860', '1845_1865', '1850_1870', '1855_1875',
+         '1860_1880', '1865_1885', '1870_1890', '1875_1895'])
+        targetIntervals = [ ['1835_1855', '1840_1860', '1845_1865'],
+                            ['1840_1860', '1845_1865', '1850_1870'],
+                            ['1845_1865', '1850_1870', '1855_1875'],
+                            ['1850_1870', '1855_1875', '1860_1880'],
+                            ['1855_1875', '1860_1880', '1865_1885'],
+                            ['1860_1880', '1865_1885', '1870_1890'],
+                            ['1865_1885', '1870_1890', '1875_1895'] ]
+        seedVocabulary = SortedDict({
+            key: {} for key in targetKeys
+        })
+
+        actualKeys = SortedList(seedVocabulary.keys())
+        actualIntervals = _arrangeIntervals(seedVocabulary, 3, 1)
+        self._doArrangeIntervalsTesting(targetKeys, actualKeys, targetIntervals, actualIntervals, 'Test2')
+
+    def _doArrangeIntervalsTesting(self, targetKeys, actualKeys, targetIntervals, actualIntervals, testname):
+        self.assertSequenceEqual(targetKeys, actualKeys, 'Should have same keys.')
+        self.assertSequenceEqual(targetIntervals, actualIntervals, 'Should have same intervals.')
