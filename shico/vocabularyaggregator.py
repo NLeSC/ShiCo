@@ -38,7 +38,7 @@ class VocabularyAggregator():
         self._yIntervalFreq = yIntervalFreq
 
     def aggregate(self, vocab):
-        '''Apply the aggrecation algorithm to the given vocabulary with the
+        '''Apply the aggregation algorithm to the given vocabulary with the
         settings for this vocabularyaggregator.
 
         Returns a dictionary of updated vocabularies and a dictionary of time
@@ -77,8 +77,6 @@ def _adaptiveAggregation(V, n, yIntervals, weightF, param, freq):
 
     # Select weighting function
     f = _selectWeightingFunction(weightF, param)
-
-    # Iterate over time frames
     for t in _arrangeIntervals(V, yIntervals, freq):
         mu_t = getRangeMiddle(t[0], t[-1])
         V_prime = SortedDict({tx: V[tx] for tx in t})
@@ -129,6 +127,13 @@ def _arrangeIntervals(vocabs, nYears, freq):
      [['1950_1959', '1951_1960', '1952_1961'],
       ['1951_1960', '1952_1961', '1953_1962'],
       ['1952_1961', '1953_1962', '1954_1963']]
+
+    vocabs          -- Vocabulary used (only the keys are used)
+    nYears
+    yearsInInterval -- Number of years to be used for each interval (width of
+                       the window).
+    freq
+    yIntervalFreq   -- Spacing between group periods.
     '''
     keys = vocabs.keys()
     return [keys[i:i + nYears] for i in range(0, 1 + len(keys) - nYears, freq)]

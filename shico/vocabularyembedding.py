@@ -82,7 +82,7 @@ def doSpaceEmbedding(monitor, results, aggMetadata):
             wordsT1[i], locsT1[i, :]) for i in range(len(wordsT1))]
 
     # Aggregation step (more like throwing away some years)
-    embeddedResultsAgg = {year: embeddedResults[year] for year in aggMetadata}
+    embeddedResultsAgg = {year: embeddedResults[year] for year in aggMetadata if year in embeddedResults}
     embeddedResultsAgg = SortedDict(embeddedResultsAgg)
 
     return embeddedResultsAgg
