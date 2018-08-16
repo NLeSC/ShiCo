@@ -1,6 +1,6 @@
 FROM node:alpine
 
-COPY ./webapp/ /home/shico
+COPY . /home/shico
 WORKDIR /home/shico
 
 RUN npm install -g gulp
