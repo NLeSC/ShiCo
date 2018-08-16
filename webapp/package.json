@@ -1,7 +1,9 @@
 {
   "name": "shico",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-print": "^5.0.0"
+  },
   "scripts": {
     "test": "gulp test"
   },
