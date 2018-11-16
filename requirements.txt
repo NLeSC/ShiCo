@@ -1,4 +1,4 @@
-gensim==3.1.0
+gensim==3.6.0
 sortedcontainers==1.4.2
 docopt==0.6.2
 Flask==0.10.1
