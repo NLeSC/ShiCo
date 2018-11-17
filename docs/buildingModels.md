@@ -15,7 +15,7 @@ import numpy as np
 def buildRandomDoc():
     '''Create a random document with two sentences of an arbitrary length.'''
     # This is my vocabulary of possible words
-    vocab = [ 'hello', 'world', 'this', 'is', 'a', 'public', 'service', 'announcement', 
+    vocab = [ 'hello', 'world', 'this', 'is', 'a', 'public', 'service', 'announcement',
              'this', 'is', 'only', 'a', 'test' ]
 
     doc = []
@@ -145,7 +145,7 @@ def getDocumentsForYear(year):
 ```
 
 ## Ready to go
-Once you have implemented these three functions in whichever way is most convenient for you, we are ready to go. 
+Once you have implemented these three functions in whichever way is most convenient for you, we are ready to go.
 
 We can do a few checks to make sure our data is fine (you can do these checks with your own data as well).
  - Make sure that for any given year, we get a list of documents
@@ -188,7 +188,7 @@ def getSentencesForYear(year):
     Each sentence is a list of words.
     Each word is a string.'''
     docs = getDocumentsForYear(year)
-    
+
     sentences = []
     for doc in docs:
         for sent in doc:
@@ -200,7 +200,7 @@ def getSentencesInRange(startY, endY):
     Return list of sentences in given year.
     Each sentence is a list of words.
     Each word is a string.'''
-    return [ s for year in range(startY, endY) 
+    return [ s for year in range(startY, endY)
                for s in getSentencesForYear(year) ]
 ```
 
@@ -211,15 +211,12 @@ Now we can train the models. There are a few settings you can play with:
  - stepYears -- this controls the year gap between models.
  - modelFolder -- folder where the models will be stored.
 
-**NOTE: ** If your models have a lot of data, it could take a while to train. Grab a coffee (or tea!), and wait.
+**NOTE:** If your models have a lot of data, it could take a while to train. Grab a coffee (or tea!), and wait.
 
 
 ```python
 import gensim
-```
 
-
-```python
 yearsInModel = 5
 stepYears = 1
 modelFolder = 'tempModels'

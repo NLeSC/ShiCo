@@ -20,11 +20,12 @@ class VocabularyMonitorBase(unittest.TestCase):
         '''Test that w2v models produce results.'''
         nItems = 5
         for label, model in self.vm._models.iteritems():
-            modelWords = model.vocab.keys()
+            wv = model.wv if hasattr(model, 'wv') else model
+            modelWords = wv.vocab.keys()
             self.assertGreater(len(modelWords), 0,
                                'Model vocabulary should have at least 1 word')
-            aWord = model.vocab.keys()[0]
-            items = model.most_similar(aWord, topn=nItems)
+            aWord = wv.vocab.keys()[0]
+            items = wv.most_similar(aWord, topn=nItems)
             self.assertEqual(len(items), nItems,
                              'Model should produced %d items' % nItems)
 
