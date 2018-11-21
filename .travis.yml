@@ -1,7 +1,8 @@
 language: python
 python:
   - "2.7"
-# Setup anaconda
+before_install:
+  - sudo rm -f /etc/boto.cfg
 install:
   - "pip install --upgrade pip"
   - "pip install -r requirements.txt"
