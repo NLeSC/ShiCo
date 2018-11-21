@@ -2,6 +2,7 @@ language: python
 python:
   - "2.7"
 before_install:
+  # Fix issue with boto -- https://github.com/travis-ci/travis-ci/issues/7940
   - sudo rm -f /etc/boto.cfg
 install:
   - "pip install --upgrade pip"
